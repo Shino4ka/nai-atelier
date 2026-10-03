@@ -23,11 +23,11 @@ body {
   --border: #405774;
   --text: #eeeeee;
   --muted: #b0bdcd;
-  --accent: #9dc7d2;
-  --accent-bg: #134b70;
-  --accent-fill: #508c9b;
-  --accent-text: #0d1222;
-  --orange: #d8c3a4;
+  --accent: #7e9fa8;
+  --accent-bg: #0f3c5a;
+  --accent-fill: #40707c;
+  --accent-text: #eeeeee;
+  --orange: #ad9c83;
   --input: #293250;
   margin: 0;
   background: var(--bg);
@@ -45,11 +45,11 @@ body.light {
   --border: #c6cfdc;
   --text: #201e43;
   --muted: #57637a;
-  --accent: #366e7e;
-  --accent-bg: #dde8ed;
-  --accent-fill: #134b70;
+  --accent: #2b5865;
+  --accent-bg: #b1babe;
+  --accent-fill: #0f3c5a;
   --accent-text: #eeeeee;
-  --orange: #79674d;
+  --orange: #61523e;
   --input: #f8f9fb;
 }
 button,
@@ -671,7 +671,7 @@ dialog .note {
 }
 .primary:hover {
   background: var(--accent-fill);
-  filter: brightness(1.04);
+  filter: brightness(0.96);
 }
 .source-link {
   font-size: 14px;
