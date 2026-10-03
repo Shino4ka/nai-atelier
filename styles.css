@@ -17,18 +17,18 @@ html {
   scroll-padding-top: var(--space-6);
 }
 body {
-  --bg: #201e43;
-  --surface: #242847;
-  --card: #293250;
-  --border: #405774;
-  --text: #eeeeee;
-  --muted: #b0bdcd;
+  --bg: #1a1836;
+  --surface: #1d2039;
+  --card: #212840;
+  --border: #33465d;
+  --text: #bebebe;
+  --muted: #8d97a4;
   --accent: #7e9fa8;
   --accent-bg: #0f3c5a;
   --accent-fill: #40707c;
-  --accent-text: #eeeeee;
+  --accent-text: #bebebe;
   --orange: #ad9c83;
-  --input: #293250;
+  --input: #212840;
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -39,18 +39,18 @@ body {
 }
 body.light {
   color-scheme: light;
-  --bg: #eeeeee;
-  --surface: #e3e8ee;
-  --card: #f8f9fb;
-  --border: #c6cfdc;
-  --text: #201e43;
-  --muted: #57637a;
+  --bg: #bebebe;
+  --surface: #b6babe;
+  --card: #c6c7c9;
+  --border: #9ea6b0;
+  --text: #1a1836;
+  --muted: #464f62;
   --accent: #2b5865;
   --accent-bg: #b1babe;
   --accent-fill: #0f3c5a;
-  --accent-text: #eeeeee;
+  --accent-text: #bebebe;
   --orange: #61523e;
-  --input: #f8f9fb;
+  --input: #c6c7c9;
 }
 button,
 input,
@@ -567,8 +567,8 @@ h2 span {
   position: absolute;
   left: var(--space-2);
   bottom: var(--space-2);
-  color: #eeeeee;
-  background: #201e43dd;
+  color: #bebebe;
+  background: #1a1836dd;
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius);
   font-size: 12px;
@@ -595,7 +595,7 @@ dialog {
   box-shadow: 0 24px 100px #0006;
 }
 dialog::backdrop {
-  background: #0d100bba;
+  background: #0a0d09ba;
   backdrop-filter: blur(5px);
 }
 .dialog-head {
