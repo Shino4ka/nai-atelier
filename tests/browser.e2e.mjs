@@ -9,7 +9,13 @@ export async function runAtelierE2E(tab, browser) {
     if (!condition) throw new Error(name);
   };
   const count = () => tab.playwright.locator("#resultCount").textContent();
-  const close = () => tab.playwright.locator("dialog[open] .close").click();
+  const close = async () => {
+    await tab.playwright.locator("dialog[open] .close").click();
+    await tab.getAXState({ emit: false });
+    if (await tab.playwright.locator("dialog[open]").count()) {
+      throw new Error("dialog closes before the next action");
+    }
+  };
   const fit = () =>
     tab.playwright.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -128,30 +134,54 @@ export async function runAtelierE2E(tab, browser) {
   const viewport = await browser.capabilities.get("viewport");
   for (const width of [1440, 1024, 768, 390, 320]) {
     await viewport.set({ width, height: 900 });
+    await tab.getAXState({ emit: false });
     assert(`catalog fits ${width}px`, await fit());
+    if (width === 1440) {
+      assert(
+        "navigation occupies the sidebar on desktop",
+        await tab.playwright.evaluate(
+          () =>
+            document.querySelector("#nav").getBoundingClientRect().right <
+            document.querySelector("main").getBoundingClientRect().left,
+        ),
+      );
+      assert(
+        "search and provenance controls share a height",
+        await tab.playwright.evaluate(
+          () =>
+            document.querySelector(".search-wrap").getBoundingClientRect()
+              .height ===
+            document.querySelector("#status").getBoundingClientRect().height,
+        ),
+      );
+      assert(
+        "cards and controls share the corner radius",
+        await tab.playwright.evaluate(
+          () =>
+            getComputedStyle(document.querySelector(".card")).borderRadius ===
+            getComputedStyle(document.querySelector(".search-wrap"))
+              .borderRadius,
+        ),
+      );
+      assert(
+        "Cyrillic interface and heading fonts are loaded",
+        await tab.playwright.evaluate(
+          () =>
+            document.fonts.check("16px Manrope", "Каталог") &&
+            document.fonts.check("40px Literata", "Каталог"),
+        ),
+      );
+    }
     await tab.playwright.locator(".brand").click();
     await tab.getAXState({ emit: false });
-    await fs.writeFile(
-      new URL(`catalog-${width}.jpg`, artifactDir),
-      await tab.screenshot({ fullPage: false }),
-    );
     await tab.playwright.locator(".open-card").first().click();
     assert(`detail fits ${width}px`, await fit());
-    if (width === 390)
-      await fs.writeFile(
-        new URL("detail-mobile.jpg", artifactDir),
-        await tab.screenshot({ fullPage: false }),
-      );
     await close();
   }
   await tab.playwright.locator("#themeBtn").click();
   assert(
     "light theme is available",
     (await tab.playwright.locator("body").getAttribute("class")) === "light",
-  );
-  await fs.writeFile(
-    new URL("catalog-light.jpg", artifactDir),
-    await tab.screenshot({ fullPage: false }),
   );
   await tab.reload();
   await tab.getAXState({ emit: false });

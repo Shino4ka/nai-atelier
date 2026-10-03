@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#0b1119" />
+    <meta name="theme-color" content="#171a16" />
     <meta
       name="description"
       content="Стилевые теги, пользовательские меши и негативы NovelAI v5. Русские пояснения, источники, поиск и копирование."
@@ -11,30 +11,69 @@
     <title>NAI Atelier — каталог стилей</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%230b1119'/%3E%3Cpath d='M8 28L20 7l12 21h-7l-5-9-5 9z' fill='%235ae2ca'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='2' fill='%23171a16'/%3E%3Cpath d='M8 28L20 7l12 21h-7l-5-9-5 9z' fill='%23b6d6a4'/%3E%3C/svg%3E"
     />
+    <link
+      rel="preload"
+      href="assets/fonts/manrope-cyrillic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/manrope-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/literata-cyrillic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="fonts.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <a class="skip" href="#catalog">К каталогу</a>
     <div class="layout">
-      <header class="site-header">
-        <a href="#" class="brand" aria-label="NAI Atelier, главная"
-          ><span class="mark" aria-hidden="true">A</span
-          ><span>NAI <strong>Atelier</strong></span></a
-        >
-        <div class="top-actions">
-          <button id="sourceBtn">Источники</button
-          ><button id="workshopBtn">Добавить стиль</button
-          ><button id="themeBtn" aria-label="Включить светлую тему">◐</button>
+      <aside class="sidebar" aria-label="Навигация">
+        <div class="sidebar-heading">
+          <a href="#" class="brand" aria-label="NAI Atelier, главная">
+            <span class="mark" aria-hidden="true">A</span>
+            <span>
+              NAI
+              <strong>Atelier</strong>
+            </span>
+          </a>
+          <button id="themeBtn" aria-label="Включить светлую тему">◐</button>
         </div>
-      </header>
-      <main>
+        <nav id="nav" class="catalog-nav" aria-label="Разделы каталога"></nav>
+        <div class="sidebar-actions">
+          <button id="workshopBtn">Добавить стиль</button>
+          <button id="sourceBtn">Источники</button>
+        </div>
+        <div class="sidebar-footer">
+          <button class="text-link" id="methodBtn">О каталоге</button>
+          <a
+            href="https://t.me/ah_ah_shino4ka"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Шино · Telegram ↗
+          </a>
+        </div>
+      </aside>
+      <main class="content">
         <section class="intro" aria-labelledby="introTitle">
           <div class="intro-copy">
             <span class="eyebrow">NovelAI v5</span>
             <h1 id="introTitle">
-              Каталог<br />
+              Каталог
+              <br />
               стилей
             </h1>
             <p>
@@ -54,33 +93,37 @@
           </figure>
         </section>
         <section class="workspace" id="catalog" aria-labelledby="sectionTitle">
-          <nav id="nav" class="catalog-nav" aria-label="Разделы каталога"></nav>
           <div class="catalog-tools">
             <div class="search-wrap">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="10" cy="10" r="6.5" />
-                <path d="m15 15 5 5" /></svg
-              ><input
+                <path d="m15 15 5 5" />
+              </svg>
+              <input
                 id="search"
                 type="search"
                 placeholder="Найти стиль, тег, художника…"
                 aria-label="Поиск по каталогу"
-              /><span class="key" aria-hidden="true">/</span>
+              />
+              <span class="key" aria-hidden="true">/</span>
             </div>
-            <label class="status-select"
-              ><span class="sr-only">Происхождение</span
-              ><select id="status">
+            <label class="status-select">
+              <span class="sr-only">Происхождение</span>
+              <select id="status">
                 <option value="all">Любое происхождение</option>
                 <option value="official">Официальное</option>
                 <option value="community">Из публикаций v5</option>
                 <option value="adapted">Адаптации</option>
                 <option value="experimental">Авторские подборки</option>
-              </select></label
-            >
+              </select>
+            </label>
           </div>
           <div id="categories" class="chips" aria-label="Категории"></div>
           <div class="section-head">
-            <h2 id="sectionTitle">Все записи <span id="resultCount"></span></h2>
+            <h2 id="sectionTitle">
+              Все записи
+              <span id="resultCount"></span>
+            </h2>
           </div>
           <div class="cards" id="cards"></div>
           <div id="empty" class="empty" hidden>
@@ -91,31 +134,20 @@
           <button id="loadMore" class="load-more" hidden>Показать ещё</button>
         </section>
       </main>
-      <footer>
-        <span>NAI Atelier</span>
-        <div class="footer-links">
-          <button class="text-link" id="methodBtn">О каталоге</button
-          ><a
-            href="https://t.me/ah_ah_shino4ka"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Шино · Telegram ↗</a
-          >
-        </div>
-      </footer>
     </div>
     <div class="tray" id="tray" hidden>
       <div>
-        <span class="eyebrow">Твоя строка</span><strong id="trayCount"></strong>
+        <span class="eyebrow">Твоя строка</span>
+        <strong id="trayCount"></strong>
       </div>
-      <button id="trayView">Посмотреть</button
-      ><button class="primary" id="trayCopy">Копировать</button
-      ><button id="trayClear" aria-label="Очистить строку">×</button>
+      <button id="trayView">Посмотреть</button>
+      <button class="primary" id="trayCopy">Копировать</button>
+      <button id="trayClear" aria-label="Очистить строку">×</button>
     </div>
     <dialog id="detail" aria-labelledby="detailTitle">
       <div class="dialog-head">
-        <span class="eyebrow" id="modalKicker"></span
-        ><button class="close" aria-label="Закрыть">×</button>
+        <span class="eyebrow" id="modalKicker"></span>
+        <button class="close" aria-label="Закрыть">×</button>
       </div>
       <div id="detailContent"></div>
     </dialog>
@@ -136,46 +168,56 @@
       <h2 id="workshopTitle">Новый стиль</h2>
       <p class="workshop-lead">
         Авторские стили публикуются через GitHub из аккаунта
-        <strong>Shino4ka</strong>. Черновик можно сохранить в этом браузере.
+        <strong>Shino4ka</strong>
+        . Черновик можно сохранить в этом браузере.
       </p>
       <div class="owner-bar">
-        <span id="syncMessage" role="status">Загрузка стилей…</span
-        ><button id="refreshOwned">Обновить</button>
+        <span id="syncMessage" role="status">Загрузка стилей…</span>
+        <button id="refreshOwned">Обновить</button>
       </div>
       <form id="workshopForm">
         <div id="styleFields">
           <div class="form-grid">
-            <label
-              >Название<input
+            <label>
+              Название
+              <input
                 id="ownName"
                 maxlength="160"
                 required
-                placeholder="Название стиля" /></label
-            ><label
-              >Тип<select id="ownVariant">
+                placeholder="Название стиля"
+              />
+            </label>
+            <label>
+              Тип
+              <select id="ownVariant">
                 <option value="style">Стиль</option>
                 <option value="mix">Меш</option>
-              </select></label
-            >
+              </select>
+            </label>
           </div>
-          <label
-            >Промпт<textarea
+          <label>
+            Промпт
+            <textarea
               id="ownPrompt"
               rows="4"
               maxlength="10000"
               required
               placeholder="Стилевые теги и художники с весами"
-            ></textarea></label
-          ><label
-            >Описание<textarea
+            ></textarea>
+          </label>
+          <label>
+            Описание
+            <textarea
               id="ownDescription"
               rows="3"
               maxlength="5000"
               required
               placeholder="Как выглядит стиль и для чего подходит"
-            ></textarea></label
-          ><label
-            >Примечание<textarea
+            ></textarea>
+          </label>
+          <label>
+            Примечание
+            <textarea
               id="ownNote"
               rows="2"
               maxlength="3000"
@@ -186,34 +228,42 @@
         <div class="example-editor">
           <h3>Пример изображения</h3>
           <div class="example-input-row">
-            <label
-              >Ссылка на изображение<input
+            <label>
+              Ссылка на изображение
+              <input
                 id="ownImageURL"
                 type="url"
                 maxlength="3000"
-                placeholder="https://…" /></label
-            ><button type="button" id="previewExample">Посмотреть</button>
+                placeholder="https://…"
+              />
+            </label>
+            <button type="button" id="previewExample">Посмотреть</button>
           </div>
           <p class="field-help">
             Вставь ссылку или прикрепи файл на GitHub после нажатия «Продолжить
             на GitHub».
           </p>
           <div id="editorPreview" class="editor-preview" hidden></div>
-          <label
-            >Подпись<input
+          <label>
+            Подпись
+            <input
               id="ownCaption"
               maxlength="1000"
-              placeholder="Что показывает этот пример" /></label
-          ><label
-            >Параметры генерации<input
+              placeholder="Что показывает этот пример"
+            />
+          </label>
+          <label>
+            Параметры генерации
+            <input
               id="ownParams"
               maxlength="1000"
               placeholder="Модель, настройки и seed (необязательно)"
-          /></label>
+            />
+          </label>
         </div>
         <div class="workshop-actions">
-          <button class="primary" type="submit">Продолжить на GitHub</button
-          ><button type="button" id="saveDraft">Сохранить черновик</button>
+          <button class="primary" type="submit">Продолжить на GitHub</button>
+          <button type="button" id="saveDraft">Сохранить черновик</button>
         </div>
         <p id="workshopError" class="form-error" role="alert" hidden></p>
       </form>
