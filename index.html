@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#171a16" />
+    <meta name="theme-color" content="#0d1729" />
     <meta
       name="description"
       content="Стилевые теги, пользовательские меши и негативы NovelAI v5. Русские пояснения, источники, поиск и копирование."
@@ -11,7 +11,7 @@
     <title>NAI Atelier — каталог стилей</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='2' fill='%23171a16'/%3E%3Cpath d='M8 28L20 7l12 21h-7l-5-9-5 9z' fill='%23b6d6a4'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='2' fill='%230d1729'/%3E%3Cpath d='M8 28L20 7l12 21h-7l-5-9-5 9z' fill='%2379dece'/%3E%3C/svg%3E"
     />
     <link
       rel="preload"
@@ -43,8 +43,10 @@
       <aside class="sidebar" aria-label="Навигация">
         <div class="sidebar-heading">
           <a href="#" class="brand" aria-label="NAI Atelier, главная">
-            <span class="mark" aria-hidden="true">A</span>
-            <span>
+            <svg class="mark" aria-hidden="true" viewBox="0 0 32 32">
+              <path d="M4 28 16 4 28 28M9 19h14" />
+            </svg>
+            <span class="brand-name">
               NAI
               <strong>Atelier</strong>
             </span>
@@ -63,7 +65,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Шино · Telegram ↗
+            Шино и Астера ↗
           </a>
         </div>
       </aside>
@@ -80,17 +82,8 @@
               Художественные теги, меши и негативы с описаниями, готовыми
               строками и ссылками на примеры.
             </p>
-            <div class="mascot-gallery" id="mascots" aria-hidden="true"></div>
           </div>
-          <figure class="art">
-            <img
-              id="heroArt"
-              src="assets/canal.webp"
-              alt="Ночной канал — декоративная иллюстрация"
-              width="768"
-              height="512"
-            />
-          </figure>
+          <div class="mascot-gallery" id="mascots" aria-hidden="true"></div>
         </section>
         <section class="workspace" id="catalog" aria-labelledby="sectionTitle">
           <div class="catalog-tools">
@@ -107,16 +100,73 @@
               />
               <span class="key" aria-hidden="true">/</span>
             </div>
-            <label class="status-select">
-              <span class="sr-only">Происхождение</span>
-              <select id="status">
-                <option value="all">Любое происхождение</option>
-                <option value="official">Официальное</option>
-                <option value="community">Из публикаций v5</option>
-                <option value="adapted">Адаптации</option>
-                <option value="experimental">Авторские подборки</option>
-              </select>
-            </label>
+            <div class="custom-select" data-select="status">
+              <span id="statusLabel" class="sr-only">Происхождение</span>
+              <input type="hidden" id="status" value="all" />
+              <button
+                type="button"
+                id="statusTrigger"
+                class="select-trigger"
+                role="combobox"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="statusList"
+                aria-labelledby="statusLabel statusValue"
+              >
+                <span id="statusValue">Любое происхождение</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="m4 6 4 4 4-4" />
+                </svg>
+              </button>
+              <div
+                id="statusList"
+                class="select-list"
+                role="listbox"
+                aria-labelledby="statusLabel"
+                hidden
+              >
+                <div
+                  id="statusOption0"
+                  role="option"
+                  aria-selected="true"
+                  data-value="all"
+                >
+                  Любое происхождение
+                </div>
+                <div
+                  id="statusOption1"
+                  role="option"
+                  aria-selected="false"
+                  data-value="official"
+                >
+                  Официальное
+                </div>
+                <div
+                  id="statusOption2"
+                  role="option"
+                  aria-selected="false"
+                  data-value="community"
+                >
+                  Из публикаций v5
+                </div>
+                <div
+                  id="statusOption3"
+                  role="option"
+                  aria-selected="false"
+                  data-value="adapted"
+                >
+                  Адаптации
+                </div>
+                <div
+                  id="statusOption4"
+                  role="option"
+                  aria-selected="false"
+                  data-value="experimental"
+                >
+                  Авторские подборки
+                </div>
+              </div>
+            </div>
           </div>
           <div id="categories" class="chips" aria-label="Категории"></div>
           <div class="section-head">
@@ -187,13 +237,49 @@
                 placeholder="Название стиля"
               />
             </label>
-            <label>
-              Тип
-              <select id="ownVariant">
-                <option value="style">Стиль</option>
-                <option value="mix">Меш</option>
-              </select>
-            </label>
+            <div class="custom-select" data-select="ownVariant">
+              <span id="ownVariantLabel" class="field-label">Тип</span>
+              <input type="hidden" id="ownVariant" value="style" />
+              <button
+                type="button"
+                id="ownVariantTrigger"
+                class="select-trigger"
+                role="combobox"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="ownVariantList"
+                aria-labelledby="ownVariantLabel ownVariantValue"
+              >
+                <span id="ownVariantValue">Стиль</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="m4 6 4 4 4-4" />
+                </svg>
+              </button>
+              <div
+                id="ownVariantList"
+                class="select-list"
+                role="listbox"
+                aria-labelledby="ownVariantLabel"
+                hidden
+              >
+                <div
+                  id="ownVariantOption0"
+                  role="option"
+                  aria-selected="true"
+                  data-value="style"
+                >
+                  Стиль
+                </div>
+                <div
+                  id="ownVariantOption1"
+                  role="option"
+                  aria-selected="false"
+                  data-value="mix"
+                >
+                  Меш
+                </div>
+              </div>
+            </div>
           </div>
           <label>
             Промпт

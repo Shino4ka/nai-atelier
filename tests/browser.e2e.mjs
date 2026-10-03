@@ -82,6 +82,23 @@ export async function runAtelierE2E(tab, browser) {
   );
   await tab.playwright.locator("#reset").click();
   assert("reset restores the catalog", Number(await count()) >= 208);
+  await tab.playwright.locator("#search").fill("Itsuki");
+  assert(
+    "negative copy explains how to use the string",
+    (await tab.playwright.locator(".desc").textContent()).includes(
+      "Вставь его целиком в UC",
+    ),
+  );
+  await tab.playwright.locator("#search").fill("");
+  assert(
+    "Astera is credited with Shino's link",
+    (await tab.playwright.locator(".sidebar-footer a").textContent()).includes(
+      "Астера",
+    ) &&
+      (await tab.playwright
+        .locator(".sidebar-footer a")
+        .getAttribute("href")) === "https://t.me/ah_ah_shino4ka",
+  );
   for (const [section, expected] of [
     ["tag", 146],
     ["artist", 30],
@@ -103,12 +120,37 @@ export async function runAtelierE2E(tab, browser) {
   await tab.playwright.locator('[data-section="mix"]').click();
   assert("mix section retains recipes", Number(await count()) >= 17);
   await tab.playwright.locator('[data-section="all"]').click();
-  await tab.playwright.locator("#status").selectOption("official");
+  assert(
+    "dropdowns use custom controls",
+    (await tab.playwright.locator("select").count()) === 0,
+  );
+  await tab.playwright.locator("#statusTrigger").click();
+  await tab.playwright.locator('#statusList [data-value="official"]').click();
   assert(
     "provenance filter works",
     Number(await count()) > 0 && Number(await count()) < 208,
   );
-  await tab.playwright.locator("#status").selectOption("all");
+  await tab.playwright.locator("#statusTrigger").press("ArrowUp");
+  await tab.playwright.locator("#statusTrigger").press("Enter");
+  assert(
+    "keyboard selection restores all records",
+    Number(await count()) >= 208,
+  );
+  await tab.playwright.locator("#statusTrigger").click();
+  await tab.playwright.locator("#statusTrigger").press("End");
+  await tab.playwright.locator("#statusTrigger").press("Escape");
+  assert(
+    "Escape cancels the pending selection",
+    (await tab.playwright.locator("#statusValue").textContent()).trim() ===
+      "Любое происхождение" &&
+      !(await tab.playwright.locator("#statusList").isVisible()),
+  );
+  await tab.playwright.locator("#statusTrigger").click();
+  await tab.playwright.locator("#search").click();
+  assert(
+    "outside click closes the list",
+    !(await tab.playwright.locator("#statusList").isVisible()),
+  );
   await tab.playwright.locator("#sourceBtn").click();
   assert(
     "all 20 sources are accessible",
@@ -122,6 +164,20 @@ export async function runAtelierE2E(tab, browser) {
   );
   await close();
   await tab.playwright.locator("#workshopBtn").click();
+  await tab.playwright.locator("#ownVariantTrigger").click();
+  await tab.playwright.locator('#ownVariantList [data-value="mix"]').click();
+  assert(
+    "workshop custom dropdown selects a mix",
+    (await tab.playwright.locator("#ownVariantValue").textContent()).trim() ===
+      "Меш",
+  );
+  await tab.playwright.locator("#ownVariantTrigger").press("ArrowUp");
+  await tab.playwright.locator("#ownVariantTrigger").press("Enter");
+  assert(
+    "workshop keyboard selects a style",
+    (await tab.playwright.locator("#ownVariantValue").textContent()).trim() ===
+      "Стиль",
+  );
   assert(
     "style editor retains required fields",
     (await tab.playwright.locator("#ownName").getAttribute("required")) !==
@@ -138,6 +194,46 @@ export async function runAtelierE2E(tab, browser) {
     assert(`catalog fits ${width}px`, await fit());
     if (width === 1440) {
       assert(
+        "card descriptions sit below their headings",
+        await tab.playwright.evaluate(
+          () =>
+            document.querySelector(".card h3").getBoundingClientRect().bottom <=
+            document.querySelector(".card .desc").getBoundingClientRect().top,
+        ),
+      );
+      assert(
+        "brand and dropdown contents are centered",
+        await tab.playwright.evaluate(() => {
+          const center = (element) => {
+            const rect = element.getBoundingClientRect();
+            return rect.top + rect.height / 2;
+          };
+          return (
+            Math.abs(
+              center(document.querySelector(".mark")) -
+                center(document.querySelector(".brand-name")),
+            ) < 1 &&
+            Math.abs(
+              center(document.querySelector("#statusValue")) -
+                center(document.querySelector("#statusTrigger svg")),
+            ) < 1
+          );
+        }),
+      );
+      assert(
+        "larger chibi replace the hero illustration",
+        await tab.playwright.evaluate(
+          () =>
+            !document.querySelector("#heroArt") &&
+            [...document.querySelectorAll("#mascots img")].every(
+              (img) =>
+                img.complete &&
+                img.naturalWidth > 0 &&
+                img.getBoundingClientRect().height >= 100,
+            ),
+        ),
+      );
+      assert(
         "navigation occupies the sidebar on desktop",
         await tab.playwright.evaluate(
           () =>
@@ -151,7 +247,8 @@ export async function runAtelierE2E(tab, browser) {
           () =>
             document.querySelector(".search-wrap").getBoundingClientRect()
               .height ===
-            document.querySelector("#status").getBoundingClientRect().height,
+            document.querySelector("#statusTrigger").getBoundingClientRect()
+              .height,
         ),
       );
       assert(

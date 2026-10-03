@@ -284,17 +284,6 @@ function filtered() {
 }
 function render() {
   nav();
-  const art =
-    section === "mix"
-      ? [
-          "assets/mix.webp",
-          "Сереброволосый мужчина среди золотых цветов — декоративная иллюстрация",
-        ]
-      : ["assets/canal.webp", "Ночной канал — декоративная иллюстрация"];
-  if ($("#heroArt").getAttribute("src") !== art[0]) {
-    $("#heroArt").src = art[0];
-    $("#heroArt").alt = art[1];
-  }
   $("#categories").innerHTML = (
     ["all", "tag", "artist"].includes(section)
       ? categories.filter(
@@ -357,16 +346,96 @@ function sources() {
   );
 }
 function method() {
-  openInfo(`<h2>О каталоге</h2>
+  openInfo(`<h2>О каталоге</h2><p>Авторы: <a href="https://t.me/ah_ah_shino4ka" target="_blank" rel="noopener noreferrer">Шино</a> и Астера.</p>
 <p>Каталог объединяет художественные теги, имена художников, меши и негативы для NovelAI v5. Стилевые строки задают рисовку; персонажа, внешность, действие и окружение добавляй отдельно.</p>
 <h3>Происхождение записей</h3><p>Официальные теги и пресеты взяты из документации. Публикации v5 содержат примеры авторов. Адаптации сопровождаются примечаниями к строке, а авторские подборки служат основой для экспериментов. Генерационные тесты каталога не проводились; параметры указаны там, где их опубликовал автор.</p>
 <h3>Веса</h3><p><code>1.2::tag ::</code> усиливает тег, <code>0.5::tag ::</code> ослабляет. Имена художников записываются так же: <code>0.8::kagoya1219 ::</code>. Отрицательный вес направляет изображение от признака. В UC положительный вес усиливает избегание. Prompt Mixing через <code>|</code> доступен для v3 и ниже.</p>
 <h3>Негативы</h3><p>Вставляй одну полную строку в UC с пресетом None. Heavy подавляет dithering, halftone, screentone и multiple views; Light содержит sepia. Выбирай негатив с учётом нужных эффектов. Для комиксов есть адаптации без прямых запретов текста, чиби и панелей; их косвенное влияние не проверено.</p>
 <p>Тег eyelashes в UC подавляет ресницы. Автоматические Quality Tags могут добавлять no text. Задавай чиби для нужного кадра, а не глобально для комикса. Имена художников в UC не подтверждены как средство подавления чиби.</p>
 <h3>Сравнение стилей</h3><p>Используй одну модель Full или Curated, одинаковые промпт, размеры, sampler, steps и guidance. Сравни несколько seeds, меняя по одному тегу или весу. Вклад отдельных художников в мешах не проверен в изоляции.</p>
-<details><summary>Материалы и ограничения</summary><p>Каталог — открытый справочник, а не полный словарь обучения NovelAI. Общая документация художественных тегов не подтверждает тест каждого тега на v5. Опубликованный результат отражает пример автора.</p><p>Оригинальные строки доступны в карточках. Для части источников доступны сохранённые материалы; сведения о проверке указаны в списке источников. Закрытые Discord-каналы и недоступный EXIF не использованы для восстановления рецептов.</p><p>Иллюстрации шапки и чиби созданы для оформления другим генератором. Примеры стилей находятся в карточках.</p></details>
+<details><summary>Материалы и ограничения</summary><p>Каталог — открытый справочник, а не полный словарь обучения NovelAI. Общая документация художественных тегов не подтверждает тест каждого тега на v5. Опубликованный результат отражает пример автора.</p><p>Оригинальные строки доступны в карточках. Для части источников доступны сохранённые материалы; сведения о проверке указаны в списке источников. Закрытые Discord-каналы и недоступный EXIF не использованы для восстановления рецептов.</p><p>Чиби созданы для оформления другим генератором. Примеры стилей находятся в карточках.</p></details>
 <button id="exportData">Скачать каталог JSON</button>`);
 }
+const dropdowns = new Map();
+document.querySelectorAll("[data-select]").forEach((root) => {
+  const id = root.dataset.select;
+  const input = $("#" + id);
+  const trigger = $("#" + id + "Trigger");
+  const list = $("#" + id + "List");
+  const label = $("#" + id + "Value");
+  const options = [...list.querySelectorAll('[role="option"]')];
+  let active = 0;
+  const highlight = (index) => {
+    active = Math.max(0, Math.min(index, options.length - 1));
+    options.forEach((option, i) =>
+      option.classList.toggle("highlighted", i === active),
+    );
+    trigger.setAttribute("aria-activedescendant", options[active].id);
+    options[active].scrollIntoView({ block: "nearest" });
+  };
+  const close = () => {
+    list.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.removeAttribute("aria-activedescendant");
+  };
+  const open = () => {
+    dropdowns.forEach((control) => control.close());
+    list.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    highlight(
+      options.findIndex((option) => option.dataset.value === input.value),
+    );
+  };
+  const set = (value, notify = false) => {
+    const option =
+      options.find((option) => option.dataset.value === value) || options[0];
+    input.value = option.dataset.value;
+    label.textContent = option.textContent.trim();
+    options.forEach((item) =>
+      item.setAttribute("aria-selected", String(item === option)),
+    );
+    close();
+    if (notify) input.dispatchEvent(new Event("change", { bubbles: true }));
+  };
+  trigger.addEventListener("click", () => (list.hidden ? open() : close()));
+  trigger.addEventListener("keydown", (event) => {
+    if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
+      event.preventDefault();
+      if (list.hidden) open();
+      highlight(
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? options.length - 1
+            : active + (event.key === "ArrowDown" ? 1 : -1),
+      );
+    } else if (["Enter", " "].includes(event.key)) {
+      event.preventDefault();
+      if (list.hidden) open();
+      else set(options[active].dataset.value, true);
+    } else if (event.key === "Escape" && !list.hidden) {
+      event.preventDefault();
+      event.stopPropagation();
+      close();
+    } else if (event.key === "Tab") close();
+  });
+  list.addEventListener("click", (event) => {
+    const option = event.target.closest('[role="option"]');
+    if (!option) return;
+    set(option.dataset.value, true);
+    trigger.focus();
+  });
+  // Keep focus on the combobox until a pointer selection is committed.
+  list.addEventListener("pointerdown", (event) => event.preventDefault());
+  root.addEventListener("focusout", (event) => {
+    if (!root.contains(event.relatedTarget)) close();
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (!root.contains(event.target)) close();
+  });
+  root.closest("dialog")?.addEventListener("close", close);
+  dropdowns.set(id, { set, close });
+});
 let currentDetail = "",
   workshopMode = "style",
   workshopTarget = null,
@@ -380,9 +449,7 @@ const chibiAssets = [
   "assets/chibi/album.webp",
 ];
 $("#mascots").innerHTML = chibiAssets
-  .map(
-    (src) => `<img src="${src}" alt="" width="52" height="58" loading="lazy">`,
-  )
+  .map((src) => `<img src="${src}" alt="" width="156" height="156">`)
   .join("");
 function cardExample(r) {
   if (!["mix", "tag"].includes(r.kind) || !r.imageURL) return "";
@@ -392,7 +459,8 @@ function exampleMarkup(r) {
   return `<section class="example-panel" aria-label="Пример изображения"><div class="example-heading"><h3>Пример</h3><button data-example="${r.id}">${r.imageURL ? "Заменить пример" : "Добавить пример"}</button></div>${r.imageURL ? `<figure class="style-example"><a href="${esc(r.imageURL)}" target="_blank" rel="noopener noreferrer"><img src="${esc(r.imageURL)}" alt="${esc(r.imageCaption || "Пример стиля " + r.name)}" referrerpolicy="no-referrer"></a>${r.imageCaption ? `<figcaption>${esc(r.imageCaption)}</figcaption>` : ""}</figure>${r.exampleParams || (r.custom && r.params) ? `<p class="example-params">${esc(r.exampleParams || r.params)}</p>` : ""}` : ""}${r.exampleIssue ? `<a class="source-link" href="${esc(r.exampleIssue)}" target="_blank" rel="noopener noreferrer">Публикация примера на GitHub</a>` : ""}</section>`;
 }
 function field(id, value) {
-  $("#" + id).value = value || "";
+  if (dropdowns.has(id)) dropdowns.get(id).set(value);
+  else $("#" + id).value = value || "";
 }
 function openWorkshop(r = null, mode = "style") {
   if ($("#detail").open) $("#detail").close();
@@ -693,7 +761,7 @@ document.addEventListener("click", (e) => {
     query = "";
     status = "all";
     $("#search").value = "";
-    $("#status").value = "all";
+    dropdowns.get("status").set("all");
     limit = 24;
     render();
   }
@@ -744,8 +812,9 @@ $("#status").addEventListener("change", (e) => {
 document.addEventListener("keydown", (e) => {
   if (
     e.key === "/" &&
-    !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName) &&
-    !$("dialog[open]")
+    !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName) &&
+    !$("dialog[open]") &&
+    !$('.select-trigger[aria-expanded="true"]')
   ) {
     e.preventDefault();
     $("#search").focus();
