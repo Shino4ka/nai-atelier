@@ -17,16 +17,16 @@ html {
   scroll-padding-top: var(--space-6);
 }
 body {
-  --bg: #0d1729;
-  --surface: #112039;
-  --card: #152640;
-  --border: #2c405c;
-  --text: #edf3f7;
-  --muted: #a4b5cc;
-  --accent: #79dece;
-  --accent-bg: #163d48;
-  --orange: #e4c69a;
-  --input: #152640;
+  --bg: #192432;
+  --surface: #202d3e;
+  --card: #263549;
+  --border: #3a4a5e;
+  --text: #e0e7ec;
+  --muted: #aab7c5;
+  --accent: #a3cfc7;
+  --accent-bg: #2c454b;
+  --orange: #d8c3a4;
+  --input: #263549;
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -37,16 +37,16 @@ body {
 }
 body.light {
   color-scheme: light;
-  --bg: #edf4f7;
-  --surface: #e3edf3;
-  --card: #f9fcfd;
-  --border: #c6d6e0;
-  --text: #142943;
-  --muted: #506780;
-  --accent: #14766f;
-  --accent-bg: #d6eeeb;
-  --orange: #805e31;
-  --input: #f9fcfd;
+  --bg: #f1f4f5;
+  --surface: #e8eef0;
+  --card: #f9fbfb;
+  --border: #cfdadd;
+  --text: #2b3e50;
+  --muted: #596d7c;
+  --accent: #35736d;
+  --accent-bg: #e1eeeb;
+  --orange: #79674d;
+  --input: #f9fbfb;
 }
 button,
 input,
@@ -563,8 +563,8 @@ h2 span {
   position: absolute;
   left: var(--space-2);
   bottom: var(--space-2);
-  color: #edf3f7;
-  background: #0d1729dd;
+  color: #e0e7ec;
+  background: #192432dd;
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius);
   font-size: 12px;
@@ -666,7 +666,7 @@ dialog .note {
   font-weight: 600;
 }
 body.light .primary {
-  color: #f9fcfd;
+  color: #f9fbfb;
 }
 .primary:hover {
   background: var(--accent);
