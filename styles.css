@@ -17,16 +17,18 @@ html {
   scroll-padding-top: var(--space-6);
 }
 body {
-  --bg: #192432;
-  --surface: #202d3e;
-  --card: #263549;
-  --border: #3a4a5e;
-  --text: #e0e7ec;
-  --muted: #aab7c5;
-  --accent: #a3cfc7;
-  --accent-bg: #2c454b;
+  --bg: #201e43;
+  --surface: #242847;
+  --card: #293250;
+  --border: #405774;
+  --text: #eeeeee;
+  --muted: #b0bdcd;
+  --accent: #9dc7d2;
+  --accent-bg: #134b70;
+  --accent-fill: #508c9b;
+  --accent-text: #0d1222;
   --orange: #d8c3a4;
-  --input: #263549;
+  --input: #293250;
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -37,16 +39,18 @@ body {
 }
 body.light {
   color-scheme: light;
-  --bg: #f1f4f5;
-  --surface: #e8eef0;
-  --card: #f9fbfb;
-  --border: #cfdadd;
-  --text: #2b3e50;
-  --muted: #596d7c;
-  --accent: #35736d;
-  --accent-bg: #e1eeeb;
+  --bg: #eeeeee;
+  --surface: #e3e8ee;
+  --card: #f8f9fb;
+  --border: #c6cfdc;
+  --text: #201e43;
+  --muted: #57637a;
+  --accent: #366e7e;
+  --accent-bg: #dde8ed;
+  --accent-fill: #134b70;
+  --accent-text: #eeeeee;
   --orange: #79674d;
-  --input: #f9fbfb;
+  --input: #f8f9fb;
 }
 button,
 input,
@@ -563,8 +567,8 @@ h2 span {
   position: absolute;
   left: var(--space-2);
   bottom: var(--space-2);
-  color: #e0e7ec;
-  background: #192432dd;
+  color: #eeeeee;
+  background: #201e43dd;
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius);
   font-size: 12px;
@@ -660,17 +664,14 @@ dialog .note {
   flex-wrap: wrap;
 }
 .primary {
-  color: #1b2815;
-  background: var(--accent);
-  border-color: var(--accent);
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-fill);
   font-weight: 600;
 }
-body.light .primary {
-  color: #f9fbfb;
-}
 .primary:hover {
-  background: var(--accent);
-  filter: brightness(0.93);
+  background: var(--accent-fill);
+  filter: brightness(1.04);
 }
 .source-link {
   font-size: 14px;
