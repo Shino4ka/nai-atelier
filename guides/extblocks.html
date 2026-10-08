@@ -1606,9 +1606,22 @@ if('mediaSession' in navigator){
  for(const [action,handler] of Object.entries(handlers)){try{navigator.mediaSession.setActionHandler(action,handler)}catch{}}
 }
 renderTrack();renderVolume();renderModes();renderPlayback();
-// Only continue a just-playing session after navigation within this website.
-let sameSite=false;try{sameSite=new URL(document.referrer).origin===location.origin}catch{}
-if(session&&session.playing&&sameSite&&Date.now()-session.savedAt<15000){load(index,false,pendingSeek||0);play(false)}
+// Try audible playback on arrival; browsers may require the first user gesture.
+let startupArmed=true;
+function cancelStartup(){
+ startupArmed=false;document.removeEventListener('click',startOnGesture);document.removeEventListener('keydown',startOnGesture);
+}
+function startOnGesture(event){
+ if(!startupArmed||!event.isTrusted)return;
+ if(event.type==='keydown'&&(event.ctrlKey||event.metaKey||event.altKey||['Shift','Control','Alt','Meta'].includes(event.key)))return;
+ if(widget.contains(event.target)&&!event.target.closest('#musicOpen'))return;
+ cancelStartup();play(false);
+}
+document.addEventListener('click',startOnGesture);
+document.addEventListener('keydown',startOnGesture);
+audio.addEventListener('playing',cancelStartup,{once:true});
+audio.autoplay=true;
+play(false);
 })();
 
 </script>
