@@ -47,26 +47,39 @@ svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 .home-mode .header{background:#0c101b;color:#edf1f8;border-color:#28344a}
 .home-mode .header a{color:#c7d4e5}
 .home-mode .brand{color:#edf1f8}
-.gateway{display:grid;grid-template-columns:1fr 1fr;height:calc(100svh - 82px);min-height:610px;max-height:1300px;background:#080c17;overflow:hidden}
-.portal{display:flex;align-items:flex-end;position:relative;isolation:isolate;overflow:hidden;min-width:0;padding:clamp(28px,5vw,75px);color:#fff}
-.portal+.portal{border-left:1px solid #53687977}
-.portal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%;z-index:-3;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
-.portal::after{content:'';position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,#0b102010 25%,#0b102000 38%,#080d1ab8 74%,#080d1af5 100%)}
-.portal:hover img,.portal:focus-visible img{transform:scale(1.04)}
-.portal-number{font-size:14px;letter-spacing:.13em;color:#c7d7e3;display:flex;align-items:center;gap:13px;margin-bottom:18px}
-.portal-number::after{content:'';width:45px;height:1px;background:#c7d7e388}
-.portal h1,.portal h2{font:400 clamp(55px,6.5vw,104px)/1.1 var(--serif);letter-spacing:-3px;margin-bottom:20px}
-.portal p{color:#d7e1ed;font-size:16px;max-width:420px;margin-bottom:27px}
-.enter{display:inline-flex;border:1px solid #aabec980;padding:10px 21px;border-radius:6px;font-size:14px;font-weight:650;transition:.3s}
-.portal:hover .enter{background:#93e2d9;color:#11212a;border-color:#93e2d9}
-.portal-tools{position:absolute;top:24px;right:28px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#e2edf4b0}
+/* Paired stages for transparent character illustrations. */
+.gateway{display:grid;grid-template-columns:1fr 1fr;height:calc(100svh - 82px);min-height:650px;max-height:1300px;background:#0c101b;overflow:hidden}
+.portal{--portal-ink:196,166,243;display:flex;align-items:flex-end;position:relative;isolation:isolate;overflow:hidden;min-width:0;padding:32px clamp(28px,4.2vw,64px);color:#fff;background:radial-gradient(ellipse at 50% 35%,rgba(var(--portal-ink),.15),transparent 62%),linear-gradient(150deg,#191525,#0c101b 80%)}
+.portal-tavern{--portal-ink:111,218,208;background:radial-gradient(ellipse at 50% 35%,rgba(var(--portal-ink),.16),transparent 62%),linear-gradient(210deg,#11262d,#0c101b 80%)}
+.portal+.portal{border-left:1px solid #93a4c126}
+.portal::before{content:'';position:absolute;left:0;right:0;bottom:218px;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--portal-ink),.2),transparent);z-index:0}
+.portal::after{content:'';position:absolute;inset:auto 0 0;height:225px;background:linear-gradient(0deg,#0c101b,transparent);z-index:0;pointer-events:none}
+.portal-scene{position:absolute;inset:25px 24px 223px;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;z-index:1}
+.portal-scene::before{content:'';position:absolute;inset:0 max(10px,calc(50% - 200px)) 0;border:1px solid rgba(var(--portal-ink),.22);border-radius:220px 220px 4px 4px;background:linear-gradient(180deg,rgba(var(--portal-ink),.045),transparent 80%);box-shadow:0 0 0 16px rgba(var(--portal-ink),.018);transform:translateY(10px);transition:transform .65s cubic-bezier(.25,.8,.25,1),border-color .65s}
+.portal-scene::after{content:'';position:absolute;bottom:-13px;width:min(330px,76%);height:35px;border-radius:50%;background:radial-gradient(ellipse,#0009,transparent 70%);z-index:0;transition:transform .65s}
+.portal-scene img{position:relative;inset:auto;width:100%;height:100%;object-fit:contain;object-position:center bottom;z-index:1;filter:drop-shadow(0 15px 18px #0005);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.25,.8,.25,1);animation:art-arrive .8s both}
+.portal-tavern .portal-scene img{animation-delay:.12s}
+.portal:hover .portal-scene img,.portal:focus-visible .portal-scene img{transform:translateY(-7px) scale(1.025)}
+.portal:hover .portal-scene::before,.portal:focus-visible .portal-scene::before{transform:translateY(3px);border-color:rgba(var(--portal-ink),.42)}
+.portal:hover .portal-scene::after{transform:scale(.94);opacity:.8}
+.portal-copy{position:relative;z-index:2;width:100%;max-width:540px}
+.portal-number{font-size:12px;letter-spacing:.14em;color:rgb(var(--portal-ink));display:flex;align-items:center;gap:13px;margin-bottom:10px}
+.portal-number::after{content:'';width:45px;height:1px;background:rgba(var(--portal-ink),.4)}
+.portal h1,.portal h2{font:400 clamp(48px,5.2vw,84px)/1.12 var(--serif);letter-spacing:-2.4px;margin-bottom:10px}
+.portal p{color:#c4cddd;font-size:15px;max-width:430px;margin-bottom:18px}
+.enter{display:inline-flex;align-items:center;gap:25px;border:1px solid rgba(var(--portal-ink),.35);padding:9px 18px;border-radius:6px;font-size:14px;font-weight:650;transition:background .3s,border-color .3s,color .3s}
+.enter::after{content:'↗';font-size:18px;line-height:1;font-weight:400;transition:transform .3s}
+.portal:hover .enter,.portal:focus-visible .enter{background:rgb(var(--portal-ink));color:#101b26;border-color:rgb(var(--portal-ink))}
+.portal:hover .enter::after{transform:translate(2px,-2px)}
+.portal-tools{position:absolute;top:24px;right:28px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--portal-ink),.65);z-index:2}
+@keyframes art-arrive{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
 
 .section-page{max-width:1500px;margin:auto;padding:45px 4.5vw 80px;animation:appear .45s ease}
 .page-title{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:36px}
 .page-title h1{margin:8px 0 17px}
 .page-title p{color:var(--muted);max-width:650px;margin:0}
 .page-stamp{display:flex;align-items:center;gap:18px}
-.page-stamp img{width:124px;height:142px;object-fit:cover;object-position:50% 23%;border:1px solid var(--line);border-radius:60px 60px 8px 8px}
+.page-stamp img{width:124px;height:142px;object-fit:contain;object-position:center bottom;padding:7px;background:var(--panel);border:1px solid var(--line);border-radius:60px 60px 8px 8px}
 .page-stamp span{font-size:14px;color:var(--muted);line-height:1.6;max-width:110px}
 .tabs{scrollbar-width:none;display:flex;gap:28px;border-bottom:1px solid var(--line);margin-bottom:32px;overflow-x:auto}
 .tabs a{padding:14px 0;white-space:nowrap;color:var(--muted)}
@@ -100,8 +113,10 @@ input[type=search]{width:100%;height:51px;padding:10px 16px 10px 45px;color:var(
 .guide-feature h2{margin:13px 0 19px}
 .guide-feature p{color:var(--muted);max-width:520px}
 .guide-feature small{margin-top:20px;color:var(--muted)}
-.feature-art{background:url('assets/hero-tavern.webp') 50% 35%/cover;position:relative;min-height:300px}
-.feature-art::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--panel),transparent 45%)}
+.feature-art{background:radial-gradient(ellipse at 55% 45%,color-mix(in srgb,var(--accent) 15%,transparent),transparent 70%);position:relative;min-height:365px;overflow:hidden}
+.feature-art::before{content:'';position:absolute;inset:25px 18% 0;border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:180px 180px 0 0;background:color-mix(in srgb,var(--accent) 3%,transparent)}
+.feature-art::after{content:'';position:absolute;inset:15px 20px 0;background:url('assets/hero-tavern-cutout.webp') center bottom/contain no-repeat;filter:drop-shadow(0 12px 12px #0003)}
+
 .quick-guides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}
 .quick-card,.extension-card,.block-file{padding:27px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
 .quick-card h3{margin-bottom:17px}
@@ -205,8 +220,6 @@ to{opacity:1;transform:translateY(0)}
 .gateway{grid-template-columns:1fr;grid-template-rows:1fr 1fr;height:auto;min-height:calc(100svh - 70px);max-height:none}
 .portal{min-height:max(300px,calc((100svh - 70px)/2));padding:25px 28px}
 .portal+.portal{border-left:0;border-top:1px solid #53687977}
-.portal img{object-position:50% 27%}
-.portal::after{background:linear-gradient(90deg,#080d1ae6,#080d1a80 45%,#080d1a00)}
 .portal h1,.portal h2{font-size:45px;letter-spacing:-1.6px;margin-bottom:10px}
 .portal-copy{width:75%;max-width:450px}
 .portal-number{font-size:12px;margin-bottom:10px}
@@ -228,8 +241,8 @@ to{opacity:1;transform:translateY(0)}
 .catalog-count{width:100%;font-size:14px}
 .guide-feature{display:flex;flex-direction:column-reverse}
 .feature-copy{padding:28px}
-.feature-art{min-height:200px;background-position:50% 27%}
-.feature-art::before{background:linear-gradient(0deg,var(--panel),transparent 65%)}
+.feature-art{min-height:280px}
+
 .guide-feature h2{font-size:30px}
 .guide-feature p{font-size:14px}
 .preset-layout{grid-template-columns:1fr}
@@ -267,6 +280,23 @@ dialog{padding:24px}
 .extension-card{padding:25px}
 }
 
+
+@media(max-width:760px){
+ .gateway{height:auto;min-height:0;grid-template-columns:1fr;grid-template-rows:auto auto;max-height:none}
+ .portal{min-height:clamp(490px,78svh,650px);padding:24px 28px}
+ .portal+.portal{border-left:0;border-top:1px solid #93a4c126}
+ .portal-scene{inset:18px 18px 185px}
+ .portal::before{bottom:178px}
+ .portal::after{height:190px}
+ .portal-copy{width:100%;max-width:540px}
+ .portal h1,.portal h2{font-size:46px;letter-spacing:-1.6px;margin-bottom:8px}
+ .portal p{font-size:14px;max-width:310px;margin-bottom:14px}
+ .portal-number{font-size:11px;margin-bottom:8px}
+ .enter{padding:8px 15px}
+ .portal-tools{display:none}
+}
+@media(max-width:380px){.portal{min-height:485px;padding:22px}.portal-scene{inset:15px 12px 188px}.portal h1,.portal h2{font-size:40px}}
+
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 .block-card.active .highlight{background-size:100% 35%}
 }
@@ -295,8 +325,8 @@ dialog{padding:24px}
 </header>
 <main id="main">
 <section id="home" class="gateway" aria-label="Выбор раздела">
-<a class="portal" href="#novelai">
-<img src="assets/hero-novelai.webp" alt="Шино рисует светящуюся лису в ночном ателье" fetchpriority="high">
+<a class="portal portal-novelai" href="#novelai">
+<span class="portal-scene"><img src="assets/hero-novelai-cutout.webp" alt="Эльфийка рисует за мольбертом" fetchpriority="high"></span>
 <span class="portal-tools">Illustration</span>
 <div class="portal-copy">
 <span class="portal-number">01 / ATELIER</span>
@@ -305,8 +335,8 @@ dialog{padding:24px}
 <span class="enter">Открыть каталог</span>
 </div>
 </a>
-<a class="portal" href="#tavern/guides">
-<img src="assets/hero-tavern.webp" alt="Шино читает книгу в той же ночной библиотеке" fetchpriority="high">
+<a class="portal portal-tavern" href="#tavern/guides">
+<span class="portal-scene"><img src="assets/hero-tavern-cutout.webp" alt="Шино читает книгу в бирюзовом кресле" fetchpriority="high"></span>
 <span class="portal-tools">Roleplay</span>
 <div class="portal-copy">
 <span class="portal-number">02 / LIBRARY</span>
@@ -325,7 +355,7 @@ dialog{padding:24px}
 </div>
 <div class="page-stamp">
 <span>Материалы<br>Шино и Астеры</span>
-<img src="assets/hero-novelai.webp" alt="" loading="lazy">
+<img src="assets/hero-novelai-cutout.webp" alt="" loading="lazy">
 </div>
 </div>
 <div class="catalog-layout">
@@ -364,7 +394,7 @@ dialog{padding:24px}
 </div>
 <div class="page-stamp">
 <span>Собрано<br>Шино</span>
-<img src="assets/hero-tavern.webp" alt="" loading="lazy">
+<img src="assets/hero-tavern-cutout.webp" alt="" loading="lazy">
 </div>
 </div>
 <nav class="tabs" aria-label="Материалы SillyTavern">
@@ -382,7 +412,7 @@ dialog{padding:24px}
 <a class="primary" href="guides/extblocks.html">Читать гайд</a>
 <small>25 разделов · скриншоты · поиск по тексту</small>
 </div>
-<div class="feature-art" role="img" aria-label="Шино с книгой в библиотеке">
+<div class="feature-art" role="img" aria-label="Шино с книгой в кресле">
 </div>
 </article>
 <div class="quick-guides">
