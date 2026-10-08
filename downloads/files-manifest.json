@@ -1,0 +1,37 @@
+[
+  {
+    "file": "shino-gemini-3.8-flash-v01.json",
+    "sha256": "1c3e8ee024d5c0d6a2c99ac2a434b7ce75909b067b595b295a535d14886c6fad",
+    "bytes": 37490
+  },
+  {
+    "file": "regex-return-normal-spaces.json",
+    "sha256": "ab65f5b27de431e25a4068b641fcedb604e81a8a6b0572a87ac1efda958c4f25",
+    "bytes": 383
+  },
+  {
+    "file": "regex-use-figure-spaces.json",
+    "sha256": "2388495c9a98e1dc2c7bd21d09d88e64368fc95eaa8f80d4cbb64264f2d72745",
+    "bytes": 380
+  },
+  {
+    "file": "novel-comm.json",
+    "sha256": "917bba386b81a924cbdce5ed7870b7b1be04b54134c160adb82fba97a7fc523b",
+    "bytes": 29779
+  },
+  {
+    "file": "investigation-dossier.json",
+    "sha256": "7510983bcc6f45916a169d99921936427a728101ce2c03febdecca030e4a1711",
+    "bytes": 31690
+  },
+  {
+    "file": "fandom-guide-state.json",
+    "sha256": "5638df39976ebe6d8741dcda2ebeee21b4cba434ce07d2b77bffbd6681eacb04",
+    "bytes": 8156
+  },
+  {
+    "file": "regex-fandom-guide.json",
+    "sha256": "a9fd9da744b1bd48b5377d56f73126c06bef0470d835a9bf252be41ae0df0d9a",
+    "bytes": 491547
+  }
+]

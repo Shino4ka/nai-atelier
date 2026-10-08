@@ -1,0 +1,1422 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ExtBlocks — полный гайд</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f5f5fb;color:#24283b;font:17px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}.toolbar{position:sticky;top:0;background:#fbfbfff5;border-bottom:1px solid #dddfee;backdrop-filter:blur(10px);z-index:10;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}.toolbar span{color:#606883;font-weight:650;font-size:14px}.toolbar button{background:#514796;color:white;border:0;border-radius:10px;padding:11px 16px;font:600 14px system-ui;cursor:pointer}main{max-width:940px;margin:0 auto;padding:34px 48px 80px}h1{font-size:clamp(30px,4.8vw,48px);line-height:1.16;letter-spacing:-1.2px;max-width:760px;margin:0 0 24px}h2{font-size:28px;line-height:1.3;border-top:1px solid #dcdfee;margin:56px 0 20px;padding-top:30px;scroll-margin-top:95px}h3{font-size:22px;line-height:1.4;margin-top:36px}p{margin:15px 0}li{margin:9px 0}strong{font-weight:700}a{color:#4a458e;word-break:break-word}code{font-family:"DejaVu Sans Mono",monospace;font-size:.87em;background:#e9eaf3;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{background:#1d2337;color:#f3f4ff;padding:20px;border-radius:14px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit}table{border-collapse:collapse;width:100%;margin:20px 0;background:#fff;font-size:15px;border:1px solid #dfe1ed}th,td{padding:12px 14px;border-bottom:1px solid #dfe1ed;vertical-align:top;text-align:left}th{background:#eeeef7;font-weight:700}figure{margin:30px auto 36px;max-width:700px}figure img{width:100%;display:block;border-radius:14px}figure .zoom{border:none;background:none;padding:0;display:block;width:100%;cursor:zoom-in}figcaption{color:#6c728b;font-size:13px;text-align:center;margin:10px 0}.quick{background:#e9e7f7;border:1px solid #d5d0ef;padding:22px 26px;border-radius:16px;margin:28px 0}.quick b{color:#464078}details{background:#fff;padding:20px;border:1px solid #dfe1ed;border-radius:14px;margin:24px 0}summary{font-size:18px;font-weight:700;cursor:pointer}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px}.gallery figure{margin:20px 0}dialog{border:0;padding:10px;background:#171a26;border-radius:16px;max-width:min(98vw,1100px);max-height:96vh}dialog::backdrop{background:#0d122be6}dialog img{max-width:100%;max-height:88vh;display:block;margin:auto;object-fit:contain}dialog button{display:block;background:#514796;color:#fff;border:0;border-radius:6px;margin:0 0 8px auto;padding:7px 12px;font:600 14px system-ui;cursor:pointer}@media(max-width:640px){main{padding:28px 20px 55px}body{font-size:16px}h2{font-size:24px}th,td{padding:9px 8px;font-size:13px}.toolbar{padding:10px 14px}.toolbar span{font-size:12px}.gallery{grid-template-columns:1fr}.quick{padding:18px}}@media print{body{background:white}main{max-width:none}.toolbar,.gallery,dialog{display:none}figure{max-width:410px;break-inside:avoid}h2{break-after:avoid}pre{color:black;background:#f0f0f0}a{color:inherit}}.layout{max-width:1290px;margin:auto;display:grid;grid-template-columns:290px minmax(0,1fr);gap:8px}
+.layout main{width:100%;padding:34px 38px 80px;min-width:0}
+.sidebar{padding:26px 18px;position:sticky;top:73px;height:calc(100vh - 73px);overflow:auto}
+.sidebar details{margin:0;padding:16px;background:#fff}.sidebar summary{font-size:17px}
+.toc{margin-top:15px;display:grid;gap:3px}.toc a{font-size:13px;line-height:1.45;text-decoration:none;padding:7px 8px;border-radius:6px}
+.toc a:hover,.toc a:focus-visible{background:#e9e7f7}.toolbar{flex-wrap:wrap}
+.searchbar{display:flex;align-items:center;gap:8px;flex:1;max-width:490px;margin:0 20px}
+.searchbar input{font:15px system-ui;border:1px solid #cbcedf;border-radius:9px;padding:10px 12px;min-width:0;width:100%;background:white;color:#24283b}
+.toolbar .clear{color:#514796;background:#e9e7f7;padding:10px}
+.searchstatus{font-size:14px;color:#626980;padding:0 0 10px}
+.chapter[hidden],.toc a[hidden],.searchstatus[hidden]{display:none!important}
+.codewrap{position:relative;margin:20px 0}.codewrap pre{padding-top:44px;margin:0}
+.copycode{position:absolute;top:7px;right:9px;padding:5px 10px;border-radius:6px;border:1px solid #5b647c;background:#343d54;color:white;font:12px system-ui;cursor:pointer}
+.tablewrap{max-width:100%;overflow-x:auto}.tablewrap table{min-width:430px}
+figure.screen{max-width:410px}.chapter,.chapter h2{scroll-margin-top:105px}#top{scroll-margin-top:100px}
+.backtop{display:block;margin:30px 0;text-align:right;font-size:14px}
+@media(max-width:1000px){.layout{display:block;max-width:940px}.sidebar{position:static;height:auto;max-height:none;padding:18px 20px 0}.toc{grid-template-columns:1fr 1fr}.layout main{padding:28px 28px 65px}.searchbar{margin:0;max-width:none}}
+@media(max-width:640px){.toolbar span{display:none}.toolbar{padding:10px 12px;gap:8px}.toolbar>button{font-size:12px;padding:10px 12px}.searchbar{flex-basis:100%;order:2}.searchbar input{font-size:14px}.layout main{padding:24px 20px 55px}.toc{grid-template-columns:1fr}.sidebar{padding:16px 20px 0}.chapter,.chapter h2{scroll-margin-top:125px}th,td{min-width:100px}h1{font-size:34px}}
+@media print{.layout{display:block}.sidebar,.searchbar,.copycode,.backtop{display:none}.layout main{padding:0}.chapter[hidden]{display:block!important}}
+</style><link rel="stylesheet" href="../fonts.css"><style>
+:root{color-scheme:dark}body{background:#0c101b;color:#e9edf6;font-family:Manrope,system-ui,sans-serif}.toolbar{background:#0c101bf5;border-color:#2a3245}.guide-back{color:#e9edf6;text-decoration:none;font-weight:700}.guide-back span{display:inline!important;color:#67768e;padding:0 8px}h1{font-family:Literata,Georgia,serif;font-weight:400;letter-spacing:-1.5px}h2{border-color:#2a3245;color:#f4f6fc}h3{color:#a5ebe5}a{color:#8ae0db}code{background:#202a3d;color:#b5f3ec}pre{background:#111827;border:1px solid #2a3245}table,details,.sidebar details{background:#121927;border-color:#2a3245}th{background:#202a3d}th,td{border-color:#2a3245;font-size:14px}.quick{background:#162b33;border-color:#275662}.quick b{color:#a5ebe5}figcaption{color:#a4afc1;font-size:14px}.toc a{color:#bdc9db;font-size:14px}.toc a:hover,.toc a:focus-visible{background:#202a3d}.toolbar button{background:#93e2d9;color:#101e24}.toolbar .clear{background:#243143;color:#dce7f8}.searchbar input{background:#131d2c;border-color:#354359;color:#eef3fb}.searchstatus{color:#b6c1d2}.sidebar{top:78px;height:calc(100vh - 78px)}.layout{max-width:1400px;grid-template-columns:300px minmax(0,1fr)}.layout main{max-width:1020px;padding:40px 48px 100px}.toc a{padding:9px 8px}.sidebar details{border-radius:10px}figure img{border:1px solid #354359}.copycode{font-size:14px;background:#243143}a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #96e4db;outline-offset:4px}@media(max-width:1000px){.layout{display:block}.sidebar{height:auto;position:static}.layout main{padding:28px 24px 65px}}@media(max-width:640px){.guide-back{font-size:14px}.toolbar>button{font-size:14px}.layout main{padding:25px 18px 65px}.sidebar{padding:16px 18px 0}h1{font-size:32px;letter-spacing:-.6px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{body{color:#111;background:#fff}h2,h3{color:#111}table,details{background:#fff}code{color:#111;background:#eee}}
+</style></head><body><div class="toolbar"><a class="guide-back" href="../index.html#tavern/guides">Atelier <span aria-hidden="true">/</span> SillyTavern</a><div class="searchbar" role="search"><input id="search" type="search" placeholder="Найти: инвентарь, Rewrite, Keyword…" aria-label="Поиск по разделам"><button id="clear" class="clear" aria-label="Очистить поиск">Сброс</button></div><button id="copy">Скопировать весь гайд</button></div><div class="layout"><aside class="sidebar"><details id="tocpanel" open><summary>Оглавление</summary><nav class="toc" aria-label="Разделы гайда"><a href="#part-1">1. Устанавливаем и включаем расширение</a><a href="#part-2">2. Настраиваем модель для блоков</a><a href="#part-3">3. Добавляем готовый блок, который скачали у автора</a><a href="#part-4">4. Создаём свой первый блок вручную</a><a href="#part-5">5. Какие блоки бывают и что с ними можно сделать</a><a href="#part-6">6. Пресеты, встроенные блоки и кнопки панели</a><a href="#part-7">7. API Settings: все параметры</a><a href="#part-8">8. G-Block: шаблон, промпт и формат ответа</a><a href="#part-9">9. Запуск: сообщения, период и ключевые слова</a><a href="#part-10">10. Generation Pause: блок посреди ответа</a><a href="#part-11">11. State: видимость, инъекция и фон</a><a href="#part-12">12. Injection: что попадёт в основной запрос</a><a href="#part-13">13. Context Builder: как собрать входные данные</a><a href="#part-14">14. Несколько G-Block и общий запрос</a><a href="#part-15">15. Rewrite: переписывание ответа или фрагмента</a><a href="#part-16">16. A-Block: состояние, инвентарь и счётчики</a><a href="#part-17">17. S-Block: команды и автоматизация</a><a href="#part-18">18. Макросы: подставить данные или запустить действие</a><a href="#part-19">19. Все команды ExtBlocks</a><a href="#part-20">20. Где хранятся результаты и как их исправить</a><a href="#part-21">21. Лорбук, regex и оформление</a><a href="#part-22">22. Порядок работы и связи между блоками</a><a href="#part-23">23. Возможности JavaScript для авторов блоков</a><a href="#part-24">24. Как настроить экономнее и устойчивее</a><a href="#part-25">25. Проверка и решение проблем</a><a href="#part-26">Полезные ссылки</a></nav></details></aside><main id="top"><div class="quick"><b>Скачала готовый блок?</b><br>Расширение → рабочий API → Import → включить блок → назначить батарейку.<br>Создавать новый G-Block не нужно. Подробности — в разделах 1–3.</div><h1>Внешние блоки в SillyTavern: полный гайд</h1>
+<p>Внешний блок — это дополнительный элемент рядом с ответом персонажа: например, сводка событий, новости мира, состояние сцены или красиво оформленная информационная панель.</p>
+<p>Расширение ExtBlocks может генерировать такие блоки отдельным запросом к модели. Поэтому для ролки можно оставить любимую модель, а для блоков выбрать другую.</p>
+<p><strong>Если ты скачал готовый блок, создавать его вручную не нужно.</strong> Установи расширение, настрой подключение и импортируй файл — это шаги 1–3. Шаг 4 нужен тем, кто хочет сделать собственный блок.</p>
+<p>Дальше разбираем все режимы и настройки: контекст, запуск, инъекцию, Rewrite, накопительные блоки, скрипты, команды и макросы. Можно идти по порядку или открыть нужный раздел через оглавление.</p>
+<div id="searchstatus" class="searchstatus" role="status" aria-live="polite" hidden></div><section id="part-1" class="chapter"><h2>1. Устанавливаем и включаем расширение</h2><figure><button class="zoom" aria-label="Увеличить: Установка расширения"><img src="../assets/guide/screen-01.webp" alt="Установка расширения"></button><figcaption>Установка расширения. Нажми на картинку, чтобы увеличить.</figcaption></figure>
+<p>Для расширения нужна SillyTavern 1.15.0 или новее.</p>
+<ol>
+<li><p>В верхней панели SillyTavern открой <strong>Extensions / Расширения</strong> — это значок кубиков.</p>
+</li>
+<li><p>Нажми <strong>Install extension / Установить расширение</strong>.</p>
+</li>
+<li><p>Вставь ссылку:</p>
+<p><a href="https://gitgud.io/sleepydraqon/ext-blocks-custom">https://gitgud.io/sleepydraqon/ext-blocks-custom</a></p>
+</li>
+<li><p>Поле <strong>«Ветка или тэг»</strong> оставь пустым. Нажми <strong>«Установить только мне»</strong> и дождись завершения установки. «Установить для всех пользователей» нужно, если расширением должны пользоваться все аккаунты этой Таверны.</p>
+</li>
+<li><p>Если Таверна попросит обновить страницу — обнови.</p>
+</li>
+<li><p>В <strong>Расширения → Управление расширениями / Manage extensions</strong> проверь, что <strong>ExtBlocks</strong> есть в списке и возле него стоит галочка.</p>
+</li>
+<li><p>Закрой управление расширениями, найди раздел <strong>ExtBlocks</strong> в настройках расширений и раскрой его.</p>
+</li>
+<li><p>Поставь галочку <strong>Enable ExtBlocks</strong> — она включает работу блоков.</p>
+</li>
+</ol>
+<p>Установить расширение и добавить готовый блок — разные действия. Расширение устанавливается по ссылке, а сам блок обычно импортируется из файла <code>.json</code>.</p>
+</section><section id="part-2" class="chapter"><h2>2. Настраиваем модель для блоков</h2>
+<p><strong>API</strong> — подключение к сервису, через который Таверна получает ответы модели. <strong>Connection Profile</strong> — сохранённый профиль этого подключения.</p>
+<p>Для первого запуска можно использовать уже работающий профиль основного чата. Отдельное подключение нужно только если ты хочешь выбрать для блоков другую модель или другой сервис.</p>
+<h3>Если хочешь отдельный профиль</h3><figure><button class="zoom" aria-label="Увеличить: Создание, сохранение и проверка профиля"><img src="../assets/guide/screen-02.webp" alt="Создание, сохранение и проверка профиля"></button><figcaption>Создание, сохранение и проверка профиля. Нажми на картинку, чтобы увеличить.</figcaption></figure>
+<ol>
+<li>Открой <strong>API Connections / Подключение API</strong> — значок вилки в верхней панели.</li>
+<li>Вверху находится раздел <strong>«Профиль соединения»</strong>. Запомни название текущего профиля: его потом нужно вернуть для ролки.</li>
+<li>Ниже выбери <strong>API → Chat Completion</strong>, нужный источник, модель, ключ и адрес подключения. Настрой всё так же, как для обычного чата.</li>
+<li>Возле списка профилей нажми <strong>лист с плюсиком</strong> — создание нового профиля. Назови его, например <strong>«Внешние блоки»</strong>.</li>
+<li>Если после создания что-то меняешь, нажми <strong>дискету</strong> возле списка профилей, чтобы сохранить изменения.</li>
+</ol>
+<h3>Проверяем, что профиль сохранился</h3>
+<p>Открой список в разделе <strong>«Профиль соединения»</strong>: новое название должно быть в нём. Выбери профиль и нажми <strong>значок информации — кружок с i</strong>. В раскрытом списке проверь сохранённые API и модель.</p>
+<p>Для проверки переключись на другой профиль, затем вернись к «Внешним блокам»: нужные настройки должны восстановиться. Сначала сохраняй изменения дискетой, потом переключайся.</p>
+<p>Чтобы проверить само подключение, отправь короткое сообщение в отдельном чате и дождись ответа модели. Если ответ пришёл, подключение работает.</p>
+<p>После проверки верни прежний профиль основного чата.</p>
+<h3>Подключаем профиль к ExtBlocks</h3><figure><button class="zoom" aria-label="Увеличить: Модель и батарейка"><img src="../assets/guide/screen-03.webp" alt="Модель и батарейка"></button><figcaption>Модель и батарейка. Нажми на картинку, чтобы увеличить.</figcaption></figure>
+<p>Внутри расширения открой <strong>API Settings</strong>. Я обычно выставляю такие настройки:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Что выбрать</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>API Preset</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Connection Profile</td>
+<td>Твой рабочий профиль или «Внешние блоки»</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>1 — как стартовое значение, если модель поддерживает</td>
+</tr>
+<tr>
+<td>Top P</td>
+<td>1 — если модель поддерживает</td>
+</tr>
+<tr>
+<td>Max Tokens</td>
+<td>4096 — лимит длины ответа блока</td>
+</tr>
+</tbody></table>
+<p>Если новый профиль не появился в списке, нажми кнопку обновления рядом с <strong>Connection Profile</strong>.</p>
+<p><strong>Medium — это название набора настроек внутри ExtBlocks, а не конкретная модель.</strong> Реальная модель определяется выбранным Connection Profile. Big, Medium и Small можно настроить по своему усмотрению.</p>
+<p>После добавления генерируемого блока <strong>назначь ему Medium через значок батарейки возле его названия</strong>. Нажатия переключают Big → Medium → Small. У Medium батарейка заполнена наполовину; на компьютере можно проверить подсказку <code>API Preset: Medium</code>. У A-Block и S-Block такой батарейки нет: им не назначается модель этим способом.</p>
+<p>Просто выбрать Medium в API Settings недостаточно: отдельный блок может всё ещё использовать Big.</p>
+<p>Генерация блоков тоже расходует токены. Более дешёвая модель может снизить расходы, но бесплатными блоки от этого не становятся. Если включён <strong>Inject Block</strong>, содержимое блока дополнительно передаётся основной модели и занимает место в её контексте.</p>
+</section><section id="part-3" class="chapter"><h2>3. Добавляем готовый блок, который скачали у автора</h2><figure><button class="zoom" aria-label="Увеличить: Импорт готового блока"><img src="../assets/guide/screen-04.webp" alt="Импорт готового блока"></button><figcaption>Импорт готового блока. Нажми на картинку, чтобы увеличить.</figcaption></figure>
+<p>Сначала сохрани файл на устройство. Если это ZIP-архив, распакуй его и прочитай инструкцию автора: внутри могут быть несколько блоков и отдельные файлы оформления.</p>
+<h3>Если это один блок <code>.json</code></h3>
+<ol>
+<li>Открой <strong>Расширения → ExtBlocks</strong>.</li>
+<li>Вверху выбери нужный <strong>ExtBlocks Preset</strong> — набор, в котором будет храниться блок. Для первого раза можно оставить Default.</li>
+<li>Найди раздел <strong>Preset blocks</strong>.</li>
+<li>Нажми <strong>Import именно в этом разделе</strong>.</li>
+<li>Выбери скачанный файл <code>.json</code>. На телефоне он обычно лежит в «Загрузках».</li>
+<li>Убедись, что название блока появилось в списке и блок включён. Зачёркнутое название означает, что он выключен: нажми переключатель рядом с ним.</li>
+<li>Если возле блока есть батарейка, назначь ему настроенный API Preset, например Medium.</li>
+<li>Если автор дал дополнительные файлы или настройки, установи их по его инструкции.</li>
+</ol>
+<p><strong>Не нажимай + G-Block для импорта:</strong> эта кнопка создаёт новый пустой блок.</p>
+<h3>Если это целый набор / пресет ExtBlocks</h3>
+<p>Нажми <strong>значок импорта рядом с верхним списком ExtBlocks Preset</strong>, выбери файл набора и проверь, что нужный набор выбран. Его блоки появятся в <strong>Preset blocks</strong>.</p>
+<p>Это другой импорт: верхняя кнопка предназначена для наборов, а <strong>Preset blocks → Import</strong> — для отдельных блоков.</p>
+<h3>Если блок нужен только одному персонажу</h3>
+<p>Открой чат с этим персонажем и используй <strong>Embedded blocks → Import</strong>. Блок будет сохранён в его карточке. В отличие от него, <strong>Preset blocks</strong> относится к выбранному набору расширения.</p>
+<h3>Если вместе с блоком дали regex-файл</h3>
+<p>Regex — отдельное правило, которое может превращать текст блока в красивое оформление. Такой файл импортируется в <strong>Regex / Регулярные выражения</strong>, а не в ExtBlocks. В зависимости от версии Таверны импорт находится в панели Regex или её редакторе.</p>
+<p>Расширение <code>.json</code> само по себе не говорит, что лежит внутри: это может быть блок, набор или regex. Ориентируйся на подпись автора. Если файл не импортируется, сначала проверь, для какого раздела он предназначен. Экспорт одного только промпта тоже не является готовой конфигурацией блока.</p>
+<p>После импорта <strong>сохрани авторские настройки шаблона, промпта, контекста и запуска</strong>, если в инструкции не сказано их менять. Для начала обычно достаточно подключить свою модель и включить блок.</p>
+</section><section id="part-4" class="chapter"><h2>4. Создаём свой первый блок вручную</h2>
+<p>Начнём со сводки текущей сцены: место, участники и происходящее. Красивое оформление можно добавить отдельно.</p>
+<p>В разделе <strong>Preset blocks</strong> нажми <strong>+ G-Block</strong>.</p>
+<p>Коротко о типах: <strong>G-Block</strong> генерируется моделью; <strong>A-Block</strong> хранит состояние и обновляет его по специальным командам; <strong>S-Block</strong> выполняет скрипт. Для сводки нужен G-Block.</p>
+<h3>Название, шаблон и инструкция</h3>
+<p><strong>Block Name</strong> — имя блока. Удобнее использовать латиницу и подчёркивания, например:</p>
+<pre><code class="language-text">scene_info
+</code></pre>
+<p><strong>Block Type</strong> — оставь <strong>Injectable</strong>. Режим Rewrite предназначен для переписывания ответа персонажа.</p>
+<p><strong>Block Template</strong> — образец структуры, которую должна вернуть модель. Он не обязан быть сложным HTML. Вставь:</p>
+<pre><code class="language-xml">&lt;scene_info&gt;
+Место: ...
+Участники: ...
+Что происходит: ...
+&lt;/scene_info&gt;
+</code></pre>
+<p>Имя внутри открывающего и закрывающего тегов должно совпадать с <strong>Block Name</strong>.</p>
+<p><strong>Block Prompt</strong> — инструкция модели. Вставь:</p>
+<pre><code class="language-text">По переданным сообщениям составь краткую сводку текущей сцены на русском языке. Укажи место, присутствующих участников и происходящее. Используй только установленные в переписке факты; если сведения неизвестны, напиши «неизвестно». Не придумывай действия, мысли и решения пользователя. Верни только блок &lt;scene_info&gt;...&lt;/scene_info&gt; по указанному шаблону, без пояснений и без Markdown-ограждений.
+</code></pre>
+<h3>Когда запускать генерацию</h3><figure><button class="zoom" aria-label="Увеличить: Триггеры и первый запуск"><img src="../assets/guide/screen-05.webp" alt="Триггеры и первый запуск"></button><figcaption>Триггеры и первый запуск. Нажми на картинку, чтобы увеличить.</figcaption></figure>
+<p>Чтобы блок появлялся после каждого ответа персонажа, выставь:</p>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User Message</td>
+<td>Выключено</td>
+</tr>
+<tr>
+<td>Char Message</td>
+<td>Включено</td>
+</tr>
+<tr>
+<td>Generation Pause</td>
+<td>Выключено</td>
+</tr>
+<tr>
+<td>Trigger periodicity</td>
+<td>Periodic</td>
+</tr>
+<tr>
+<td>Period</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>Так блок будет запускаться после каждого нового ответа персонажа, независимо от номера сообщения в чате.</p>
+<p><strong>Char Message</strong> означает запуск после ответа персонажа; <strong>User Message</strong> — после твоего сообщения. <strong>Periodic</strong> задаёт способ расчёта частоты, а не заменяет эти галочки.</p>
+<p>В обычном чате, где сообщения пользователя и персонажа строго чередуются, Period 2 соответствует каждому ответу персонажа, 4 — каждому второму, 6 — каждому третьему. Но расширение считает номера сообщений всего чата, поэтому при другом порядке сообщений частота может отличаться. Для проверки надёжнее начать с <strong>Period 1</strong> и одного включённого триггера.</p>
+<h3>Будет ли блок виден и будет ли модель его учитывать</h3>
+<p>В разделе <strong>State</strong> выставь:</p>
+<table>
+<thead>
+<tr>
+<th>Галочка</th>
+<th>Значение</th>
+<th>Что означает</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Disabled</td>
+<td>Выключено</td>
+<td>Блок работает</td>
+</tr>
+<tr>
+<td>Hide From Display</td>
+<td>Выключено</td>
+<td>Блок виден в чате</td>
+</tr>
+<tr>
+<td>Inject Block</td>
+<td>Включено</td>
+<td>Содержимое передаётся основной модели</td>
+</tr>
+<tr>
+<td>Background Generation</td>
+<td>Выключено</td>
+<td>Обычная генерация</td>
+</tr>
+</tbody></table>
+<p><strong>Hide From Display и Inject Block отвечают за разные вещи.</strong> Скрытый блок может оставаться в контексте модели. Видимый блок может служить только тебе, если Inject Block выключен.</p>
+<p>Если нужен только визуальный блок и основной модели он не нужен, отключи <strong>Inject Block</strong>.</p>
+<p>При включённом Inject Block выбери <strong>Injection Role → System</strong> и <strong>Injection Position → After Main Prompt</strong>. Для этой позиции основной Main Prompt должен быть включён в пресете чата. Injection Depth здесь не нужен — он относится к позиции In Chat.</p>
+<h3>Даём модели сообщения для чтения</h3><figure><button class="zoom" aria-label="Увеличить: Контекст: последние сообщения"><img src="../assets/guide/screen-06.webp" alt="Контекст: последние сообщения"></button><figcaption>Контекст: последние сообщения. Нажми на картинку, чтобы увеличить.</figcaption></figure>
+<p>Теперь открой вкладку <strong>Context Builder</strong>. Здесь выбирается, что модель блока получит для работы. Один Block Prompt не заменяет контекст переписки.</p>
+<ol>
+<li>Нажми <strong>Add Item</strong>.</li>
+<li>Заполни поля:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Context Item Type</td>
+<td>Last messages</td>
+</tr>
+<tr>
+<td>Item Name</td>
+<td>Последние сообщения</td>
+</tr>
+<tr>
+<td>Item Role</td>
+<td>User</td>
+</tr>
+<tr>
+<td>Messages Count</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Messages Offset</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>Здесь <strong>6 — последние шесть несистемных сообщений чата</strong>, а не шесть пар «ты + персонаж». Item Name — имя элемента контекста; совпадение имён у разных блоков также влияет на объединение запросов, подробнее в разделе 14; Item Role задаёт роль контекста в запросе модели блока и не выбирает, чьи сообщения читать.</p>
+<ol start="3">
+<li>Остальные поля пока оставь по умолчанию.</li>
+<li>Нажми <strong>Save Item</strong>, затем <strong>Save</strong>, чтобы сохранить весь блок.</li>
+<li>В списке блоков назначь ему <strong>Medium</strong> через батарейку.</li>
+</ol>
+<p>Можно добавить ещё один Item типа <strong>Previous block</strong>, если блоку нужно читать свой предыдущий результат — например, чтобы продолжать сводку. Укажи <strong>Block Name → scene_info</strong>, <strong>Blocks Count → 1</strong>, придумай Item Name и сохрани Item. Добавляй этот Item, только если блоку нужен его прошлый результат.</p>
+<p>Другие типы контекста: <strong>Text</strong> — текст, который ты впишешь вручную; <strong>Last messages by keyword</strong> — сообщения, отбираемые с учётом заданного ключевого слова. Для первого запуска достаточно обычного <strong>Last messages</strong>.</p>
+</section><section id="part-5" class="chapter"><h2>5. Какие блоки бывают и что с ними можно сделать</h2>
+<p>В ExtBlocks есть три кнопки создания, но четыре режима работы: Rewrite выбирается внутри редактора G-Block.</p>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Что делает</th>
+<th>Для чего пригодится</th>
+<th>Кто выполняет работу</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>G-Block → Injectable</td>
+<td>Генерирует отдельный блок</td>
+<td>Сводка, новости мира, дневник, панель сцены, текст для оформления</td>
+<td>Модель из API Preset</td>
+</tr>
+<tr>
+<td>G-Block → Rewrite</td>
+<td>Переписывает текст сообщения</td>
+<td>Исправление языка, изменение стиля, доработка абзаца</td>
+<td>Модель из API Preset</td>
+</tr>
+<tr>
+<td>A-Block</td>
+<td>Хранит данные и применяет к ним обновления</td>
+<td>Инвентарь, деньги, характеристики, задания, отношения</td>
+<td>Расширение; команды обновления пишет модель или ты</td>
+</tr>
+<tr>
+<td>S-Block</td>
+<td>Выполняет скрипт</td>
+<td>Автоматизация, команды, вычисления, связки с другими функциями Таверны</td>
+<td>STscript или JavaScript</td>
+</tr>
+</tbody></table>
+<p><strong>G-Block</strong> удобен, когда каждый раз нужен новый текст. <strong>A-Block</strong> — когда важно сохранить структуру данных и изменить только отдельные значения. <strong>S-Block</strong> — когда нужны действия, а <strong>Rewrite</strong> — когда нужно поменять уже полученный ответ.</p>
+<p>Например, можно собрать такую связку: A-Block хранит инвентарь → G-Block читает инвентарь и последние события → возвращает команды обновления → A-Block применяет их. Другой G-Block делает красивое описание состояния, а S-Block запускает нужные команды.</p>
+<p>Расширение само по себе не подключает поиск в интернете, не создаёт изображения и не устанавливает оформление. Для таких задач блоку нужны соответствующие инструменты, скрипты или дополнительные настройки.</p>
+</section><section id="part-6" class="chapter"><h2>6. Пресеты, встроенные блоки и кнопки панели</h2>
+<h3>Три разных «пресета»</h3>
+<p>Здесь легко запутаться, поэтому сразу разделим названия.</p>
+<table>
+<thead>
+<tr>
+<th>Название</th>
+<th>Что это</th>
+<th>Где находится</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ExtBlocks Preset</td>
+<td>Набор конфигураций блоков</td>
+<td>Верхний список в ExtBlocks</td>
+</tr>
+<tr>
+<td>API Preset: Big / Medium / Small</td>
+<td>Настройки запросов к модели для блоков</td>
+<td>API Settings и батарейка блока</td>
+</tr>
+<tr>
+<td>Пресет основного чата</td>
+<td>Основные промпты и настройки ролки</td>
+<td>Обычные настройки SillyTavern</td>
+</tr>
+</tbody></table>
+<p>Переключить набор ExtBlocks и переключить модель блока — разные действия. Набор может содержать блоки с разными батарейками.</p>
+<h3>Работа с наборами</h3>
+<p>Возле <strong>ExtBlocks Preset</strong> находятся кнопки создания, импорта, экспорта и удаления набора. Чтобы собрать отдельный набор, нажми <strong>+</strong>, дай ему понятное имя и добавь нужные блоки в Preset blocks. Для другой ролки можно создать другой набор и переключаться между ними.</p>
+<p>Экспорт набора сохраняет его блоки и их конфигурации. Он не переносит твои ключи, рабочее подключение и всю историю результатов из чата. После импорта на другом устройстве проверь API Settings и батарейки.</p>
+<p>Импорт набора с уже существующим именем может заменить набор с этим именем. То же относится к импорту одноимённого блока в его раздел. Перед заменой своей настроенной версии сохрани её экспортом.</p>
+<h3>Preset blocks и Embedded blocks</h3>
+<p><strong>Preset blocks</strong> принадлежат выбранному набору. <strong>Embedded blocks</strong> записываются в карточку конкретного персонажа и могут переезжать вместе с ней, если формат экспорта сохраняет данные расширений.</p>
+<p>Одновременно используются блоки выбранного набора и карточки. Если в обоих разделах есть блок с одинаковым <strong>Block Name</strong>, приоритет получает <strong>Embedded block</strong>. Это действует даже тогда, когда встроенный блок выключен: одноимённый блок из набора не становится его запасной версией.</p>
+<p>Если блок ведёт себя не так, как настроено в Preset blocks, проверь, нет ли одноимённого в Embedded blocks. Для независимых блоков используй разные имена.</p>
+<h3>Кнопки возле блока</h3>
+<table>
+<thead>
+<tr>
+<th>Кнопка</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Полоски слева</td>
+<td>Перетаскивание и изменение порядка</td>
+</tr>
+<tr>
+<td>G / R / A / S</td>
+<td>Тип блока</td>
+</tr>
+<tr>
+<td>Батарейка</td>
+<td>Big → Medium → Small для G и Rewrite</td>
+</tr>
+<tr>
+<td>Переключатель возле имени</td>
+<td>Включение и выключение; выключенное имя зачёркнуто</td>
+</tr>
+<tr>
+<td>Карандаш</td>
+<td>Редактор конфигурации</td>
+</tr>
+<tr>
+<td>Документ со стрелкой</td>
+<td>Экспорт готовой конфигурации блока в JSON</td>
+</tr>
+<tr>
+<td>Волшебная палочка</td>
+<td>Экспорт собранного запроса G / Rewrite для текущего чата</td>
+</tr>
+<tr>
+<td>Корзина</td>
+<td>Удаление конфигурации</td>
+</tr>
+</tbody></table>
+<p><strong>Экспорт блока</strong> нужен, чтобы поделиться работающей настройкой. <strong>Экспорт промпта</strong> показывает, какой запрос получается после сборки контекста и подстановок. Для него должен быть открыт чат; такой файл может содержать фрагменты переписки. Он не заменяет файл блока для импорта.</p>
+<p>Перетаскивание меняет порядок внутри списка, но не превращает разные типы блоков в произвольную цепочку. Для S-Block и Rewrite дополнительно важны их настройки Before / After.</p>
+<h3>Быстрый доступ</h3>
+<p>В меню расширений возле поля ввода есть пункт <strong>ExtBlocks</strong>. Он открывает ту же панель в отдельном окне: можно переключить набор, настроить API и открыть редактор блока без перехода к верхней панели. Настройки общие для обоих способов открытия.</p>
+</section><section id="part-7" class="chapter"><h2>7. API Settings: все параметры</h2>
+<p>Для запросов ExtBlocks нужен сохранённый профиль <strong>Chat Completion</strong>. Основной чат при этом может пользоваться другим подключением.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Что означает</th>
+<th>Как выбирать</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>API Preset</td>
+<td>Какой набор настроек сейчас редактируешь</td>
+<td>Настрой каждый используемый Big / Medium / Small</td>
+</tr>
+<tr>
+<td>Connection Profile</td>
+<td>Профиль, из которого берутся источник, модель и подключение</td>
+<td>Выбери сохранённый рабочий профиль с уникальным именем</td>
+</tr>
+<tr>
+<td>Кнопка обновления списка</td>
+<td>Повторно загружает список профилей</td>
+<td>Нажми после создания или переименования профиля</td>
+</tr>
+<tr>
+<td>Stream</td>
+<td>Получение ответа API частями</td>
+<td>Это режим запроса; он не гарантирует постепенный показ блока в чате</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Разнообразие ответа</td>
+<td>Для фактов и YAML обычно удобнее более низкая; для творческого текста можно выше</td>
+</tr>
+<tr>
+<td>Top P</td>
+<td>Ещё один параметр выбора продолжения</td>
+<td>Для начала можно оставить 1, если сервис его поддерживает</td>
+</tr>
+<tr>
+<td>Max Tokens</td>
+<td>Максимальная длина ответа API</td>
+<td>Должно хватить на весь результат и закрывающие теги</td>
+</tr>
+<tr>
+<td>Reasoning Effort</td>
+<td>Запрашиваемый уровень рассуждения</td>
+<td>Auto или поддерживаемое моделью значение</td>
+</tr>
+<tr>
+<td>Enable confirmation JB</td>
+<td>Добавляет в конец запроса пару реплик с просьбой подтвердить запрос и подтверждением</td>
+<td>Не требуется для обычной настройки; не гарантирует принятие запроса моделью</td>
+</tr>
+</tbody></table>
+<p>В <strong>Reasoning Effort</strong> доступны Auto, Low, Medium, High, Min и Max. Наличие пункта в списке не означает, что выбранная модель его поддерживает. Сервис может проигнорировать параметр или вернуть ошибку.</p>
+<p><strong>Max Tokens — не размер памяти блока.</strong> Сколько переписки он увидит, определяет Context Builder. У некоторых моделей лимит ответа также включает токены рассуждений, поэтому видимый текст может оказаться короче.</p>
+<p>Big, Medium и Small не означают «дорого», «средне» и «дёшево» автоматически. Ты сама выбираешь, что к ним подключить. Можно назначить одну модель всем трём и отличать их только параметрами.</p>
+<p>Новый G-Block обычно получает <strong>Big</strong>. Назначай нужную батарейку после создания или импорта. У A-Block и S-Block модели нет, но скрипт может самостоятельно вызывать команды генерации.</p>
+<p>Если профиль удалён или переименован, перепроверь Connection Profile: расширение связывает его по имени и при отсутствии совпадения может обратиться к другому доступному профилю. Не создавай несколько профилей с одинаковыми именами.</p>
+<p>Для <strong>Custom / OpenAI-совместимого</strong> подключения проверь сохранённый URL API, выбранную модель, ключ и дополнительные поля, которые нужны твоему сервису. Включённый профиль без URL не станет рабочим подключением.</p>
+</section><section id="part-8" class="chapter"><h2>8. G-Block: шаблон, промпт и формат ответа</h2>
+<p>Редактор состоит из двух вкладок: <strong>Block Settings</strong> и <strong>Context Builder</strong>. В первой мы описываем задачу и поведение блока, во второй — данные для её выполнения.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Зачем нужно</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Block Name</td>
+<td>Имя, по которому блок сохраняется, находится в командах и связывается с другими блоками</td>
+</tr>
+<tr>
+<td>Block Type</td>
+<td>Injectable или Rewrite</td>
+</tr>
+<tr>
+<td>Block Template</td>
+<td>Требуемая структура результата</td>
+</tr>
+<tr>
+<td>Block Prompt</td>
+<td>Инструкция модели: что сделать и как заполнить структуру</td>
+</tr>
+</tbody></table>
+<p>Я советую короткие имена вроде <code>scene_info</code>, <code>world_news</code>, <code>inventory_update</code>. В одном разделе имя должно быть уникальным. Если переименовываешь блок, проверь его теги, Previous block, макросы, команды и regex: связанные настройки сами за новым именем не переедут.</p>
+<h3>Что писать в Template</h3>
+<p>Внешние теги позволяют расширению распознать результат. Внутри может быть обычный текст, Markdown, HTML или YAML — по задаче блока.</p>
+<pre><code class="language-xml">&lt;world_news&gt;
+1. ...
+2. ...
+3. ...
+&lt;/world_news&gt;
+</code></pre>
+<p>Для <strong>Injectable</strong> внешнее имя должно совпадать с Block Name. Не проси модель возвращать пояснение вместо блока: результат без нужных тегов может не попасть в хранилище.</p>
+<p>Сам шаблон не является движком вёрстки и не заполняет многоточия автоматически. Модель получает его как образец. Если шаблон сложный, подробно объясни, какие части сохранять и какие значения менять.</p>
+<h3>Что писать в Prompt</h3>
+<p>Хорошая инструкция отвечает на четыре вопроса: какие данные использовать, что получить, чего не выдумывать и в каком формате вернуть ответ.</p>
+<pre><code class="language-text">Составь три короткие новости мира по переданным сведениям.
+Не противоречь установленным событиям и не решай за пользователя.
+Если достоверных событий недостаточно, укажи это вместо выдуманных фактов.
+Верни только &lt;world_news&gt;...&lt;/world_news&gt;, без вступления и Markdown-ограждений.
+{{additionalPrompt}}
+</code></pre>
+<p>Последняя строка позволяет передать дополнительную просьбу через команду запуска. Если такой подстановки нет ни в промпте, ни в шаблоне, ни в контексте, дополнительная просьба не попадёт в запрос.</p>
+<h3>Чего блок не видит автоматически</h3>
+<p>Отдельная модель не получает весь основной промпт, карточку, лорбук и чат просто потому, что они открыты в Таверне. Нужную информацию добавляем через Context Builder и макросы. Если блок придумывает прошлое сцены, сначала проверь его входные данные.</p>
+</section><section id="part-9" class="chapter"><h2>9. Запуск: сообщения, период и ключевые слова</h2>
+<p>Есть две части настройки: <strong>событие запуска</strong> и <strong>условие запуска</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Событие</th>
+<th>Когда используется</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User Message</td>
+<td>После сообщения пользователя; также участвует в обработке новых свайпов</td>
+</tr>
+<tr>
+<td>Char Message</td>
+<td>После ответа персонажа</td>
+</tr>
+<tr>
+<td>Generation Pause</td>
+<td>При появлении маркера во время потокового ответа персонажа</td>
+</tr>
+</tbody></table>
+<p>Можно отметить User Message и Char Message одновременно, но тогда блок может запускаться дважды за обмен репликами. Для сводки после ответа достаточно Char Message.</p>
+<h3>Periodic</h3>
+<p><strong>Period 1</strong> — на каждом выбранном событии. Это удобное значение для первого запуска.</p>
+<p>Дальше расширение ориентируется на номер сообщения в общем массиве чата. В обычном чередовании с приветствием под номером 0 ответы персонажа имеют номера 2, 4, 6 и так далее.</p>
+<table>
+<thead>
+<tr>
+<th>Period при Char Message</th>
+<th>В обычном чередующемся чате</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Каждый ответ</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Каждый ответ с чётным номером — обычно тоже каждый ответ</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Обычно каждый второй ответ</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Обычно каждый третий ответ</td>
+</tr>
+</tbody></table>
+<p>У User Message проверка сдвинута на один номер. Дополнительные системные сообщения, удаление реплик и другой порядок разговора меняют расчёт. <strong>Period 3 не означает универсально «раз в три ответа».</strong> Используй положительное целое число; 0 не задаёт режим «всегда».</p>
+<h3>Keyword-based</h3>
+<p>В <strong>Trigger periodicity</strong> выбери <strong>Keyword-based</strong> и заполни <strong>Keyword</strong>. Блок запустится, когда выбранное сообщение содержит нужный текст.</p>
+<p>Например: User Message включено, Keyword — <code>[новости]</code>. Отправляешь сообщение с этим маркером — блок срабатывает. Без <strong>Regex</strong> это обычный поиск подстроки с учётом регистра.</p>
+<p>С галочкой <strong>Regex</strong> можно задать регулярное выражение:</p>
+<pre><code class="language-text">/\[новости\]/i
+</code></pre>
+<p>Здесь <code>i</code> разрешает разные варианты регистра. Скобки экранированы, потому что в регулярном выражении они имеют специальное значение. Неверное выражение не даст ожидаемого запуска.</p>
+<p>В Keyword-based частоту задаёт совпадение Keyword, а не старое значение Period. Пустое ключевое слово не годится для настройки такого запуска.</p>
+<p><strong>Keyword в триггерах</strong> определяет, когда запускать блок. <strong>Keyword Stopper в Context Builder</strong> определяет, какую часть переписки читать. Это разные поля.</p>
+<h3>Ручной запуск</h3>
+<p>Можно оставить автоматические события выключенными и запускать G-Block по имени:</p>
+<pre><code class="language-text">/extblocks-generate name=&quot;scene_info&quot;
+</code></pre>
+<p>Команда по имени может вызвать даже блок с Disabled. Disabled выключает автоматическую работу, но не является запретом на явный вызов командой.</p>
+</section><section id="part-10" class="chapter"><h2>10. Generation Pause: блок посреди ответа</h2>
+<p>Этот режим нужен, когда персонаж должен сначала дойти до определённого момента, затем получить результат внешнего блока и продолжить.</p>
+<ol>
+<li>Включи <strong>потоковый ответ основного чата</strong>.</li>
+<li>В блоке отметь <strong>Generation Pause</strong>. Редактор переключит условие на ключевое слово.</li>
+<li>Задай уникальный Keyword, например <code>[ПРОВЕРКА_СЦЕНЫ]</code>.</li>
+<li>В основном промпте объясни, когда модель должна выдавать этот маркер.</li>
+<li>Настрой контекст внешнего блока и нужную инъекцию результата.</li>
+</ol>
+<p>Когда маркер появляется в потоке, расширение останавливает ответ, обрезает продолжение после точки остановки, запускает нужные блоки и затем инициирует продолжение генерации. Маркер при обычном поиске и при Regex может сохраняться в тексте по-разному.</p>
+<p>Не используй частое слово вроде «да»: остановка должна происходить в конкретном месте. При продолжении модель может повторить маркер и вызвать новую паузу, поэтому в инструкции укажи, что после получения результата этот маркер повторять не нужно.</p>
+<p><strong>Stream в API Settings ExtBlocks и потоковый ответ основного чата — разные настройки.</strong> Для обнаружения маркера важен поток основного ответа. Результат после паузы зависит и от того, как основной пресет настроен на продолжение.</p>
+</section><section id="part-11" class="chapter"><h2>11. State: видимость, инъекция и фон</h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>За что отвечает</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Disabled</td>
+<td>Выключает блок из обычной автоматической обработки</td>
+</tr>
+<tr>
+<td>Hide From Display</td>
+<td>Скрывает показ результата в чате</td>
+</tr>
+<tr>
+<td>Inject Block</td>
+<td>Передаёт последнее доступное состояние основной модели</td>
+</tr>
+<tr>
+<td>Background Generation</td>
+<td>Запускает обычный G-Block в фоне, не дожидаясь его в общей цепочке</td>
+</tr>
+</tbody></table>
+<h3>Как совместить Hide и Inject</h3>
+<table>
+<thead>
+<tr>
+<th>Hide From Display</th>
+<th>Inject Block</th>
+<th>Что получится</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Выключено</td>
+<td>Выключено</td>
+<td>Видимая панель для тебя</td>
+</tr>
+<tr>
+<td>Выключено</td>
+<td>Включено</td>
+<td>Панель видна и учитывается моделью</td>
+</tr>
+<tr>
+<td>Включено</td>
+<td>Включено</td>
+<td>Скрытая память или состояние для модели</td>
+</tr>
+<tr>
+<td>Включено</td>
+<td>Выключено</td>
+<td>Результат хранится для других блоков, макросов или скриптов</td>
+</tr>
+</tbody></table>
+<p>Для последнего варианта нужно, чтобы результат кто-то действительно читал: например, через Previous block.</p>
+<h3>Background Generation</h3>
+<p>Фоновый блок сохраняет результат после завершения своего запроса. Следующий скрипт или другой запрос может начаться раньше и увидеть старое состояние.</p>
+<p>Фон удобен для необязательной панели, которая может обновиться чуть позже. Для блока, от которого зависит следующий шаг, лучше обычная генерация. Особенно это касается G-Block с командами обновления A-Block: общая цепочка обрабатывает результаты, которых она дождалась.</p>
+<p>У A-Block нет фоновой генерации, у S-Block из State есть Disabled. Rewrite выполняется в своём порядке Before / After; его нельзя превратить в фон обычного G-Block одной галочкой.</p>
+</section><section id="part-12" class="chapter"><h2>12. Injection: что попадёт в основной запрос</h2>
+<p>Инъекция работает для обычных G-Block и A-Block. В основной запрос попадает содержимое последнего подходящего сохранённого блока, а не вся история его версий.</p>
+<h3>Injection Role</h3>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Как выглядит содержимое в запросе</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>System</td>
+<td>Системное сообщение с данными или инструкцией</td>
+</tr>
+<tr>
+<td>User</td>
+<td>Сообщение пользователя</td>
+</tr>
+<tr>
+<td>Assistant</td>
+<td>Сообщение ассистента</td>
+</tr>
+</tbody></table>
+<p>Роль не делает сведения истинными и не задаёт, чьи сообщения блок прочитает. Она определяет место содержимого в структуре запроса основной модели. Для состояния сцены удобно начать с System.</p>
+<h3>Injection Position</h3>
+<table>
+<thead>
+<tr>
+<th>Позиция</th>
+<th>Где размещается содержимое</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>After Main Prompt</td>
+<td>После основного Main Prompt</td>
+</tr>
+<tr>
+<td>Before Main Prompt</td>
+<td>Перед основным Main Prompt</td>
+</tr>
+<tr>
+<td>In Chat</td>
+<td>В части запроса с историей сообщений</td>
+</tr>
+</tbody></table>
+<p>Before / After Main Prompt предназначены для System; основной Main Prompt должен быть включён в пресете. Для User / Assistant используй <strong>In Chat</strong>.</p>
+<h3>Injection Depth</h3>
+<p>Depth относится к <strong>In Chat</strong> и задаёт глубину вставки относительно конца истории. Маленькое неотрицательное значение размещает блок ближе к свежим сообщениям; большее — глубже. Начни с 0–4 и проверь итоговый запрос в Таверне.</p>
+<p>Поле допускает отрицательные числа, но для обычной настройки лучше их не использовать: расширение пересчитывает отрицательную глубину через длину чата, поэтому это не удобный способ задать стабильную позицию у начала.</p>
+<p>Если блок запускается <strong>после ответа персонажа</strong>, этот ответ уже был написан без его нового результата. Свежая инъекция пригодится следующей генерации. Для данных, которые нужны до текущего ответа, выбирай User Message или продуманную схему Generation Pause.</p>
+<p>Видимость, инъекция и отдельное системное сообщение через <code>is_separate=true</code> — три разных механизма. Последний действительно добавляет новую реплику в историю чата.</p>
+</section><section id="part-13" class="chapter"><h2>13. Context Builder: как собрать входные данные</h2><figure class="screen"><button class="zoom" aria-label="Увеличить: Четыре типа контекста"><img loading="lazy" src="../assets/guide/screen-07.webp" alt="Четыре типа контекста"></button><figcaption>Четыре типа контекста</figcaption></figure>
+<p><strong>Item</strong> — один источник информации в запросе модели блока. Их может быть несколько: правила в Text, переписка в Last messages, прошлое состояние в Previous block.</p>
+<table>
+<thead>
+<tr>
+<th>Общая настройка</th>
+<th>Что означает</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Context Item Type</td>
+<td>Тип источника данных</td>
+</tr>
+<tr>
+<td>Item Name</td>
+<td>Имя элемента; выбирай понятное и различающее нужные контексты</td>
+</tr>
+<tr>
+<td>Item Role</td>
+<td>Роль всего элемента в запросе модели блока</td>
+</tr>
+<tr>
+<td>Save Item</td>
+<td>Сохраняет изменения элемента в редакторе</td>
+</tr>
+<tr>
+<td>Save</td>
+<td>Сохраняет всю конфигурацию блока</td>
+</tr>
+</tbody></table>
+<p><strong>Item Role → User не означает «читать только мои сообщения».</strong> Если тип — Last messages, он берёт и пользователя, и персонажа; роль назначается собранному тексту.</p>
+<p>Элементы можно включать и выключать, редактировать, удалять и переставлять. Они собираются в порядке списка; соседние элементы одной роли могут объединяться в одно сообщение API.</p>
+<p>Кнопки импорта и экспорта возле <strong>Context Items</strong> работают со всем набором элементов контекста. Импорт заменяет текущий список Items в редакторе, поэтому сначала сохрани нужную конфигурацию. Файл контекста не является готовым блоком.</p>
+<h3>Text</h3>
+<p>В <strong>Content</strong> впиши постоянный текст: описание задачи, данные персонажа, правила мира или значения для подстановки. Можно использовать обычные макросы SillyTavern вроде <code>{{user}}</code> и <code>{{char}}</code>, а также макросы ExtBlocks.</p>
+<pre><code class="language-text">Пользователь: {{user}}
+Персонаж: {{char}}
+Правило: не добавляй в сводку события, которых нет в переданных данных.
+</code></pre>
+<p>Имена <code>{{user}}</code> и <code>{{char}}</code> подставляют имена, а не полную карточку персонажа или персоны. Если нужны дополнительные сведения, добавь их отдельно.</p>
+<h3>Last messages</h3>
+<p>Берёт последние доступные сообщения до точки запуска включительно. Обычные сообщения пользователя и персонажа учитываются вместе; сообщения с системным флагом исключаются.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Что делает</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Messages Count</td>
+<td>Сколько сообщений взять</td>
+<td>6 — последние шесть реплик, не шесть пар</td>
+</tr>
+<tr>
+<td>Messages Offset</td>
+<td>Сколько последних реплик пропустить</td>
+<td>Count 6 + Offset 2 — шесть реплик перед последними двумя</td>
+</tr>
+<tr>
+<td>Messages Separator</td>
+<td>Разделитель реплик</td>
+<td>Double newline — пустая строка между ними</td>
+</tr>
+<tr>
+<td>User Prefix / Suffix</td>
+<td>Текст до / после каждой реплики пользователя</td>
+<td><code>{{user}}: </code></td>
+</tr>
+<tr>
+<td>Char Prefix / Suffix</td>
+<td>Текст до / после каждой реплики персонажа</td>
+<td><code>{{char}}: </code></td>
+</tr>
+</tbody></table>
+<p>Префиксы помогают различать участников, особенно если весь Item отправляется с одной ролью. Можно писать <code>\n</code> для переноса строки: редактор превращает его в настоящий перенос.</p>
+<p>Отрицательный <strong>Messages Count</strong> имеет отдельный смысл: <code>-3</code> берёт первые три доступные несистемные реплики. Это может пригодиться для начала истории. Чтобы отключить Item, используй его переключатель: значение 0 при сохранении редактор может заменить стандартным числом.</p>
+<h3>Last messages by keyword</h3>
+<p>Здесь <strong>Keyword Stopper</strong> — маркер границы контекста. Расширение ищет его в предыдущих сообщениях и берёт переписку от последнего найденного маркера до точки запуска. Сообщение с маркером тоже входит в контекст.</p>
+<p>Например, в начале новой сцены пишешь <code>[НОВАЯ_СЦЕНА]</code>. Такой Item помогает ограничить вход текущей сценой.</p>
+<p>Это обычный поиск подстроки с учётом регистра, отдельной галочки Regex у Stopper нет. Самое свежее сообщение не используется как предыдущая граница при обычном поиске. Если маркер не найден, берётся переписка с начала: контекст может внезапно стать большим.</p>
+<h3>Previous block</h3>
+<p>Берёт сохранённые результаты названного блока из предыдущих сообщений.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Что заполнить</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Block Name</td>
+<td>Точное имя существующей конфигурации без угловых скобок</td>
+</tr>
+<tr>
+<td>Blocks Count</td>
+<td>Число прошлых результатов; для последнего состояния обычно 1</td>
+</tr>
+</tbody></table>
+<p>Название <strong>Item Name</strong> — подпись самого источника. <strong>Block Name</strong> — имя блока, результат которого нужен. Они не обязаны совпадать.</p>
+<p>Previous block не запускает другой блок заново. При первом запуске прошлой версии может ещё не быть. В обычном Item поиск идёт по предыдущим сообщениям, поэтому это не способ гарантированно прочитать результат соседнего блока, созданный только что у той же реплики.</p>
+<p>Для памяти удобно соединить <strong>Text с правилами + Previous block со старой сводкой + Last messages с новыми событиями</strong>. В промпте попроси обновить сводку, сохранив действующие факты и убрав устаревшие.</p>
+<h3>Необязательный контекст и пустые данные</h3>
+<p>Выключенные и пустые Items не добавляются в запрос. Если Previous block пуст на старте, объясни модели, что это нормальная ситуация. Не заставляй её выдумывать прошлое состояние, которого ещё нет.</p>
+</section><section id="part-14" class="chapter"><h2>14. Несколько G-Block и общий запрос</h2>
+<p>Расширение умеет объединять обычные генерируемые блоки в один запрос: модель получает несколько шаблонов и инструкций сразу. Это может сократить повторную отправку одинакового контекста.</p>
+<p><strong>Для объединения учитываются имена Context Items и их порядок</strong>, а также фоновый режим. При этом запрос использует контекст и API Preset первого блока в группе. Одного совпадения подписей недостаточно, чтобы данные в двух блоках действительно были одинаковыми.</p>
+<p>Поэтому Item Name влияет не только на удобство чтения списка:</p>
+<ul>
+<li>Если блоки должны использовать один и тот же контекст и модель, оставь одинаковую последовательность имён Items и одинаковые настройки данных.</li>
+<li>Если нужны разные модели или разный контекст, дай Items разные имена: например, <code>scene_recent</code> и <code>news_recent</code>.</li>
+<li>Если у нескольких блоков совсем нет Items, они тоже могут попасть в одну группу.</li>
+</ul>
+<p>После этого проверь батарейки и экспорт полного промпта. Не рассчитывай на отдельную модель каждого блока, если их контексты объединяются.</p>
+<p>У группы общий <strong>Max Tokens</strong> на весь ответ, включая все блоки. Если модель успела вернуть только первый и оборвала следующий, увеличь лимит или раздели запросы.</p>
+<p>Объединённые блоки не генерируются один за другим внутри одного запроса. Если одному нужен свежий результат другого, нужна отдельная последовательность запуска; Previous block обычно читает прошлые сообщения.</p>
+</section><section id="part-15" class="chapter"><h2>15. Rewrite: переписывание ответа или фрагмента</h2>
+<p>Rewrite — режим G-Block, который заменяет текст сообщения результатом другой модели. Можно поправить язык, сократить текст, изменить стиль или доработать отдельный абзац.</p>
+<h3>Создаём блок</h3>
+<ol>
+<li>Нажми <strong>+ G-Block</strong>.</li>
+<li>Задай <strong>Block Name → polish_text</strong>.</li>
+<li>Выбери <strong>Block Type → Rewrite</strong>.</li>
+<li>Вставь в <strong>Block Template</strong>:</li>
+</ol>
+<pre><code class="language-xml">&lt;rewritten text&gt;
+...
+&lt;/rewritten text&gt;
+</code></pre>
+<p><strong>У Rewrite специальный обязательный тег <code>&lt;rewritten text&gt;</code></strong>, независимо от Block Name. Здесь не используем <code>&lt;polish_text&gt;</code> как тег результата.</p>
+<p>В <strong>Block Prompt</strong>:</p>
+<pre><code class="language-text">Перепиши переданный текст на русском языке: исправь ошибки и неестественные обороты.
+Сохрани факты, действия, точку зрения и смысл. Не добавляй действия пользователя.
+Верни только &lt;rewritten text&gt;...&lt;/rewritten text&gt;.
+{{additionalPrompt}}
+</code></pre>
+<p>В <strong>Context Builder</strong> добавь <strong>Text</strong>, роль User, Content:</p>
+<pre><code class="language-text">Текст для переписывания:
+{{textToRewrite}}
+</code></pre>
+<p>Сохрани Item и блок, назначь батарейку. <code>{{textToRewrite}}</code> передаст целое сообщение или выбранный фрагмент в зависимости от способа вызова.</p>
+<h3>Ручной и автоматический режимы</h3>
+<p>Для ручной обработки последнего сообщения выключи User Message, Char Message и Generation Pause. Запуск:</p>
+<pre><code class="language-text">/extblocks-rewrite name=&quot;polish_text&quot;
+</code></pre>
+<p>Для автоматической обработки ответа включи <strong>Char Message</strong>, Period 1. В <strong>Generation Order</strong> выбери:</p>
+<table>
+<thead>
+<tr>
+<th>Порядок</th>
+<th>Когда переписывается сообщение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Before blocks</td>
+<td>Перед обычными G-Block: они смогут читать уже изменённый текст</td>
+</tr>
+<tr>
+<td>After blocks</td>
+<td>После обычных G-Block: они работают с исходным ответом</td>
+</tr>
+</tbody></table>
+<p>Если несколько Rewrite сработали вместе, они выполняются последовательно. Это несколько запросов и несколько изменений одного сообщения.</p>
+<h3>Переписываем выделенный фрагмент</h3>
+<ol>
+<li>Включи нужный Rewrite-блок: список выбора показывает включённые Rewrite.</li>
+<li>Открой обычное редактирование сообщения персонажа.</li>
+<li>Нажми кнопку <strong>[ExtBlocks] Partial rewrite</strong> в редакторе сообщения.</li>
+<li>Выдели текст в поле редактирования.</li>
+<li>В появившемся окне выбери блок, при необходимости впиши дополнительную просьбу и запусти Rewrite.</li>
+</ol>
+<p>Дополнительная просьба попадёт в модель через <code>{{additionalPrompt}}</code>. Возможность выделения зависит от интерфейса устройства; если окно не появляется на телефоне, можно обработать целое последнее сообщение командой.</p>
+<p>Rewrite меняет сохранённое сообщение. Если исходная версия нужна, сохрани её перед обработкой. При одинаковых повторяющихся фрагментах замена может затронуть первое совпадение текста.</p>
+</section><section id="part-16" class="chapter"><h2>16. A-Block: состояние, инвентарь и счётчики</h2><figure class="screen"><button class="zoom" aria-label="Увеличить: A-Block: состояние и имя updater"><img loading="lazy" src="../assets/guide/screen-08.webp" alt="A-Block: состояние и имя updater"></button><figcaption>A-Block: состояние и имя updater</figcaption></figure>
+<p>Накопительный блок хранит структуру в <strong>YAML</strong> и меняет её по командам обновления. Он не вызывает свою модель и не выводит новый текст по обычному промпту.</p>
+<p>У него два имени: <strong>Block Name</strong> — имя состояния, <strong>Block-updater Name</strong> — имя блока с командами. Имена должны отличаться.</p>
+<h3>Настраиваем inventory</h3>
+<p>Нажми <strong>+ A-Block</strong> и заполни:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Block Name</td>
+<td>inventory</td>
+</tr>
+<tr>
+<td>Block-updater Name</td>
+<td>inventory_update</td>
+</tr>
+<tr>
+<td>Char Message</td>
+<td>Включено, если команды приходят от модели</td>
+</tr>
+<tr>
+<td>User Message</td>
+<td>Включено, если хочешь применять команды из своих сообщений</td>
+</tr>
+<tr>
+<td>Inject Block</td>
+<td>Включено, если основная модель должна видеть инвентарь</td>
+</tr>
+<tr>
+<td>Hide From Display</td>
+<td>По желанию</td>
+</tr>
+</tbody></table>
+<p>Сохрани блок. Для начального состояния можно добавить в первое приветствие персонажа:</p>
+<pre><code class="language-xml">&lt;inventory&gt;
+gold: 20
+items:
+  - ключ
+status:
+  location: трактир
+&lt;/inventory&gt;
+</code></pre>
+<p>После сохранения приветствия перезагрузи чат. ExtBlocks распознаёт блоки в первом сообщении и переносит их в своё хранилище. Для уже начатого чата можно добавить это состояние через <strong>Edit extblocks</strong> у сообщения или команду storage-append из раздела 19.</p>
+<h3>Как выглядит обновление</h3>
+<p>Если персонаж получил 10 монет и верёвку, источник команд должен вернуть:</p>
+<pre><code class="language-xml">&lt;inventory_update&gt;
+$inc:
+  gold: 10
+$push:
+  items: верёвка
+&lt;/inventory_update&gt;
+</code></pre>
+<p>После применения gold станет 30, а в items появится верёвка. Отсутствующие в обновлении поля сохраняются.</p>
+<table>
+<thead>
+<tr>
+<th>Оператор</th>
+<th>Что делает</th>
+<th>Пример значения</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$set</td>
+<td>Устанавливает или заменяет значение</td>
+<td><code>status.location: рынок</code></td>
+</tr>
+<tr>
+<td>$inc</td>
+<td>Прибавляет число; отрицательное число уменьшает</td>
+<td><code>gold: -5</code></td>
+</tr>
+<tr>
+<td>$push</td>
+<td>Добавляет элемент в массив; список добавляет несколько</td>
+<td><code>items: фонарь</code></td>
+</tr>
+<tr>
+<td>$pull</td>
+<td>Убирает первый точно совпавший элемент массива</td>
+<td><code>items: ключ</code></td>
+</tr>
+<tr>
+<td>$unset</td>
+<td>Удаляет поле</td>
+<td><code>status.temporary: true</code></td>
+</tr>
+</tbody></table>
+<p>Это поддерживаемый набор операторов в стиле MongoDB, а не полный язык запросов MongoDB. Например, <code>$push</code> со списком добавляет его элементы напрямую; не нужно писать <code>$each</code>.</p>
+<p>Вложенные поля задаются через точку: <code>status.location</code>. Индекс массива тоже можно указать: <code>quests.0.done</code>. В $inc отправляй именно числа, а не строки в кавычках. У YAML важны отступы; используй пробелы.</p>
+<h3>Кто пишет команды обновления</h3>
+<p>Можно попросить основную модель писать <code>&lt;inventory_update&gt;</code> в своём ответе. <strong>Copy Default Prompt</strong> копирует инструкцию с операторами и примером; вставь её в промпт основного чата или в нужный G-Block. Сама кнопка не подключает инструкцию к модели и не создаёт начальное состояние.</p>
+<p>Другой вариант — отдельный G-Block:</p>
+<ol>
+<li>Создай G-Block с именем <strong>inventory_update</strong> и шаблоном <code>&lt;inventory_update&gt;...&lt;/inventory_update&gt;</code>.</li>
+<li>Добавь последние сообщения и данные о текущем инвентаре.</li>
+<li>В промпте попроси вернуть только фактически произошедшие изменения в YAML с $set, $inc, $push, $pull, $unset. Если изменений нет — пустой updater.</li>
+<li>Включи Char Message, Period 1; оставь <strong>Background Generation выключенным</strong>.</li>
+<li>У G-Block отключи Inject Block; Hide From Display можно включить, чтобы не показывать служебные команды.</li>
+<li>Назначь G-Block нужную модель. У A-Block тоже должен быть включён Char Message.</li>
+</ol>
+<p>Готовый updater из обычной генерации будет обработан накопительным блоком. Если A-Block читается через Previous block, это прошлое сохранённое состояние. Для получения последнего доступного состояния можно использовать Text с <code>{{ExtBlocks::inventory}}</code>.</p>
+<p>Если ты явно вызываешь G-Block командой и ему нужен A-Block, удобнее передавать состояние таким макросом в Text: ручная генерация по имени собирает список генерируемых блоков, и поиск A-Block через Previous block в таком вызове может не сработать.</p>
+<h3>Почему данные иногда удваиваются</h3>
+<p>$inc и $push повторно применяют действие. Если повторно обработать тот же updater «добавь 10 монет», можно получить ещё 10. Не проси одновременно основную модель и внешний updater применять одно и то же изменение. Для полного проверенного значения выбирай $set.</p>
+<p>A-Block хранит последнее состояние, но не проверяет самостоятельно правильность арифметики, канон сюжета или логичность команды. Всё это нужно оговорить источнику обновлений.</p>
+</section><section id="part-17" class="chapter"><h2>17. S-Block: команды и автоматизация</h2><figure class="screen"><button class="zoom" aria-label="Увеличить: S-Block: тип скрипта и порядок выполнения"><img loading="lazy" src="../assets/guide/screen-09.webp" alt="S-Block: тип скрипта и порядок выполнения"></button><figcaption>S-Block: тип скрипта и порядок выполнения</figcaption></figure>
+<p>S-Block выполняет <strong>STscript</strong> или <strong>JavaScript</strong>. В нём нет Template, Block Prompt и Context Builder обычного G-Block: есть текст скрипта и параметры запуска.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Что означает</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Block Name</td>
+<td>Имя для поиска и ручного запуска</td>
+</tr>
+<tr>
+<td>Script Type</td>
+<td>STscript или JavaScript</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Код / последовательность команд</td>
+</tr>
+<tr>
+<td>Triggers, Period / Keyword</td>
+<td>Условия запуска, как у G-Block</td>
+</tr>
+<tr>
+<td>Disabled</td>
+<td>Выключение автоматической обработки</td>
+</tr>
+<tr>
+<td>Execution Order</td>
+<td>Before blocks или After blocks</td>
+</tr>
+</tbody></table>
+<p>Для проверки создай <strong>STscript</strong> с именем <code>block_notice</code>:</p>
+<pre><code class="language-text">/echo Блоки обработаны
+</code></pre>
+<p>Выключи автоматические события и вызови:</p>
+<pre><code class="language-text">/extblocks-execute-script name=&quot;block_notice&quot;
+</code></pre>
+<p>Если хочешь автоматическое уведомление, включи Char Message, Period 1 и <strong>Execution Order → After blocks</strong>. <code>/echo</code> показывает уведомление; это не результат G-Block в хранилище.</p>
+<p>Скрипт может вызывать команды ExtBlocks, а также другие команды Таверны и установленных расширений. Их наличие и синтаксис проверяй через встроенную помощь и автодополнение.</p>
+<h3>JavaScript</h3>
+<p>Для Script Type → JavaScript можно использовать асинхронный код. Небольшая проверка:</p>
+<pre><code class="language-javascript">const message = context.chat[messageId];
+toastr.info(message?.is_user ? &#39;Сообщение пользователя&#39; : &#39;Сообщение персонажа&#39;);
+</code></pre>
+<p>Доступны <code>context</code>, <code>messageId</code>, <code>isUser</code>, <code>allBlocks</code>, <code>triggeredBlocks</code>, <code>additionalMacro</code>, <code>is_separate</code>, а также сервисы и плагины расширения. Это вариант для тех, кто уже пишет код. Скрипт выполняет реальные действия в Таверне — перед импортом чужого JavaScript посмотри, что он делает.</p>
+<p>Возвращённая JavaScript строка не становится внешним блоком автоматически. Для сохранения результата нужны соответствующие команды или BlockService.</p>
+<p><strong>Before blocks</strong> выполняется до Rewrite Before и обычных G-Block. <strong>After blocks</strong> — после Rewrite After. При фоновой генерации After не означает, что все фоновые запросы уже завершены.</p>
+<p>Не вызывай из скрипта тот же скрипт по кругу и не запускай команду, которая бесконечно создаёт новое событие для него. Для ручной проверки отключи автоматические события.</p>
+</section><section id="part-18" class="chapter"><h2>18. Макросы: подставить данные или запустить действие</h2>
+<p>Макрос — запись в двойных фигурных скобках, которую Таверна заменяет значением. У ExtBlocks есть макросы чтения состояния и макросы запуска.</p>
+<h3>Прочитать последнее состояние</h3>
+<pre><code class="language-text">{{ExtBlocks::scene_info}}
+</code></pre>
+<p>То же действие имеет длинное имя:</p>
+<pre><code class="language-text">{{ExtBlocks-GetBlockByName::scene_info}}
+</code></pre>
+<p>Подставляется последний доступный сохранённый блок с этим именем, вместе с его тегами. Конфигурация должна быть включена, открыт чат с персонажем. Если блока или состояния ещё нет, подстановка может быть пустой.</p>
+<p>Это удобно в Text другого блока или в промпте. Если то же состояние уже передаётся через Inject Block, не дублируй его без необходимости.</p>
+<h3>Запустить по имени</h3>
+<table>
+<thead>
+<tr>
+<th>Макрос</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{{ExtBlocks-Call::scene_info}}</code></td>
+<td>Генерация G-Block</td>
+</tr>
+<tr>
+<td><code>{{ExtBlocks-Call::scene_info::Укажи только место}}</code></td>
+<td>Генерация с дополнительной просьбой</td>
+</tr>
+<tr>
+<td><code>{{ExtBlocks-CallRewrite::polish_text}}</code></td>
+<td>Переписывание сообщения</td>
+</tr>
+<tr>
+<td><code>{{ExtBlocks-CallScript::block_notice}}</code></td>
+<td>Выполнение скрипта</td>
+</tr>
+</tbody></table>
+<p>Несколько имён указываются через запятую. Макросы запуска выполняют действие и возвращают пустую строку; это не подстановка результата вместо макроса. Для чтения результата нужен макрос состояния.</p>
+<p>Не размещай вызов генерации в поле, которое может многократно пересобираться автоматически: повторная обработка макроса может снова вызвать запрос. Для понятного ручного запуска проще slash-команда.</p>
+<h3>Локальные подстановки</h3>
+<table>
+<thead>
+<tr>
+<th>Макрос</th>
+<th>Что подставляет</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{{additionalPrompt}}</code></td>
+<td>Дополнительную просьбу из команды или окна Rewrite</td>
+</tr>
+<tr>
+<td><code>{{textToRewrite}}</code></td>
+<td>Текст, который нужно переписать</td>
+</tr>
+<tr>
+<td><code>{{mainPrompt}}</code></td>
+<td>Текущий основной Main Prompt</td>
+</tr>
+<tr>
+<td><code>{{wiBefore}}</code></td>
+<td>Активированные записи World Info перед определением персонажа</td>
+</tr>
+<tr>
+<td><code>{{wiAfter}}</code></td>
+<td>Активированные записи после определения персонажа</td>
+</tr>
+<tr>
+<td><code>{{wiExamples}}</code></td>
+<td>Активированные записи у примеров сообщений</td>
+</tr>
+<tr>
+<td><code>{{wiDepth}}</code></td>
+<td>Активированные записи с позицией по глубине</td>
+</tr>
+<tr>
+<td><code>{{wiAll}}</code></td>
+<td>Совокупность этих активированных записей</td>
+</tr>
+</tbody></table>
+<p>Локальные подстановки рассчитаны на запросы G / Rewrite и их контекст. <code>{{mainPrompt}}</code> не добавляет весь пресет основного чата, все расширения и всю историю.</p>
+</section><section id="part-19" class="chapter"><h2>19. Все команды ExtBlocks</h2>
+<p>Команды вводятся в поле сообщения и отправляются как команды Таверны. Для запуска нужен открытый чат и существующая конфигурация с точным именем.</p>
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/extblocks-generate name=&quot;scene_info&quot;</code></td>
+<td>Сгенерировать названный G-Block у последнего сообщения</td>
+</tr>
+<tr>
+<td><code>/extblocks-regenerate</code></td>
+<td>Очистить блоки последнего сообщения и повторно обработать его по автоматическим условиям</td>
+</tr>
+<tr>
+<td><code>/extblocks-rewrite name=&quot;polish_text&quot;</code></td>
+<td>Переписать последнее сообщение названным Rewrite</td>
+</tr>
+<tr>
+<td><code>/extblocks-execute-script name=&quot;block_notice&quot;</code></td>
+<td>Выполнить названный S-Block</td>
+</tr>
+<tr>
+<td><code>/extblocks-storage-append</code> + текст блока</td>
+<td>Сохранить распознанные блоки у последнего сообщения</td>
+</tr>
+<tr>
+<td><code>/extblocks-storage-purge</code></td>
+<td>Удалить всё хранилище блоков у последнего сообщения</td>
+</tr>
+<tr>
+<td><code>/extblocks-storage-export</code></td>
+<td>Добавить системную реплику с последним доступным состоянием каждого включённого блока</td>
+</tr>
+<tr>
+<td><code>/extblocks-flushinjects</code></td>
+<td>Перезагрузить текущий чат для обновления работы инъекций и отображения</td>
+</tr>
+<tr>
+<td><code>/extblocks-abort-generation</code></td>
+<td>Попытаться отменить текущий API-запрос расширения</td>
+</tr>
+</tbody></table>
+<h3>Несколько блоков</h3>
+<pre><code class="language-text">/extblocks-generate name=&quot;scene_info,world_news&quot;
+</code></pre>
+<h3>Дополнительная просьба</h3>
+<pre><code class="language-text">/extblocks-generate name=&quot;scene_info&quot; Сосредоточься на месте и участниках
+</code></pre>
+<p>В промпте, шаблоне или Text должен быть <code>{{additionalPrompt}}</code>. Для Rewrite дополнительный текст после имени передаётся аналогично.</p>
+<h3>Отдельное сообщение</h3>
+<pre><code class="language-text">/extblocks-generate name=&quot;scene_info&quot; is_separate=true
+</code></pre>
+<p>Этот вариант добавляет результат отдельной системной репликой в чат. По умолчанию результат сохраняется у существующего последнего сообщения. Отдельные сообщения влияют на историю и номера сообщений для Periodic.</p>
+<h3>Добавить состояние вручную</h3>
+<p>Создай и включи A-Block <code>inventory</code>, затем выполни:</p>
+<pre><code class="language-text">/extblocks-storage-append &lt;inventory&gt;
+gold: 20
+items:
+  - ключ
+&lt;/inventory&gt;
+</code></pre>
+<p>Команда сохраняет состояние напрямую. Если таким способом добавляется updater, это не равно запуску накопления: storage-append сама по себе не применяет его операторы.</p>
+<h3>Важные особенности</h3>
+<p>Явные команды генерации, Rewrite и скриптов могут работать с выключенными конфигурациями. Автоматические триггеры при этом не включаются.</p>
+<p><strong>regenerate сначала удаляет старое хранилище последнего сообщения</strong> и заново проверяет условия запуска. Если нужные триггеры сейчас не подходят, блок может не появиться. Для запуска конкретного G-Block используй generate с именем. Для самого первого приветствия slash-regenerate не выполняет обычную перегенерацию.</p>
+<p><strong>storage-export переносит последние состояния включённых блоков</strong>, а не всю историю и не их конфигурации. Для обмена готовыми блоками используй экспорт в панели.</p>
+<p><strong>flushinjects не удаляет сохранённые данные блока</strong>. После перезагрузки они могут снова попасть в контекст. Чтобы прекратить передачу состояния, выключи Inject Block в конфигурации.</p>
+<p><strong>abort-generation не является универсальной кнопкой отмены скриптов и всех параллельных запросов.</strong> При уже полученном потоковом ответе отмена тоже может не остановить его чтение.</p>
+</section><section id="part-20" class="chapter"><h2>20. Где хранятся результаты и как их исправить</h2>
+<p>Конфигурация блока и его результаты хранятся отдельно. Конфигурация говорит, что делать; состояние у сообщения содержит то, что уже получилось.</p>
+<h3>Редактор хранилища</h3>
+<p>В дополнительных кнопках сообщения — обычно под <strong>…</strong> — найди <strong>Edit extblocks</strong> с иконкой редактирования. Откроется окно <strong>Blocks Editor</strong>.</p>
+<p>Здесь можно исправить сохранённую сводку или YAML, добавить начальное состояние и удалить ненужный результат. Сохраняй внешние теги и правильные имена блоков. Это редактор данных конкретной реплики, а не редактор Block Prompt.</p>
+<p>В этом окне есть <strong>Regenerate</strong>: он повторно обрабатывает выбранную реплику по условиям запуска, а не только последнее сообщение чата. Старое хранилище этой реплики сначала очищается. После ручного исправления нажми Save; Cancel отменяет правку.</p>
+<p>Если блок уже перенесён из приветствия в хранилище, обычное редактирование текста сообщения может его не показывать. Ищи его через Edit extblocks.</p>
+<h3>Свайпы</h3>
+<p>Расширение сохраняет блоки с учётом вариантов ответа. При переключении существующих свайпов оно восстанавливает данные выбранного варианта. При генерации нового варианта блоки могут быть пересчитаны по триггерам.</p>
+<p>Если ты изменила старые реплики, уже сохранённые сводки и состояния не становятся правильными автоматически. Проверь зависимые блоки и перегенерируй нужные результаты. Удаление и добавление сообщений также меняет расчёт Periodic.</p>
+<h3>Новый чат и перенос состояния</h3>
+<p>Новая переписка не получает историю блоков старого чата автоматически. Можно сохранить последние состояния через <strong>storage-export</strong>, скопировать нужные теги и добавить их в новый чат через редактор хранилища или storage-append. На новом месте должны существовать соответствующие конфигурации.</p>
+<p>Начальные состояния в первом приветствии подходят для старта каждой новой истории. Для резервной копии нужны и конфигурации, и сам чат: экспорт одного G-Block не содержит прошлых результатов.</p>
+</section><section id="part-21" class="chapter"><h2>21. Лорбук, regex и оформление</h2>
+<h3>World Info</h3>
+<p>Для сведений из лорбука добавь в Text, например:</p>
+<pre><code class="language-text">Сведения мира:
+{{wiAll}}
+</code></pre>
+<p>В запрос попадут активированные записи. Их активация проверяется по тексту запроса блока — его контексту, промпту и шаблону — с учётом настроек World Info. Если нужное ключевое слово не передано, запись может не активироваться.</p>
+<p><code>{{wiAll}}</code> не означает «весь лорбук независимо от ключей». Постоянные записи и правила активации продолжают иметь значение. Для небольшой обязательной справки можно использовать прямой Text.</p>
+<h3>Regex</h3>
+<p>Regex может менять отображение и содержимое, отправляемое в промпт. Блок при этом сохраняет свой исходный формат; отдельное правило превращает его в панель, таблицу или другую вёрстку.</p>
+<p>Если автор дал JSON для ExtBlocks и JSON для Regex, импортируй каждый в свой раздел. Проверь имя в тегах, имя в правиле и области применения regex. После переименования блока старое правило может перестать срабатывать.</p>
+<p>Настройки обработки Regex для промптов могут также менять сообщения, которые ExtBlocks собирает в контекст. Если модель блока «не видит» кусок переписки, проверь правила, которые убирают его из запросов.</p>
+<h3>HTML, CSS и изображения</h3>
+<p>HTML в Template задаёт модельный результат; фактическое отображение зависит от возможностей Таверны и правил оформления. Для сложной панели удобнее держать структуру стабильной и разрешать модели менять только данные.</p>
+<p>Сам ExtBlocks не превращает текстовое описание в изображение. Для блока с картинкой нужна отдельная связка: генератор, внешний сервис или скрипт автора. Импорт текстового G-Block не устанавливает эту связку автоматически.</p>
+<h3>Кнопки выбора действия</h3>
+<p>У расширения есть обработчик HTML-кнопок с классом <code>custom-menu-button</code>. При нажатии текст из вложенного элемента <code>custom-cyoa-option-value</code> вставляется в поле сообщения. Он не отправляется автоматически.</p>
+<pre><code class="language-html">&lt;div class=&quot;custom-menu-button&quot;&gt;
+  &lt;span class=&quot;custom-cyoa-option-value&quot;&gt;Осмотреть комнату&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Такая структура может использоваться в оформлении блока с вариантами действий. Чтобы она работала как кнопка, HTML должен действительно отрисоваться в чате: обычно это часть regex-оформления автора.</p>
+</section><section id="part-22" class="chapter"><h2>22. Порядок работы и связи между блоками</h2>
+<p>Когда приходит подходящее сообщение, расширение сначала применяет найденные в нём команды A-Block. Затем для сработавших G, Rewrite и S выполняется такая последовательность:</p>
+<ol>
+<li>S-Block с <strong>Before blocks</strong>.</li>
+<li>Rewrite с <strong>Before blocks</strong>.</li>
+<li>Обычные G-Block, объединённые по контексту.</li>
+<li>Rewrite с <strong>After blocks</strong>.</li>
+<li>S-Block с <strong>After blocks</strong>.</li>
+<li>Обработка updater-команд A-Block, полученных от обычных G-Block, завершение которых ожидалось.</li>
+</ol>
+<p>Фоновые G-Block завершаются независимо от этой очереди. S-Block с After не гарантирует доступ к новым A-состояниям, обновление которых будет обработано только следующим этапом.</p>
+<p>Для схемы «генерация → скрипт читает результат» используй обычный G-Block и макрос последнего состояния или обращение к его хранилищу. <strong>Previous block</strong> при обычной сборке контекста смотрит назад по сообщениям, а не ждёт соседний блок.</p>
+<p>Если несколько связанных результатов нужны за один проход, можно попросить модель вернуть их в общем запросе. Если нужен отдельный второй вызов по первому результату — задай последовательность командами / скриптом и проверь, что чтение происходит после сохранения результата.</p>
+<p>Проверяй такие связки сначала на одном блоке, затем добавляй следующий. Так легче увидеть, где теряются данные или происходит повторное обновление.</p>
+</section><section id="part-23" class="chapter"><h2>23. Возможности JavaScript для авторов блоков</h2>
+<p>Этот раздел пригодится, если ты уже используешь Script Type → JavaScript и хочешь работать с ExtBlocks из кода.</p>
+<p>В скриптах доступны <strong>BlockService</strong>, <strong>ContextService</strong>, <strong>GenerationService</strong>, <strong>ApiService</strong>, <strong>SettingsService</strong>, <strong>MacroService</strong>, а также <strong>GeneratedPlugin</strong>, <strong>RewritePlugin</strong>, <strong>AccumulationPlugin</strong>, <strong>ScriptPlugin</strong>, <strong>PluginRegistry</strong> и состояние <strong>extStates</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Вызов</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>BlockService.getAllBlocks()</code></td>
+<td>Доступные конфигурации набора и персонажа с учётом приоритета имён</td>
+</tr>
+<tr>
+<td><code>BlockService.getAllEnabledBlocks()</code></td>
+<td>Только включённые конфигурации</td>
+</tr>
+<tr>
+<td><code>BlockService.getBlocksByType([&#39;generated&#39;], true)</code></td>
+<td>Включённые конфигурации указанного типа</td>
+</tr>
+<tr>
+<td><code>ContextService.getPreviousBlockContextUnconditional(config, messageId, true)</code></td>
+<td>Последнее состояние, включая текущую реплику</td>
+</tr>
+<tr>
+<td><code>BlockService.addBlocksToExtra(messageId, text)</code></td>
+<td>Сохранить распознанные блоки у реплики</td>
+</tr>
+<tr>
+<td><code>BlockService.purgeBlocksExtra(messageId)</code></td>
+<td>Очистить хранилище блоков реплики</td>
+</tr>
+<tr>
+<td><code>BlockService.updateBlocksDisplay(messageId)</code></td>
+<td>Обновить показ результатов у реплики</td>
+</tr>
+<tr>
+<td><code>BlockService.injectBlock(text, config)</code></td>
+<td>Добавить содержимое в контекст по настройкам конфигурации</td>
+</tr>
+<tr>
+<td><code>BlockService.selfReloadCurrentChat()</code></td>
+<td>Перезагрузить текущий чат</td>
+</tr>
+<tr>
+<td><code>ApiService.abortGeneration()</code></td>
+<td>Отменить отслеживаемый запрос API</td>
+</tr>
+<tr>
+<td><code>executeST(command)</code></td>
+<td>Выполнить команду STscript из JavaScript</td>
+</tr>
+</tbody></table>
+<p>Для программной генерации есть <strong>GenerationService.handleBlocksGeneration</strong>, для прямого вызова плагинов — методы <strong>execute</strong>. Они принимают конфигурации и параметры, включая messageId; это интерфейсы кода расширения, а не обычные поля редактора.</p>
+<h3>Прочитать состояние без изменения данных</h3>
+<pre><code class="language-javascript">const config = BlockService.getAllEnabledBlocks()
+  .find(block =&gt; block.name === &#39;inventory&#39;);
+
+const state = config
+  ? ContextService.getPreviousBlockContextUnconditional(config, messageId, true)
+  : &#39;&#39;;
+
+toastr.info(state || &#39;Состояние ещё не сохранено&#39;);
+</code></pre>
+<h3>Запустить G-Block из JavaScript</h3>
+<pre><code class="language-javascript">await executeST(&#39;/extblocks-generate name=&quot;scene_info&quot;&#39;);
+</code></pre>
+<p>Имя G-Block должно существовать. Чтобы прочитать его новый результат после вызова, выключи у него Background Generation.</p>
+<p>Для других расширений предусмотрены события <strong><code>/extblocks/generate</code></strong> и <strong><code>/extblocks/generated</code></strong>: первое служит для вызова генерации, второе сообщает о полученном содержимом и номере сообщения. Также есть интеграция с FatPresets для импорта, смены и выключения наборов. Эти события не добавляют новые кнопки сами по себе; ими пользуется подключённое расширение или код автора.</p>
+</section><section id="part-24" class="chapter"><h2>24. Как настроить экономнее и устойчивее</h2>
+<p>Отдельное API помогает выбирать модель под задачу, но расходы зависят ещё и от контекста, частоты и длины ответа.</p>
+<ul>
+<li>Для короткой панели не передавай весь чат: начни с 6–10 последних реплик.</li>
+<li>Для долгой памяти передавай предыдущую сводку и новые события, а не всю историю заново.</li>
+<li>Включай только нужное событие запуска. User Message и Char Message вместе могут удвоить число вызовов.</li>
+<li>Для необязательных новостей используй ручной запуск, маркер или более редкий период.</li>
+<li>Не передавай визуальную панель основной модели через Inject Block, если ей эти данные не нужны.</li>
+<li>Не дублируй одно состояние одновременно через Inject Block, Text и Previous block без необходимости.</li>
+<li>Для YAML и строгих схем задай точный формат, короткую инструкцию и достаточный Max Tokens.</li>
+<li>Перед сложным импортом сохрани свою рабочую конфигурацию экспортом.</li>
+</ul>
+<p>Слишком маленький лимит ответа может обрезать закрывающие теги и сделать результат непригодным для сохранения. Слишком большой лимит не заставляет модель писать больше, но разрешает длинный ответ.</p>
+<p>Новости мира без внешнего поиска остаются текстом, созданным по переданным данным. Для фактических новостей сначала нужен источник свежей информации.</p>
+</section><section id="part-25" class="chapter"><h2>25. Проверка и решение проблем</h2>
+<h3>Быстрая проверка G-Block</h3>
+<ol>
+<li>Открой чат с персонажем.</li>
+<li>Проверь Enable ExtBlocks, нужный набор и отсутствие одноимённого Embedded block.</li>
+<li>Назначь блоку настроенную батарейку.</li>
+<li>Включи Char Message и Period 1, выключи Generation Pause и Background Generation.</li>
+<li>Добавь Last messages, сохрани <strong>Save Item → Save</strong>.</li>
+<li>Проверь совпадение Block Name и тегов шаблона.</li>
+<li>Отправь сообщение, дождись ответа и завершения внешнего запроса.</li>
+</ol>
+<p>Для скачанного блока сохраняй настройки автора. Временную простую проверку удобнее делать на отдельном G-Block, а не заменять сложную связку.</p>
+<h3>Если что-то не работает</h3>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Что проверить</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ExtBlocks вообще не появился</td>
+<td>Установлено ли расширение, включено ли оно в управлении, обновилась ли страница</td>
+</tr>
+<tr>
+<td>Панель есть, но блок не запускается</td>
+<td>Enable ExtBlocks, Disabled, выбранный набор, событие, Period / Keyword</td>
+</tr>
+<tr>
+<td>Блок работает с другой моделью</td>
+<td>Батарейка, Connection Profile, дубли имён профилей, объединение по Item Name</td>
+</tr>
+<tr>
+<td>Профиль отсутствует в ExtBlocks</td>
+<td>Сохранён ли профиль, выбран ли Chat Completion, обновлён ли список</td>
+</tr>
+<tr>
+<td>Ошибка API</td>
+<td>Источник, модель, ключ, URL, доступ сервиса, лимит, поддержка параметров</td>
+</tr>
+<tr>
+<td>Генерация прошла, но блока не видно</td>
+<td>Hide From Display, нужные теги, незакрытый блок, данные в Edit extblocks</td>
+</tr>
+<tr>
+<td>Видно текст вместо красивой панели</td>
+<td>Установлен ли regex / CSS автора, совпадают ли имена, применимо ли правило</td>
+</tr>
+<tr>
+<td>Блок путает прошлое сцены</td>
+<td>Есть ли нужные сообщения в Context Builder, Offset, Previous block, лорбук</td>
+</tr>
+<tr>
+<td>Блок скрыт, но влияет на ответы</td>
+<td>Inject Block или подстановка того же состояния макросом</td>
+</tr>
+<tr>
+<td>Блок виден, но персонаж его игнорирует</td>
+<td>Inject Block, позиция, Main Prompt, момент генерации относительно ответа</td>
+</tr>
+<tr>
+<td>Ключевое слово не срабатывает</td>
+<td>Регистр, событие, экранирование и Regex, точный текст сообщения</td>
+</tr>
+<tr>
+<td>Блок обрезан</td>
+<td>Max Tokens, длина общего ответа группы, закрывающие теги</td>
+</tr>
+<tr>
+<td>Previous block пуст</td>
+<td>Точное имя, наличие конфигурации и прошлых сохранённых результатов</td>
+</tr>
+<tr>
+<td>A-Block не меняется</td>
+<td>Включён ли нужный триггер, совпадает ли updater_name, правильный ли YAML</td>
+</tr>
+<tr>
+<td>Монеты / предметы удвоились</td>
+<td>Повторный $inc / $push, два источника обновления одного события</td>
+</tr>
+<tr>
+<td>Rewrite ничего не заменил</td>
+<td>Есть ли <code>&lt;rewritten text&gt;</code>, подставлен ли <code>{{textToRewrite}}</code>, пришёл ли непустой ответ</td>
+</tr>
+<tr>
+<td>Фоновой результат ещё старый</td>
+<td>Завершился ли запрос, не прочитала ли его зависимая операция раньше времени</td>
+</tr>
+<tr>
+<td>После смены набора работают странные настройки</td>
+<td>Нет ли Embedded block с тем же именем</td>
+</tr>
+</tbody></table>
+<h3>Copy Debug Report</h3>
+<p>Нажми <strong>Copy Debug Report</strong> после неудачного запуска. Отчёт показывает выбранные профили, модель, API Preset, состояние расширения, сведения о последних запросах, ответах и ошибках. История отчёта ограничена; перечисление блоков тоже не является полным списком всех конфигураций.</p>
+<p>Расширение не включает в штатные поля отчёта тексты промптов и сообщений, значения ключей и паролей. Имена профилей, моделей и адрес сервиса могут быть видны; перед публикацией посмотри, что именно скопировалось.</p>
+<p>Для разбора проблемы полезно приложить точный текст ошибки и настройки проблемного блока. Экспорт полного промпта может содержать переписку: отправляй его только если этот текст можно показать.</p>
+</section><section id="part-26" class="chapter"><h2>Полезные ссылки</h2>
+<ul>
+<li><a href="https://gitgud.io/sleepydraqon/ext-blocks-custom">Репозиторий ExtBlocks</a></li>
+<li><a href="https://gitgud.io/sleepydraqon/ext-blocks-custom/-/blob/master/README.md">Описание возможностей расширения</a></li>
+<li><a href="https://docs.sillytavern.app/extensions/">Установка расширений SillyTavern</a></li>
+<li><a href="https://docs.sillytavern.app/usage/core-concepts/connection-profiles/">Профили соединения</a></li>
+</ul>
+</section><details id="screens"><summary>Все скриншоты настроек</summary><div class="gallery"><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-10.webp" alt="Установка расширения по ссылке"></button><figcaption>Установка расширения по ссылке</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-11.webp" alt="ExtBlocks в списке установленных расширений"></button><figcaption>ExtBlocks в списке установленных расширений</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-12.webp" alt="Панель ExtBlocks: Default, импорт и выключенный блок"></button><figcaption>Панель ExtBlocks: Default, импорт и выключенный блок</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-13.webp" alt="API Settings: профиль подключения и параметры генерации"></button><figcaption>API Settings: профиль подключения и параметры генерации</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-14.webp" alt="G-Block: название, тип и шаблон"></button><figcaption>G-Block: название, тип и шаблон</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-15.webp" alt="G-Block: промпт, триггеры, State и инъекция"></button><figcaption>G-Block: промпт, триггеры, State и инъекция</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-16.webp" alt="Context Builder: Add Item"></button><figcaption>Context Builder: Add Item</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-17.webp" alt="Контекст типа Text"></button><figcaption>Контекст типа Text</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-07.webp" alt="Выбор типа контекста"></button><figcaption>Выбор типа контекста</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-18.webp" alt="Last messages: сколько сообщений читать"></button><figcaption>Last messages: сколько сообщений читать</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-19.webp" alt="Previous block: имя блока и число предыдущих результатов"></button><figcaption>Previous block: имя блока и число предыдущих результатов</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-20.webp" alt="Last messages by keyword: контекст с ключевым словом"></button><figcaption>Last messages by keyword: контекст с ключевым словом</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-21.webp" alt="Префиксы сообщений и кнопка Save Item"></button><figcaption>Префиксы сообщений и кнопка Save Item</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-08.webp" alt="A-Block: обновление состояния"></button><figcaption>A-Block: обновление состояния</figcaption></figure><figure><button class="zoom" aria-label="Увеличить скриншот"><img loading="lazy" src="../assets/guide/screen-09.webp" alt="S-Block: выполнение скрипта"></button><figcaption>S-Block: выполнение скрипта</figcaption></figure></div></details><a class="backtop" href="#top">К началу ↑</a></main></div><dialog id="viewer"><button id="close">Закрыть</button><img id="large" alt="Увеличенная иллюстрация"></dialog><script>const guide="# Внешние блоки в SillyTavern: полный гайд\n\nВнешний блок — это дополнительный элемент рядом с ответом персонажа: например, сводка событий, новости мира, состояние сцены или красиво оформленная информационная панель.\n\nРасширение ExtBlocks может генерировать такие блоки отдельным запросом к модели. Поэтому для ролки можно оставить любимую модель, а для блоков выбрать другую.\n\n**Если ты скачал готовый блок, создавать его вручную не нужно.** Установи расширение, настрой подключение и импортируй файл — это шаги 1–3. Шаг 4 нужен тем, кто хочет сделать собственный блок.\n\nДальше разбираем все режимы и настройки: контекст, запуск, инъекцию, Rewrite, накопительные блоки, скрипты, команды и макросы. Можно идти по порядку или открыть нужный раздел через оглавление.\n\nДальше разбираем все режимы и настройки: контекст, запуск, инъекцию, Rewrite, накопительные блоки, скрипты, команды и макросы. Можно идти по порядку или открыть нужный раздел через оглавление.\n\n## 1. Устанавливаем и включаем расширение\n\nДля расширения нужна SillyTavern 1.15.0 или новее.\n\n1. В верхней панели SillyTavern открой **Extensions / Расширения** — это значок кубиков.\n2. Нажми **Install extension / Установить расширение**.\n3. Вставь ссылку:\n\n   https://gitgud.io/sleepydraqon/ext-blocks-custom\n\n4. Поле **«Ветка или тэг»** оставь пустым. Нажми **«Установить только мне»** и дождись завершения установки. «Установить для всех пользователей» нужно, если расширением должны пользоваться все аккаунты этой Таверны.\n5. Если Таверна попросит обновить страницу — обнови.\n6. В **Расширения → Управление расширениями / Manage extensions** проверь, что **ExtBlocks** есть в списке и возле него стоит галочка.\n7. Закрой управление расширениями, найди раздел **ExtBlocks** в настройках расширений и раскрой его.\n8. Поставь галочку **Enable ExtBlocks** — она включает работу блоков.\n\nУстановить расширение и добавить готовый блок — разные действия. Расширение устанавливается по ссылке, а сам блок обычно импортируется из файла `.json`.\n\n## 2. Настраиваем модель для блоков\n\n**API** — подключение к сервису, через который Таверна получает ответы модели. **Connection Profile** — сохранённый профиль этого подключения.\n\nДля первого запуска можно использовать уже работающий профиль основного чата. Отдельное подключение нужно только если ты хочешь выбрать для блоков другую модель или другой сервис.\n\n### Если хочешь отдельный профиль\n\n1. Открой **API Connections / Подключение API** — значок вилки в верхней панели.\n2. Вверху находится раздел **«Профиль соединения»**. Запомни название текущего профиля: его потом нужно вернуть для ролки.\n3. Ниже выбери **API → Chat Completion**, нужный источник, модель, ключ и адрес подключения. Настрой всё так же, как для обычного чата.\n4. Возле списка профилей нажми **лист с плюсиком** — создание нового профиля. Назови его, например **«Внешние блоки»**.\n5. Если после создания что-то меняешь, нажми **дискету** возле списка профилей, чтобы сохранить изменения.\n\n### Проверяем, что профиль сохранился\n\nОткрой список в разделе **«Профиль соединения»**: новое название должно быть в нём. Выбери профиль и нажми **значок информации — кружок с i**. В раскрытом списке проверь сохранённые API и модель.\n\nДля проверки переключись на другой профиль, затем вернись к «Внешним блокам»: нужные настройки должны восстановиться. Сначала сохраняй изменения дискетой, потом переключайся.\n\nЧтобы проверить само подключение, отправь короткое сообщение в отдельном чате и дождись ответа модели. Если ответ пришёл, подключение работает.\n\nПосле проверки верни прежний профиль основного чата.\n\n### Подключаем профиль к ExtBlocks\n\nВнутри расширения открой **API Settings**. Я обычно выставляю такие настройки:\n\n| Поле | Что выбрать |\n| --- | --- |\n| API Preset | Medium |\n| Connection Profile | Твой рабочий профиль или «Внешние блоки» |\n| Temperature | 1 — как стартовое значение, если модель поддерживает |\n| Top P | 1 — если модель поддерживает |\n| Max Tokens | 4096 — лимит длины ответа блока |\n\nЕсли новый профиль не появился в списке, нажми кнопку обновления рядом с **Connection Profile**.\n\n**Medium — это название набора настроек внутри ExtBlocks, а не конкретная модель.** Реальная модель определяется выбранным Connection Profile. Big, Medium и Small можно настроить по своему усмотрению.\n\nПосле добавления генерируемого блока **назначь ему Medium через значок батарейки возле его названия**. Нажатия переключают Big → Medium → Small. У Medium батарейка заполнена наполовину; на компьютере можно проверить подсказку `API Preset: Medium`. У A-Block и S-Block такой батарейки нет: им не назначается модель этим способом.\n\nПросто выбрать Medium в API Settings недостаточно: отдельный блок может всё ещё использовать Big.\n\nГенерация блоков тоже расходует токены. Более дешёвая модель может снизить расходы, но бесплатными блоки от этого не становятся. Если включён **Inject Block**, содержимое блока дополнительно передаётся основной модели и занимает место в её контексте.\n\n## 3. Добавляем готовый блок, который скачали у автора\n\nСначала сохрани файл на устройство. Если это ZIP-архив, распакуй его и прочитай инструкцию автора: внутри могут быть несколько блоков и отдельные файлы оформления.\n\n### Если это один блок `.json`\n\n1. Открой **Расширения → ExtBlocks**.\n2. Вверху выбери нужный **ExtBlocks Preset** — набор, в котором будет храниться блок. Для первого раза можно оставить Default.\n3. Найди раздел **Preset blocks**.\n4. Нажми **Import именно в этом разделе**.\n5. Выбери скачанный файл `.json`. На телефоне он обычно лежит в «Загрузках».\n6. Убедись, что название блока появилось в списке и блок включён. Зачёркнутое название означает, что он выключен: нажми переключатель рядом с ним.\n7. Если возле блока есть батарейка, назначь ему настроенный API Preset, например Medium.\n8. Если автор дал дополнительные файлы или настройки, установи их по его инструкции.\n\n**Не нажимай + G-Block для импорта:** эта кнопка создаёт новый пустой блок.\n\n### Если это целый набор / пресет ExtBlocks\n\nНажми **значок импорта рядом с верхним списком ExtBlocks Preset**, выбери файл набора и проверь, что нужный набор выбран. Его блоки появятся в **Preset blocks**.\n\nЭто другой импорт: верхняя кнопка предназначена для наборов, а **Preset blocks → Import** — для отдельных блоков.\n\n### Если блок нужен только одному персонажу\n\nОткрой чат с этим персонажем и используй **Embedded blocks → Import**. Блок будет сохранён в его карточке. В отличие от него, **Preset blocks** относится к выбранному набору расширения.\n\n### Если вместе с блоком дали regex-файл\n\nRegex — отдельное правило, которое может превращать текст блока в красивое оформление. Такой файл импортируется в **Regex / Регулярные выражения**, а не в ExtBlocks. В зависимости от версии Таверны импорт находится в панели Regex или её редакторе.\n\nРасширение `.json` само по себе не говорит, что лежит внутри: это может быть блок, набор или regex. Ориентируйся на подпись автора. Если файл не импортируется, сначала проверь, для какого раздела он предназначен. Экспорт одного только промпта тоже не является готовой конфигурацией блока.\n\nПосле импорта **сохрани авторские настройки шаблона, промпта, контекста и запуска**, если в инструкции не сказано их менять. Для начала обычно достаточно подключить свою модель и включить блок.\n\n## 4. Создаём свой первый блок вручную\n\nНачнём со сводки текущей сцены: место, участники и происходящее. Красивое оформление можно добавить отдельно.\n\nВ разделе **Preset blocks** нажми **+ G-Block**.\n\nКоротко о типах: **G-Block** генерируется моделью; **A-Block** хранит состояние и обновляет его по специальным командам; **S-Block** выполняет скрипт. Для сводки нужен G-Block.\n\n### Название, шаблон и инструкция\n\n**Block Name** — имя блока. Удобнее использовать латиницу и подчёркивания, например:\n\n```text\nscene_info\n```\n\n**Block Type** — оставь **Injectable**. Режим Rewrite предназначен для переписывания ответа персонажа.\n\n**Block Template** — образец структуры, которую должна вернуть модель. Он не обязан быть сложным HTML. Вставь:\n\n```xml\n\u003cscene_info>\nМесто: ...\nУчастники: ...\nЧто происходит: ...\n\u003c/scene_info>\n```\n\nИмя внутри открывающего и закрывающего тегов должно совпадать с **Block Name**.\n\n**Block Prompt** — инструкция модели. Вставь:\n\n```text\nПо переданным сообщениям составь краткую сводку текущей сцены на русском языке. Укажи место, присутствующих участников и происходящее. Используй только установленные в переписке факты; если сведения неизвестны, напиши «неизвестно». Не придумывай действия, мысли и решения пользователя. Верни только блок \u003cscene_info>...\u003c/scene_info> по указанному шаблону, без пояснений и без Markdown-ограждений.\n```\n\n### Когда запускать генерацию\n\nЧтобы блок появлялся после каждого ответа персонажа, выставь:\n\n| Настройка | Значение |\n| --- | --- |\n| User Message | Выключено |\n| Char Message | Включено |\n| Generation Pause | Выключено |\n| Trigger periodicity | Periodic |\n| Period | 1 |\n\nТак блок будет запускаться после каждого нового ответа персонажа, независимо от номера сообщения в чате.\n\n**Char Message** означает запуск после ответа персонажа; **User Message** — после твоего сообщения. **Periodic** задаёт способ расчёта частоты, а не заменяет эти галочки.\n\nВ обычном чате, где сообщения пользователя и персонажа строго чередуются, Period 2 соответствует каждому ответу персонажа, 4 — каждому второму, 6 — каждому третьему. Но расширение считает номера сообщений всего чата, поэтому при другом порядке сообщений частота может отличаться. Для проверки надёжнее начать с **Period 1** и одного включённого триггера.\n\n### Будет ли блок виден и будет ли модель его учитывать\n\nВ разделе **State** выставь:\n\n| Галочка | Значение | Что означает |\n| --- | --- | --- |\n| Disabled | Выключено | Блок работает |\n| Hide From Display | Выключено | Блок виден в чате |\n| Inject Block | Включено | Содержимое передаётся основной модели |\n| Background Generation | Выключено | Обычная генерация |\n\n**Hide From Display и Inject Block отвечают за разные вещи.** Скрытый блок может оставаться в контексте модели. Видимый блок может служить только тебе, если Inject Block выключен.\n\nЕсли нужен только визуальный блок и основной модели он не нужен, отключи **Inject Block**.\n\nПри включённом Inject Block выбери **Injection Role → System** и **Injection Position → After Main Prompt**. Для этой позиции основной Main Prompt должен быть включён в пресете чата. Injection Depth здесь не нужен — он относится к позиции In Chat.\n\n### Даём модели сообщения для чтения\n\nТеперь открой вкладку **Context Builder**. Здесь выбирается, что модель блока получит для работы. Один Block Prompt не заменяет контекст переписки.\n\n1. Нажми **Add Item**.\n2. Заполни поля:\n\n| Поле | Значение |\n| --- | --- |\n| Context Item Type | Last messages |\n| Item Name | Последние сообщения |\n| Item Role | User |\n| Messages Count | 6 |\n| Messages Offset | 0 |\n\nЗдесь **6 — последние шесть несистемных сообщений чата**, а не шесть пар «ты + персонаж». Item Name — имя элемента контекста; совпадение имён у разных блоков также влияет на объединение запросов, подробнее в разделе 14; Item Role задаёт роль контекста в запросе модели блока и не выбирает, чьи сообщения читать.\n\n3. Остальные поля пока оставь по умолчанию.\n4. Нажми **Save Item**, затем **Save**, чтобы сохранить весь блок.\n5. В списке блоков назначь ему **Medium** через батарейку.\n\nМожно добавить ещё один Item типа **Previous block**, если блоку нужно читать свой предыдущий результат — например, чтобы продолжать сводку. Укажи **Block Name → scene_info**, **Blocks Count → 1**, придумай Item Name и сохрани Item. Добавляй этот Item, только если блоку нужен его прошлый результат.\n\nДругие типы контекста: **Text** — текст, который ты впишешь вручную; **Last messages by keyword** — сообщения, отбираемые с учётом заданного ключевого слова. Для первого запуска достаточно обычного **Last messages**.\n\n## 5. Какие блоки бывают и что с ними можно сделать\n\nВ ExtBlocks есть три кнопки создания, но четыре режима работы: Rewrite выбирается внутри редактора G-Block.\n\n| Тип | Что делает | Для чего пригодится | Кто выполняет работу |\n| --- | --- | --- | --- |\n| G-Block → Injectable | Генерирует отдельный блок | Сводка, новости мира, дневник, панель сцены, текст для оформления | Модель из API Preset |\n| G-Block → Rewrite | Переписывает текст сообщения | Исправление языка, изменение стиля, доработка абзаца | Модель из API Preset |\n| A-Block | Хранит данные и применяет к ним обновления | Инвентарь, деньги, характеристики, задания, отношения | Расширение; команды обновления пишет модель или ты |\n| S-Block | Выполняет скрипт | Автоматизация, команды, вычисления, связки с другими функциями Таверны | STscript или JavaScript |\n\n**G-Block** удобен, когда каждый раз нужен новый текст. **A-Block** — когда важно сохранить структуру данных и изменить только отдельные значения. **S-Block** — когда нужны действия, а **Rewrite** — когда нужно поменять уже полученный ответ.\n\nНапример, можно собрать такую связку: A-Block хранит инвентарь → G-Block читает инвентарь и последние события → возвращает команды обновления → A-Block применяет их. Другой G-Block делает красивое описание состояния, а S-Block запускает нужные команды.\n\nРасширение само по себе не подключает поиск в интернете, не создаёт изображения и не устанавливает оформление. Для таких задач блоку нужны соответствующие инструменты, скрипты или дополнительные настройки.\n\n## 6. Пресеты, встроенные блоки и кнопки панели\n\n### Три разных «пресета»\n\nЗдесь легко запутаться, поэтому сразу разделим названия.\n\n| Название | Что это | Где находится |\n| --- | --- | --- |\n| ExtBlocks Preset | Набор конфигураций блоков | Верхний список в ExtBlocks |\n| API Preset: Big / Medium / Small | Настройки запросов к модели для блоков | API Settings и батарейка блока |\n| Пресет основного чата | Основные промпты и настройки ролки | Обычные настройки SillyTavern |\n\nПереключить набор ExtBlocks и переключить модель блока — разные действия. Набор может содержать блоки с разными батарейками.\n\n### Работа с наборами\n\nВозле **ExtBlocks Preset** находятся кнопки создания, импорта, экспорта и удаления набора. Чтобы собрать отдельный набор, нажми **+**, дай ему понятное имя и добавь нужные блоки в Preset blocks. Для другой ролки можно создать другой набор и переключаться между ними.\n\nЭкспорт набора сохраняет его блоки и их конфигурации. Он не переносит твои ключи, рабочее подключение и всю историю результатов из чата. После импорта на другом устройстве проверь API Settings и батарейки.\n\nИмпорт набора с уже существующим именем может заменить набор с этим именем. То же относится к импорту одноимённого блока в его раздел. Перед заменой своей настроенной версии сохрани её экспортом.\n\n### Preset blocks и Embedded blocks\n\n**Preset blocks** принадлежат выбранному набору. **Embedded blocks** записываются в карточку конкретного персонажа и могут переезжать вместе с ней, если формат экспорта сохраняет данные расширений.\n\nОдновременно используются блоки выбранного набора и карточки. Если в обоих разделах есть блок с одинаковым **Block Name**, приоритет получает **Embedded block**. Это действует даже тогда, когда встроенный блок выключен: одноимённый блок из набора не становится его запасной версией.\n\nЕсли блок ведёт себя не так, как настроено в Preset blocks, проверь, нет ли одноимённого в Embedded blocks. Для независимых блоков используй разные имена.\n\n### Кнопки возле блока\n\n| Кнопка | Что делает |\n| --- | --- |\n| Полоски слева | Перетаскивание и изменение порядка |\n| G / R / A / S | Тип блока |\n| Батарейка | Big → Medium → Small для G и Rewrite |\n| Переключатель возле имени | Включение и выключение; выключенное имя зачёркнуто |\n| Карандаш | Редактор конфигурации |\n| Документ со стрелкой | Экспорт готовой конфигурации блока в JSON |\n| Волшебная палочка | Экспорт собранного запроса G / Rewrite для текущего чата |\n| Корзина | Удаление конфигурации |\n\n**Экспорт блока** нужен, чтобы поделиться работающей настройкой. **Экспорт промпта** показывает, какой запрос получается после сборки контекста и подстановок. Для него должен быть открыт чат; такой файл может содержать фрагменты переписки. Он не заменяет файл блока для импорта.\n\nПеретаскивание меняет порядок внутри списка, но не превращает разные типы блоков в произвольную цепочку. Для S-Block и Rewrite дополнительно важны их настройки Before / After.\n\n### Быстрый доступ\n\nВ меню расширений возле поля ввода есть пункт **ExtBlocks**. Он открывает ту же панель в отдельном окне: можно переключить набор, настроить API и открыть редактор блока без перехода к верхней панели. Настройки общие для обоих способов открытия.\n\n## 7. API Settings: все параметры\n\nДля запросов ExtBlocks нужен сохранённый профиль **Chat Completion**. Основной чат при этом может пользоваться другим подключением.\n\n| Поле | Что означает | Как выбирать |\n| --- | --- | --- |\n| API Preset | Какой набор настроек сейчас редактируешь | Настрой каждый используемый Big / Medium / Small |\n| Connection Profile | Профиль, из которого берутся источник, модель и подключение | Выбери сохранённый рабочий профиль с уникальным именем |\n| Кнопка обновления списка | Повторно загружает список профилей | Нажми после создания или переименования профиля |\n| Stream | Получение ответа API частями | Это режим запроса; он не гарантирует постепенный показ блока в чате |\n| Temperature | Разнообразие ответа | Для фактов и YAML обычно удобнее более низкая; для творческого текста можно выше |\n| Top P | Ещё один параметр выбора продолжения | Для начала можно оставить 1, если сервис его поддерживает |\n| Max Tokens | Максимальная длина ответа API | Должно хватить на весь результат и закрывающие теги |\n| Reasoning Effort | Запрашиваемый уровень рассуждения | Auto или поддерживаемое моделью значение |\n| Enable confirmation JB | Добавляет в конец запроса пару реплик с просьбой подтвердить запрос и подтверждением | Не требуется для обычной настройки; не гарантирует принятие запроса моделью |\n\nВ **Reasoning Effort** доступны Auto, Low, Medium, High, Min и Max. Наличие пункта в списке не означает, что выбранная модель его поддерживает. Сервис может проигнорировать параметр или вернуть ошибку.\n\n**Max Tokens — не размер памяти блока.** Сколько переписки он увидит, определяет Context Builder. У некоторых моделей лимит ответа также включает токены рассуждений, поэтому видимый текст может оказаться короче.\n\nBig, Medium и Small не означают «дорого», «средне» и «дёшево» автоматически. Ты сама выбираешь, что к ним подключить. Можно назначить одну модель всем трём и отличать их только параметрами.\n\nНовый G-Block обычно получает **Big**. Назначай нужную батарейку после создания или импорта. У A-Block и S-Block модели нет, но скрипт может самостоятельно вызывать команды генерации.\n\nЕсли профиль удалён или переименован, перепроверь Connection Profile: расширение связывает его по имени и при отсутствии совпадения может обратиться к другому доступному профилю. Не создавай несколько профилей с одинаковыми именами.\n\nДля **Custom / OpenAI-совместимого** подключения проверь сохранённый URL API, выбранную модель, ключ и дополнительные поля, которые нужны твоему сервису. Включённый профиль без URL не станет рабочим подключением.\n\n## 8. G-Block: шаблон, промпт и формат ответа\n\nРедактор состоит из двух вкладок: **Block Settings** и **Context Builder**. В первой мы описываем задачу и поведение блока, во второй — данные для её выполнения.\n\n| Поле | Зачем нужно |\n| --- | --- |\n| Block Name | Имя, по которому блок сохраняется, находится в командах и связывается с другими блоками |\n| Block Type | Injectable или Rewrite |\n| Block Template | Требуемая структура результата |\n| Block Prompt | Инструкция модели: что сделать и как заполнить структуру |\n\nЯ советую короткие имена вроде `scene_info`, `world_news`, `inventory_update`. В одном разделе имя должно быть уникальным. Если переименовываешь блок, проверь его теги, Previous block, макросы, команды и regex: связанные настройки сами за новым именем не переедут.\n\n### Что писать в Template\n\nВнешние теги позволяют расширению распознать результат. Внутри может быть обычный текст, Markdown, HTML или YAML — по задаче блока.\n\n```xml\n\u003cworld_news>\n1. ...\n2. ...\n3. ...\n\u003c/world_news>\n```\n\nДля **Injectable** внешнее имя должно совпадать с Block Name. Не проси модель возвращать пояснение вместо блока: результат без нужных тегов может не попасть в хранилище.\n\nСам шаблон не является движком вёрстки и не заполняет многоточия автоматически. Модель получает его как образец. Если шаблон сложный, подробно объясни, какие части сохранять и какие значения менять.\n\n### Что писать в Prompt\n\nХорошая инструкция отвечает на четыре вопроса: какие данные использовать, что получить, чего не выдумывать и в каком формате вернуть ответ.\n\n```text\nСоставь три короткие новости мира по переданным сведениям.\nНе противоречь установленным событиям и не решай за пользователя.\nЕсли достоверных событий недостаточно, укажи это вместо выдуманных фактов.\nВерни только \u003cworld_news>...\u003c/world_news>, без вступления и Markdown-ограждений.\n{{additionalPrompt}}\n```\n\nПоследняя строка позволяет передать дополнительную просьбу через команду запуска. Если такой подстановки нет ни в промпте, ни в шаблоне, ни в контексте, дополнительная просьба не попадёт в запрос.\n\n### Чего блок не видит автоматически\n\nОтдельная модель не получает весь основной промпт, карточку, лорбук и чат просто потому, что они открыты в Таверне. Нужную информацию добавляем через Context Builder и макросы. Если блок придумывает прошлое сцены, сначала проверь его входные данные.\n\n## 9. Запуск: сообщения, период и ключевые слова\n\nЕсть две части настройки: **событие запуска** и **условие запуска**.\n\n| Событие | Когда используется |\n| --- | --- |\n| User Message | После сообщения пользователя; также участвует в обработке новых свайпов |\n| Char Message | После ответа персонажа |\n| Generation Pause | При появлении маркера во время потокового ответа персонажа |\n\nМожно отметить User Message и Char Message одновременно, но тогда блок может запускаться дважды за обмен репликами. Для сводки после ответа достаточно Char Message.\n\n### Periodic\n\n**Period 1** — на каждом выбранном событии. Это удобное значение для первого запуска.\n\nДальше расширение ориентируется на номер сообщения в общем массиве чата. В обычном чередовании с приветствием под номером 0 ответы персонажа имеют номера 2, 4, 6 и так далее.\n\n| Period при Char Message | В обычном чередующемся чате |\n| --- | --- |\n| 1 | Каждый ответ |\n| 2 | Каждый ответ с чётным номером — обычно тоже каждый ответ |\n| 4 | Обычно каждый второй ответ |\n| 6 | Обычно каждый третий ответ |\n\nУ User Message проверка сдвинута на один номер. Дополнительные системные сообщения, удаление реплик и другой порядок разговора меняют расчёт. **Period 3 не означает универсально «раз в три ответа».** Используй положительное целое число; 0 не задаёт режим «всегда».\n\n### Keyword-based\n\nВ **Trigger periodicity** выбери **Keyword-based** и заполни **Keyword**. Блок запустится, когда выбранное сообщение содержит нужный текст.\n\nНапример: User Message включено, Keyword — `[новости]`. Отправляешь сообщение с этим маркером — блок срабатывает. Без **Regex** это обычный поиск подстроки с учётом регистра.\n\nС галочкой **Regex** можно задать регулярное выражение:\n\n```text\n/\\[новости\\]/i\n```\n\nЗдесь `i` разрешает разные варианты регистра. Скобки экранированы, потому что в регулярном выражении они имеют специальное значение. Неверное выражение не даст ожидаемого запуска.\n\nВ Keyword-based частоту задаёт совпадение Keyword, а не старое значение Period. Пустое ключевое слово не годится для настройки такого запуска.\n\n**Keyword в триггерах** определяет, когда запускать блок. **Keyword Stopper в Context Builder** определяет, какую часть переписки читать. Это разные поля.\n\n### Ручной запуск\n\nМожно оставить автоматические события выключенными и запускать G-Block по имени:\n\n```text\n/extblocks-generate name=\"scene_info\"\n```\n\nКоманда по имени может вызвать даже блок с Disabled. Disabled выключает автоматическую работу, но не является запретом на явный вызов командой.\n\n## 10. Generation Pause: блок посреди ответа\n\nЭтот режим нужен, когда персонаж должен сначала дойти до определённого момента, затем получить результат внешнего блока и продолжить.\n\n1. Включи **потоковый ответ основного чата**.\n2. В блоке отметь **Generation Pause**. Редактор переключит условие на ключевое слово.\n3. Задай уникальный Keyword, например `[ПРОВЕРКА_СЦЕНЫ]`.\n4. В основном промпте объясни, когда модель должна выдавать этот маркер.\n5. Настрой контекст внешнего блока и нужную инъекцию результата.\n\nКогда маркер появляется в потоке, расширение останавливает ответ, обрезает продолжение после точки остановки, запускает нужные блоки и затем инициирует продолжение генерации. Маркер при обычном поиске и при Regex может сохраняться в тексте по-разному.\n\nНе используй частое слово вроде «да»: остановка должна происходить в конкретном месте. При продолжении модель может повторить маркер и вызвать новую паузу, поэтому в инструкции укажи, что после получения результата этот маркер повторять не нужно.\n\n**Stream в API Settings ExtBlocks и потоковый ответ основного чата — разные настройки.** Для обнаружения маркера важен поток основного ответа. Результат после паузы зависит и от того, как основной пресет настроен на продолжение.\n\n## 11. State: видимость, инъекция и фон\n\n| Настройка | За что отвечает |\n| --- | --- |\n| Disabled | Выключает блок из обычной автоматической обработки |\n| Hide From Display | Скрывает показ результата в чате |\n| Inject Block | Передаёт последнее доступное состояние основной модели |\n| Background Generation | Запускает обычный G-Block в фоне, не дожидаясь его в общей цепочке |\n\n### Как совместить Hide и Inject\n\n| Hide From Display | Inject Block | Что получится |\n| --- | --- | --- |\n| Выключено | Выключено | Видимая панель для тебя |\n| Выключено | Включено | Панель видна и учитывается моделью |\n| Включено | Включено | Скрытая память или состояние для модели |\n| Включено | Выключено | Результат хранится для других блоков, макросов или скриптов |\n\nДля последнего варианта нужно, чтобы результат кто-то действительно читал: например, через Previous block.\n\n### Background Generation\n\nФоновый блок сохраняет результат после завершения своего запроса. Следующий скрипт или другой запрос может начаться раньше и увидеть старое состояние.\n\nФон удобен для необязательной панели, которая может обновиться чуть позже. Для блока, от которого зависит следующий шаг, лучше обычная генерация. Особенно это касается G-Block с командами обновления A-Block: общая цепочка обрабатывает результаты, которых она дождалась.\n\nУ A-Block нет фоновой генерации, у S-Block из State есть Disabled. Rewrite выполняется в своём порядке Before / After; его нельзя превратить в фон обычного G-Block одной галочкой.\n\n## 12. Injection: что попадёт в основной запрос\n\nИнъекция работает для обычных G-Block и A-Block. В основной запрос попадает содержимое последнего подходящего сохранённого блока, а не вся история его версий.\n\n### Injection Role\n\n| Роль | Как выглядит содержимое в запросе |\n| --- | --- |\n| System | Системное сообщение с данными или инструкцией |\n| User | Сообщение пользователя |\n| Assistant | Сообщение ассистента |\n\nРоль не делает сведения истинными и не задаёт, чьи сообщения блок прочитает. Она определяет место содержимого в структуре запроса основной модели. Для состояния сцены удобно начать с System.\n\n### Injection Position\n\n| Позиция | Где размещается содержимое |\n| --- | --- |\n| After Main Prompt | После основного Main Prompt |\n| Before Main Prompt | Перед основным Main Prompt |\n| In Chat | В части запроса с историей сообщений |\n\nBefore / After Main Prompt предназначены для System; основной Main Prompt должен быть включён в пресете. Для User / Assistant используй **In Chat**.\n\n### Injection Depth\n\nDepth относится к **In Chat** и задаёт глубину вставки относительно конца истории. Маленькое неотрицательное значение размещает блок ближе к свежим сообщениям; большее — глубже. Начни с 0–4 и проверь итоговый запрос в Таверне.\n\nПоле допускает отрицательные числа, но для обычной настройки лучше их не использовать: расширение пересчитывает отрицательную глубину через длину чата, поэтому это не удобный способ задать стабильную позицию у начала.\n\nЕсли блок запускается **после ответа персонажа**, этот ответ уже был написан без его нового результата. Свежая инъекция пригодится следующей генерации. Для данных, которые нужны до текущего ответа, выбирай User Message или продуманную схему Generation Pause.\n\nВидимость, инъекция и отдельное системное сообщение через `is_separate=true` — три разных механизма. Последний действительно добавляет новую реплику в историю чата.\n\n## 13. Context Builder: как собрать входные данные\n\n**Item** — один источник информации в запросе модели блока. Их может быть несколько: правила в Text, переписка в Last messages, прошлое состояние в Previous block.\n\n| Общая настройка | Что означает |\n| --- | --- |\n| Context Item Type | Тип источника данных |\n| Item Name | Имя элемента; выбирай понятное и различающее нужные контексты |\n| Item Role | Роль всего элемента в запросе модели блока |\n| Save Item | Сохраняет изменения элемента в редакторе |\n| Save | Сохраняет всю конфигурацию блока |\n\n**Item Role → User не означает «читать только мои сообщения».** Если тип — Last messages, он берёт и пользователя, и персонажа; роль назначается собранному тексту.\n\nЭлементы можно включать и выключать, редактировать, удалять и переставлять. Они собираются в порядке списка; соседние элементы одной роли могут объединяться в одно сообщение API.\n\nКнопки импорта и экспорта возле **Context Items** работают со всем набором элементов контекста. Импорт заменяет текущий список Items в редакторе, поэтому сначала сохрани нужную конфигурацию. Файл контекста не является готовым блоком.\n\n### Text\n\nВ **Content** впиши постоянный текст: описание задачи, данные персонажа, правила мира или значения для подстановки. Можно использовать обычные макросы SillyTavern вроде `{{user}}` и `{{char}}`, а также макросы ExtBlocks.\n\n```text\nПользователь: {{user}}\nПерсонаж: {{char}}\nПравило: не добавляй в сводку события, которых нет в переданных данных.\n```\n\nИмена `{{user}}` и `{{char}}` подставляют имена, а не полную карточку персонажа или персоны. Если нужны дополнительные сведения, добавь их отдельно.\n\n### Last messages\n\nБерёт последние доступные сообщения до точки запуска включительно. Обычные сообщения пользователя и персонажа учитываются вместе; сообщения с системным флагом исключаются.\n\n| Поле | Что делает | Пример |\n| --- | --- | --- |\n| Messages Count | Сколько сообщений взять | 6 — последние шесть реплик, не шесть пар |\n| Messages Offset | Сколько последних реплик пропустить | Count 6 + Offset 2 — шесть реплик перед последними двумя |\n| Messages Separator | Разделитель реплик | Double newline — пустая строка между ними |\n| User Prefix / Suffix | Текст до / после каждой реплики пользователя | `{{user}}: ` |\n| Char Prefix / Suffix | Текст до / после каждой реплики персонажа | `{{char}}: ` |\n\nПрефиксы помогают различать участников, особенно если весь Item отправляется с одной ролью. Можно писать `\\n` для переноса строки: редактор превращает его в настоящий перенос.\n\nОтрицательный **Messages Count** имеет отдельный смысл: `-3` берёт первые три доступные несистемные реплики. Это может пригодиться для начала истории. Чтобы отключить Item, используй его переключатель: значение 0 при сохранении редактор может заменить стандартным числом.\n\n### Last messages by keyword\n\nЗдесь **Keyword Stopper** — маркер границы контекста. Расширение ищет его в предыдущих сообщениях и берёт переписку от последнего найденного маркера до точки запуска. Сообщение с маркером тоже входит в контекст.\n\nНапример, в начале новой сцены пишешь `[НОВАЯ_СЦЕНА]`. Такой Item помогает ограничить вход текущей сценой.\n\nЭто обычный поиск подстроки с учётом регистра, отдельной галочки Regex у Stopper нет. Самое свежее сообщение не используется как предыдущая граница при обычном поиске. Если маркер не найден, берётся переписка с начала: контекст может внезапно стать большим.\n\n### Previous block\n\nБерёт сохранённые результаты названного блока из предыдущих сообщений.\n\n| Поле | Что заполнить |\n| --- | --- |\n| Block Name | Точное имя существующей конфигурации без угловых скобок |\n| Blocks Count | Число прошлых результатов; для последнего состояния обычно 1 |\n\nНазвание **Item Name** — подпись самого источника. **Block Name** — имя блока, результат которого нужен. Они не обязаны совпадать.\n\nPrevious block не запускает другой блок заново. При первом запуске прошлой версии может ещё не быть. В обычном Item поиск идёт по предыдущим сообщениям, поэтому это не способ гарантированно прочитать результат соседнего блока, созданный только что у той же реплики.\n\nДля памяти удобно соединить **Text с правилами + Previous block со старой сводкой + Last messages с новыми событиями**. В промпте попроси обновить сводку, сохранив действующие факты и убрав устаревшие.\n\n### Необязательный контекст и пустые данные\n\nВыключенные и пустые Items не добавляются в запрос. Если Previous block пуст на старте, объясни модели, что это нормальная ситуация. Не заставляй её выдумывать прошлое состояние, которого ещё нет.\n\n## 14. Несколько G-Block и общий запрос\n\nРасширение умеет объединять обычные генерируемые блоки в один запрос: модель получает несколько шаблонов и инструкций сразу. Это может сократить повторную отправку одинакового контекста.\n\n**Для объединения учитываются имена Context Items и их порядок**, а также фоновый режим. При этом запрос использует контекст и API Preset первого блока в группе. Одного совпадения подписей недостаточно, чтобы данные в двух блоках действительно были одинаковыми.\n\nПоэтому Item Name влияет не только на удобство чтения списка:\n\n- Если блоки должны использовать один и тот же контекст и модель, оставь одинаковую последовательность имён Items и одинаковые настройки данных.\n- Если нужны разные модели или разный контекст, дай Items разные имена: например, `scene_recent` и `news_recent`.\n- Если у нескольких блоков совсем нет Items, они тоже могут попасть в одну группу.\n\nПосле этого проверь батарейки и экспорт полного промпта. Не рассчитывай на отдельную модель каждого блока, если их контексты объединяются.\n\nУ группы общий **Max Tokens** на весь ответ, включая все блоки. Если модель успела вернуть только первый и оборвала следующий, увеличь лимит или раздели запросы.\n\nОбъединённые блоки не генерируются один за другим внутри одного запроса. Если одному нужен свежий результат другого, нужна отдельная последовательность запуска; Previous block обычно читает прошлые сообщения.\n\n## 15. Rewrite: переписывание ответа или фрагмента\n\nRewrite — режим G-Block, который заменяет текст сообщения результатом другой модели. Можно поправить язык, сократить текст, изменить стиль или доработать отдельный абзац.\n\n### Создаём блок\n\n1. Нажми **+ G-Block**.\n2. Задай **Block Name → polish_text**.\n3. Выбери **Block Type → Rewrite**.\n4. Вставь в **Block Template**:\n\n```xml\n\u003crewritten text>\n...\n\u003c/rewritten text>\n```\n\n**У Rewrite специальный обязательный тег `\u003crewritten text>`**, независимо от Block Name. Здесь не используем `\u003cpolish_text>` как тег результата.\n\nВ **Block Prompt**:\n\n```text\nПерепиши переданный текст на русском языке: исправь ошибки и неестественные обороты.\nСохрани факты, действия, точку зрения и смысл. Не добавляй действия пользователя.\nВерни только \u003crewritten text>...\u003c/rewritten text>.\n{{additionalPrompt}}\n```\n\nВ **Context Builder** добавь **Text**, роль User, Content:\n\n```text\nТекст для переписывания:\n{{textToRewrite}}\n```\n\nСохрани Item и блок, назначь батарейку. `{{textToRewrite}}` передаст целое сообщение или выбранный фрагмент в зависимости от способа вызова.\n\n### Ручной и автоматический режимы\n\nДля ручной обработки последнего сообщения выключи User Message, Char Message и Generation Pause. Запуск:\n\n```text\n/extblocks-rewrite name=\"polish_text\"\n```\n\nДля автоматической обработки ответа включи **Char Message**, Period 1. В **Generation Order** выбери:\n\n| Порядок | Когда переписывается сообщение |\n| --- | --- |\n| Before blocks | Перед обычными G-Block: они смогут читать уже изменённый текст |\n| After blocks | После обычных G-Block: они работают с исходным ответом |\n\nЕсли несколько Rewrite сработали вместе, они выполняются последовательно. Это несколько запросов и несколько изменений одного сообщения.\n\n### Переписываем выделенный фрагмент\n\n1. Включи нужный Rewrite-блок: список выбора показывает включённые Rewrite.\n2. Открой обычное редактирование сообщения персонажа.\n3. Нажми кнопку **[ExtBlocks] Partial rewrite** в редакторе сообщения.\n4. Выдели текст в поле редактирования.\n5. В появившемся окне выбери блок, при необходимости впиши дополнительную просьбу и запусти Rewrite.\n\nДополнительная просьба попадёт в модель через `{{additionalPrompt}}`. Возможность выделения зависит от интерфейса устройства; если окно не появляется на телефоне, можно обработать целое последнее сообщение командой.\n\nRewrite меняет сохранённое сообщение. Если исходная версия нужна, сохрани её перед обработкой. При одинаковых повторяющихся фрагментах замена может затронуть первое совпадение текста.\n\n## 16. A-Block: состояние, инвентарь и счётчики\n\nНакопительный блок хранит структуру в **YAML** и меняет её по командам обновления. Он не вызывает свою модель и не выводит новый текст по обычному промпту.\n\nУ него два имени: **Block Name** — имя состояния, **Block-updater Name** — имя блока с командами. Имена должны отличаться.\n\n### Настраиваем inventory\n\nНажми **+ A-Block** и заполни:\n\n| Поле | Значение |\n| --- | --- |\n| Block Name | inventory |\n| Block-updater Name | inventory_update |\n| Char Message | Включено, если команды приходят от модели |\n| User Message | Включено, если хочешь применять команды из своих сообщений |\n| Inject Block | Включено, если основная модель должна видеть инвентарь |\n| Hide From Display | По желанию |\n\nСохрани блок. Для начального состояния можно добавить в первое приветствие персонажа:\n\n```xml\n\u003cinventory>\ngold: 20\nitems:\n  - ключ\nstatus:\n  location: трактир\n\u003c/inventory>\n```\n\nПосле сохранения приветствия перезагрузи чат. ExtBlocks распознаёт блоки в первом сообщении и переносит их в своё хранилище. Для уже начатого чата можно добавить это состояние через **Edit extblocks** у сообщения или команду storage-append из раздела 19.\n\n### Как выглядит обновление\n\nЕсли персонаж получил 10 монет и верёвку, источник команд должен вернуть:\n\n```xml\n\u003cinventory_update>\n$inc:\n  gold: 10\n$push:\n  items: верёвка\n\u003c/inventory_update>\n```\n\nПосле применения gold станет 30, а в items появится верёвка. Отсутствующие в обновлении поля сохраняются.\n\n| Оператор | Что делает | Пример значения |\n| --- | --- | --- |\n| $set | Устанавливает или заменяет значение | `status.location: рынок` |\n| $inc | Прибавляет число; отрицательное число уменьшает | `gold: -5` |\n| $push | Добавляет элемент в массив; список добавляет несколько | `items: фонарь` |\n| $pull | Убирает первый точно совпавший элемент массива | `items: ключ` |\n| $unset | Удаляет поле | `status.temporary: true` |\n\nЭто поддерживаемый набор операторов в стиле MongoDB, а не полный язык запросов MongoDB. Например, `$push` со списком добавляет его элементы напрямую; не нужно писать `$each`.\n\nВложенные поля задаются через точку: `status.location`. Индекс массива тоже можно указать: `quests.0.done`. В $inc отправляй именно числа, а не строки в кавычках. У YAML важны отступы; используй пробелы.\n\n### Кто пишет команды обновления\n\nМожно попросить основную модель писать `\u003cinventory_update>` в своём ответе. **Copy Default Prompt** копирует инструкцию с операторами и примером; вставь её в промпт основного чата или в нужный G-Block. Сама кнопка не подключает инструкцию к модели и не создаёт начальное состояние.\n\nДругой вариант — отдельный G-Block:\n\n1. Создай G-Block с именем **inventory_update** и шаблоном `\u003cinventory_update>...\u003c/inventory_update>`.\n2. Добавь последние сообщения и данные о текущем инвентаре.\n3. В промпте попроси вернуть только фактически произошедшие изменения в YAML с $set, $inc, $push, $pull, $unset. Если изменений нет — пустой updater.\n4. Включи Char Message, Period 1; оставь **Background Generation выключенным**.\n5. У G-Block отключи Inject Block; Hide From Display можно включить, чтобы не показывать служебные команды.\n6. Назначь G-Block нужную модель. У A-Block тоже должен быть включён Char Message.\n\nГотовый updater из обычной генерации будет обработан накопительным блоком. Если A-Block читается через Previous block, это прошлое сохранённое состояние. Для получения последнего доступного состояния можно использовать Text с `{{ExtBlocks::inventory}}`.\n\nЕсли ты явно вызываешь G-Block командой и ему нужен A-Block, удобнее передавать состояние таким макросом в Text: ручная генерация по имени собирает список генерируемых блоков, и поиск A-Block через Previous block в таком вызове может не сработать.\n\n### Почему данные иногда удваиваются\n\n$inc и $push повторно применяют действие. Если повторно обработать тот же updater «добавь 10 монет», можно получить ещё 10. Не проси одновременно основную модель и внешний updater применять одно и то же изменение. Для полного проверенного значения выбирай $set.\n\nA-Block хранит последнее состояние, но не проверяет самостоятельно правильность арифметики, канон сюжета или логичность команды. Всё это нужно оговорить источнику обновлений.\n\n## 17. S-Block: команды и автоматизация\n\nS-Block выполняет **STscript** или **JavaScript**. В нём нет Template, Block Prompt и Context Builder обычного G-Block: есть текст скрипта и параметры запуска.\n\n| Поле | Что означает |\n| --- | --- |\n| Block Name | Имя для поиска и ручного запуска |\n| Script Type | STscript или JavaScript |\n| Script | Код / последовательность команд |\n| Triggers, Period / Keyword | Условия запуска, как у G-Block |\n| Disabled | Выключение автоматической обработки |\n| Execution Order | Before blocks или After blocks |\n\nДля проверки создай **STscript** с именем `block_notice`:\n\n```text\n/echo Блоки обработаны\n```\n\nВыключи автоматические события и вызови:\n\n```text\n/extblocks-execute-script name=\"block_notice\"\n```\n\nЕсли хочешь автоматическое уведомление, включи Char Message, Period 1 и **Execution Order → After blocks**. `/echo` показывает уведомление; это не результат G-Block в хранилище.\n\nСкрипт может вызывать команды ExtBlocks, а также другие команды Таверны и установленных расширений. Их наличие и синтаксис проверяй через встроенную помощь и автодополнение.\n\n### JavaScript\n\nДля Script Type → JavaScript можно использовать асинхронный код. Небольшая проверка:\n\n```javascript\nconst message = context.chat[messageId];\ntoastr.info(message?.is_user ? 'Сообщение пользователя' : 'Сообщение персонажа');\n```\n\nДоступны `context`, `messageId`, `isUser`, `allBlocks`, `triggeredBlocks`, `additionalMacro`, `is_separate`, а также сервисы и плагины расширения. Это вариант для тех, кто уже пишет код. Скрипт выполняет реальные действия в Таверне — перед импортом чужого JavaScript посмотри, что он делает.\n\nВозвращённая JavaScript строка не становится внешним блоком автоматически. Для сохранения результата нужны соответствующие команды или BlockService.\n\n**Before blocks** выполняется до Rewrite Before и обычных G-Block. **After blocks** — после Rewrite After. При фоновой генерации After не означает, что все фоновые запросы уже завершены.\n\nНе вызывай из скрипта тот же скрипт по кругу и не запускай команду, которая бесконечно создаёт новое событие для него. Для ручной проверки отключи автоматические события.\n\n## 18. Макросы: подставить данные или запустить действие\n\nМакрос — запись в двойных фигурных скобках, которую Таверна заменяет значением. У ExtBlocks есть макросы чтения состояния и макросы запуска.\n\n### Прочитать последнее состояние\n\n```text\n{{ExtBlocks::scene_info}}\n```\n\nТо же действие имеет длинное имя:\n\n```text\n{{ExtBlocks-GetBlockByName::scene_info}}\n```\n\nПодставляется последний доступный сохранённый блок с этим именем, вместе с его тегами. Конфигурация должна быть включена, открыт чат с персонажем. Если блока или состояния ещё нет, подстановка может быть пустой.\n\nЭто удобно в Text другого блока или в промпте. Если то же состояние уже передаётся через Inject Block, не дублируй его без необходимости.\n\n### Запустить по имени\n\n| Макрос | Действие |\n| --- | --- |\n| `{{ExtBlocks-Call::scene_info}}` | Генерация G-Block |\n| `{{ExtBlocks-Call::scene_info::Укажи только место}}` | Генерация с дополнительной просьбой |\n| `{{ExtBlocks-CallRewrite::polish_text}}` | Переписывание сообщения |\n| `{{ExtBlocks-CallScript::block_notice}}` | Выполнение скрипта |\n\nНесколько имён указываются через запятую. Макросы запуска выполняют действие и возвращают пустую строку; это не подстановка результата вместо макроса. Для чтения результата нужен макрос состояния.\n\nНе размещай вызов генерации в поле, которое может многократно пересобираться автоматически: повторная обработка макроса может снова вызвать запрос. Для понятного ручного запуска проще slash-команда.\n\n### Локальные подстановки\n\n| Макрос | Что подставляет |\n| --- | --- |\n| `{{additionalPrompt}}` | Дополнительную просьбу из команды или окна Rewrite |\n| `{{textToRewrite}}` | Текст, который нужно переписать |\n| `{{mainPrompt}}` | Текущий основной Main Prompt |\n| `{{wiBefore}}` | Активированные записи World Info перед определением персонажа |\n| `{{wiAfter}}` | Активированные записи после определения персонажа |\n| `{{wiExamples}}` | Активированные записи у примеров сообщений |\n| `{{wiDepth}}` | Активированные записи с позицией по глубине |\n| `{{wiAll}}` | Совокупность этих активированных записей |\n\nЛокальные подстановки рассчитаны на запросы G / Rewrite и их контекст. `{{mainPrompt}}` не добавляет весь пресет основного чата, все расширения и всю историю.\n\n## 19. Все команды ExtBlocks\n\nКоманды вводятся в поле сообщения и отправляются как команды Таверны. Для запуска нужен открытый чат и существующая конфигурация с точным именем.\n\n| Команда | Назначение |\n| --- | --- |\n| `/extblocks-generate name=\"scene_info\"` | Сгенерировать названный G-Block у последнего сообщения |\n| `/extblocks-regenerate` | Очистить блоки последнего сообщения и повторно обработать его по автоматическим условиям |\n| `/extblocks-rewrite name=\"polish_text\"` | Переписать последнее сообщение названным Rewrite |\n| `/extblocks-execute-script name=\"block_notice\"` | Выполнить названный S-Block |\n| `/extblocks-storage-append` + текст блока | Сохранить распознанные блоки у последнего сообщения |\n| `/extblocks-storage-purge` | Удалить всё хранилище блоков у последнего сообщения |\n| `/extblocks-storage-export` | Добавить системную реплику с последним доступным состоянием каждого включённого блока |\n| `/extblocks-flushinjects` | Перезагрузить текущий чат для обновления работы инъекций и отображения |\n| `/extblocks-abort-generation` | Попытаться отменить текущий API-запрос расширения |\n\n### Несколько блоков\n\n```text\n/extblocks-generate name=\"scene_info,world_news\"\n```\n\n### Дополнительная просьба\n\n```text\n/extblocks-generate name=\"scene_info\" Сосредоточься на месте и участниках\n```\n\nВ промпте, шаблоне или Text должен быть `{{additionalPrompt}}`. Для Rewrite дополнительный текст после имени передаётся аналогично.\n\n### Отдельное сообщение\n\n```text\n/extblocks-generate name=\"scene_info\" is_separate=true\n```\n\nЭтот вариант добавляет результат отдельной системной репликой в чат. По умолчанию результат сохраняется у существующего последнего сообщения. Отдельные сообщения влияют на историю и номера сообщений для Periodic.\n\n### Добавить состояние вручную\n\nСоздай и включи A-Block `inventory`, затем выполни:\n\n```text\n/extblocks-storage-append \u003cinventory>\ngold: 20\nitems:\n  - ключ\n\u003c/inventory>\n```\n\nКоманда сохраняет состояние напрямую. Если таким способом добавляется updater, это не равно запуску накопления: storage-append сама по себе не применяет его операторы.\n\n### Важные особенности\n\nЯвные команды генерации, Rewrite и скриптов могут работать с выключенными конфигурациями. Автоматические триггеры при этом не включаются.\n\n**regenerate сначала удаляет старое хранилище последнего сообщения** и заново проверяет условия запуска. Если нужные триггеры сейчас не подходят, блок может не появиться. Для запуска конкретного G-Block используй generate с именем. Для самого первого приветствия slash-regenerate не выполняет обычную перегенерацию.\n\n**storage-export переносит последние состояния включённых блоков**, а не всю историю и не их конфигурации. Для обмена готовыми блоками используй экспорт в панели.\n\n**flushinjects не удаляет сохранённые данные блока**. После перезагрузки они могут снова попасть в контекст. Чтобы прекратить передачу состояния, выключи Inject Block в конфигурации.\n\n**abort-generation не является универсальной кнопкой отмены скриптов и всех параллельных запросов.** При уже полученном потоковом ответе отмена тоже может не остановить его чтение.\n\n## 20. Где хранятся результаты и как их исправить\n\nКонфигурация блока и его результаты хранятся отдельно. Конфигурация говорит, что делать; состояние у сообщения содержит то, что уже получилось.\n\n### Редактор хранилища\n\nВ дополнительных кнопках сообщения — обычно под **…** — найди **Edit extblocks** с иконкой редактирования. Откроется окно **Blocks Editor**.\n\nЗдесь можно исправить сохранённую сводку или YAML, добавить начальное состояние и удалить ненужный результат. Сохраняй внешние теги и правильные имена блоков. Это редактор данных конкретной реплики, а не редактор Block Prompt.\n\nВ этом окне есть **Regenerate**: он повторно обрабатывает выбранную реплику по условиям запуска, а не только последнее сообщение чата. Старое хранилище этой реплики сначала очищается. После ручного исправления нажми Save; Cancel отменяет правку.\n\nЕсли блок уже перенесён из приветствия в хранилище, обычное редактирование текста сообщения может его не показывать. Ищи его через Edit extblocks.\n\n### Свайпы\n\nРасширение сохраняет блоки с учётом вариантов ответа. При переключении существующих свайпов оно восстанавливает данные выбранного варианта. При генерации нового варианта блоки могут быть пересчитаны по триггерам.\n\nЕсли ты изменила старые реплики, уже сохранённые сводки и состояния не становятся правильными автоматически. Проверь зависимые блоки и перегенерируй нужные результаты. Удаление и добавление сообщений также меняет расчёт Periodic.\n\n### Новый чат и перенос состояния\n\nНовая переписка не получает историю блоков старого чата автоматически. Можно сохранить последние состояния через **storage-export**, скопировать нужные теги и добавить их в новый чат через редактор хранилища или storage-append. На новом месте должны существовать соответствующие конфигурации.\n\nНачальные состояния в первом приветствии подходят для старта каждой новой истории. Для резервной копии нужны и конфигурации, и сам чат: экспорт одного G-Block не содержит прошлых результатов.\n\n## 21. Лорбук, regex и оформление\n\n### World Info\n\nДля сведений из лорбука добавь в Text, например:\n\n```text\nСведения мира:\n{{wiAll}}\n```\n\nВ запрос попадут активированные записи. Их активация проверяется по тексту запроса блока — его контексту, промпту и шаблону — с учётом настроек World Info. Если нужное ключевое слово не передано, запись может не активироваться.\n\n`{{wiAll}}` не означает «весь лорбук независимо от ключей». Постоянные записи и правила активации продолжают иметь значение. Для небольшой обязательной справки можно использовать прямой Text.\n\n### Regex\n\nRegex может менять отображение и содержимое, отправляемое в промпт. Блок при этом сохраняет свой исходный формат; отдельное правило превращает его в панель, таблицу или другую вёрстку.\n\nЕсли автор дал JSON для ExtBlocks и JSON для Regex, импортируй каждый в свой раздел. Проверь имя в тегах, имя в правиле и области применения regex. После переименования блока старое правило может перестать срабатывать.\n\nНастройки обработки Regex для промптов могут также менять сообщения, которые ExtBlocks собирает в контекст. Если модель блока «не видит» кусок переписки, проверь правила, которые убирают его из запросов.\n\n### HTML, CSS и изображения\n\nHTML в Template задаёт модельный результат; фактическое отображение зависит от возможностей Таверны и правил оформления. Для сложной панели удобнее держать структуру стабильной и разрешать модели менять только данные.\n\nСам ExtBlocks не превращает текстовое описание в изображение. Для блока с картинкой нужна отдельная связка: генератор, внешний сервис или скрипт автора. Импорт текстового G-Block не устанавливает эту связку автоматически.\n\n### Кнопки выбора действия\n\nУ расширения есть обработчик HTML-кнопок с классом `custom-menu-button`. При нажатии текст из вложенного элемента `custom-cyoa-option-value` вставляется в поле сообщения. Он не отправляется автоматически.\n\n```html\n\u003cdiv class=\"custom-menu-button\">\n  \u003cspan class=\"custom-cyoa-option-value\">Осмотреть комнату\u003c/span>\n\u003c/div>\n```\n\nТакая структура может использоваться в оформлении блока с вариантами действий. Чтобы она работала как кнопка, HTML должен действительно отрисоваться в чате: обычно это часть regex-оформления автора.\n\n## 22. Порядок работы и связи между блоками\n\nКогда приходит подходящее сообщение, расширение сначала применяет найденные в нём команды A-Block. Затем для сработавших G, Rewrite и S выполняется такая последовательность:\n\n1. S-Block с **Before blocks**.\n2. Rewrite с **Before blocks**.\n3. Обычные G-Block, объединённые по контексту.\n4. Rewrite с **After blocks**.\n5. S-Block с **After blocks**.\n6. Обработка updater-команд A-Block, полученных от обычных G-Block, завершение которых ожидалось.\n\nФоновые G-Block завершаются независимо от этой очереди. S-Block с After не гарантирует доступ к новым A-состояниям, обновление которых будет обработано только следующим этапом.\n\nДля схемы «генерация → скрипт читает результат» используй обычный G-Block и макрос последнего состояния или обращение к его хранилищу. **Previous block** при обычной сборке контекста смотрит назад по сообщениям, а не ждёт соседний блок.\n\nЕсли несколько связанных результатов нужны за один проход, можно попросить модель вернуть их в общем запросе. Если нужен отдельный второй вызов по первому результату — задай последовательность командами / скриптом и проверь, что чтение происходит после сохранения результата.\n\nПроверяй такие связки сначала на одном блоке, затем добавляй следующий. Так легче увидеть, где теряются данные или происходит повторное обновление.\n\n## 23. Возможности JavaScript для авторов блоков\n\nЭтот раздел пригодится, если ты уже используешь Script Type → JavaScript и хочешь работать с ExtBlocks из кода.\n\nВ скриптах доступны **BlockService**, **ContextService**, **GenerationService**, **ApiService**, **SettingsService**, **MacroService**, а также **GeneratedPlugin**, **RewritePlugin**, **AccumulationPlugin**, **ScriptPlugin**, **PluginRegistry** и состояние **extStates**.\n\n| Вызов | Назначение |\n| --- | --- |\n| `BlockService.getAllBlocks()` | Доступные конфигурации набора и персонажа с учётом приоритета имён |\n| `BlockService.getAllEnabledBlocks()` | Только включённые конфигурации |\n| `BlockService.getBlocksByType(['generated'], true)` | Включённые конфигурации указанного типа |\n| `ContextService.getPreviousBlockContextUnconditional(config, messageId, true)` | Последнее состояние, включая текущую реплику |\n| `BlockService.addBlocksToExtra(messageId, text)` | Сохранить распознанные блоки у реплики |\n| `BlockService.purgeBlocksExtra(messageId)` | Очистить хранилище блоков реплики |\n| `BlockService.updateBlocksDisplay(messageId)` | Обновить показ результатов у реплики |\n| `BlockService.injectBlock(text, config)` | Добавить содержимое в контекст по настройкам конфигурации |\n| `BlockService.selfReloadCurrentChat()` | Перезагрузить текущий чат |\n| `ApiService.abortGeneration()` | Отменить отслеживаемый запрос API |\n| `executeST(command)` | Выполнить команду STscript из JavaScript |\n\nДля программной генерации есть **GenerationService.handleBlocksGeneration**, для прямого вызова плагинов — методы **execute**. Они принимают конфигурации и параметры, включая messageId; это интерфейсы кода расширения, а не обычные поля редактора.\n\n### Прочитать состояние без изменения данных\n\n```javascript\nconst config = BlockService.getAllEnabledBlocks()\n  .find(block => block.name === 'inventory');\n\nconst state = config\n  ? ContextService.getPreviousBlockContextUnconditional(config, messageId, true)\n  : '';\n\ntoastr.info(state || 'Состояние ещё не сохранено');\n```\n\n### Запустить G-Block из JavaScript\n\n```javascript\nawait executeST('/extblocks-generate name=\"scene_info\"');\n```\n\nИмя G-Block должно существовать. Чтобы прочитать его новый результат после вызова, выключи у него Background Generation.\n\nДля других расширений предусмотрены события **`/extblocks/generate`** и **`/extblocks/generated`**: первое служит для вызова генерации, второе сообщает о полученном содержимом и номере сообщения. Также есть интеграция с FatPresets для импорта, смены и выключения наборов. Эти события не добавляют новые кнопки сами по себе; ими пользуется подключённое расширение или код автора.\n\n## 24. Как настроить экономнее и устойчивее\n\nОтдельное API помогает выбирать модель под задачу, но расходы зависят ещё и от контекста, частоты и длины ответа.\n\n- Для короткой панели не передавай весь чат: начни с 6–10 последних реплик.\n- Для долгой памяти передавай предыдущую сводку и новые события, а не всю историю заново.\n- Включай только нужное событие запуска. User Message и Char Message вместе могут удвоить число вызовов.\n- Для необязательных новостей используй ручной запуск, маркер или более редкий период.\n- Не передавай визуальную панель основной модели через Inject Block, если ей эти данные не нужны.\n- Не дублируй одно состояние одновременно через Inject Block, Text и Previous block без необходимости.\n- Для YAML и строгих схем задай точный формат, короткую инструкцию и достаточный Max Tokens.\n- Перед сложным импортом сохрани свою рабочую конфигурацию экспортом.\n\nСлишком маленький лимит ответа может обрезать закрывающие теги и сделать результат непригодным для сохранения. Слишком большой лимит не заставляет модель писать больше, но разрешает длинный ответ.\n\nНовости мира без внешнего поиска остаются текстом, созданным по переданным данным. Для фактических новостей сначала нужен источник свежей информации.\n\n## 25. Проверка и решение проблем\n\n### Быстрая проверка G-Block\n\n1. Открой чат с персонажем.\n2. Проверь Enable ExtBlocks, нужный набор и отсутствие одноимённого Embedded block.\n3. Назначь блоку настроенную батарейку.\n4. Включи Char Message и Period 1, выключи Generation Pause и Background Generation.\n5. Добавь Last messages, сохрани **Save Item → Save**.\n6. Проверь совпадение Block Name и тегов шаблона.\n7. Отправь сообщение, дождись ответа и завершения внешнего запроса.\n\nДля скачанного блока сохраняй настройки автора. Временную простую проверку удобнее делать на отдельном G-Block, а не заменять сложную связку.\n\n### Если что-то не работает\n\n| Симптом | Что проверить |\n| --- | --- |\n| ExtBlocks вообще не появился | Установлено ли расширение, включено ли оно в управлении, обновилась ли страница |\n| Панель есть, но блок не запускается | Enable ExtBlocks, Disabled, выбранный набор, событие, Period / Keyword |\n| Блок работает с другой моделью | Батарейка, Connection Profile, дубли имён профилей, объединение по Item Name |\n| Профиль отсутствует в ExtBlocks | Сохранён ли профиль, выбран ли Chat Completion, обновлён ли список |\n| Ошибка API | Источник, модель, ключ, URL, доступ сервиса, лимит, поддержка параметров |\n| Генерация прошла, но блока не видно | Hide From Display, нужные теги, незакрытый блок, данные в Edit extblocks |\n| Видно текст вместо красивой панели | Установлен ли regex / CSS автора, совпадают ли имена, применимо ли правило |\n| Блок путает прошлое сцены | Есть ли нужные сообщения в Context Builder, Offset, Previous block, лорбук |\n| Блок скрыт, но влияет на ответы | Inject Block или подстановка того же состояния макросом |\n| Блок виден, но персонаж его игнорирует | Inject Block, позиция, Main Prompt, момент генерации относительно ответа |\n| Ключевое слово не срабатывает | Регистр, событие, экранирование и Regex, точный текст сообщения |\n| Блок обрезан | Max Tokens, длина общего ответа группы, закрывающие теги |\n| Previous block пуст | Точное имя, наличие конфигурации и прошлых сохранённых результатов |\n| A-Block не меняется | Включён ли нужный триггер, совпадает ли updater_name, правильный ли YAML |\n| Монеты / предметы удвоились | Повторный $inc / $push, два источника обновления одного события |\n| Rewrite ничего не заменил | Есть ли `\u003crewritten text>`, подставлен ли `{{textToRewrite}}`, пришёл ли непустой ответ |\n| Фоновой результат ещё старый | Завершился ли запрос, не прочитала ли его зависимая операция раньше времени |\n| После смены набора работают странные настройки | Нет ли Embedded block с тем же именем |\n\n### Copy Debug Report\n\nНажми **Copy Debug Report** после неудачного запуска. Отчёт показывает выбранные профили, модель, API Preset, состояние расширения, сведения о последних запросах, ответах и ошибках. История отчёта ограничена; перечисление блоков тоже не является полным списком всех конфигураций.\n\nРасширение не включает в штатные поля отчёта тексты промптов и сообщений, значения ключей и паролей. Имена профилей, моделей и адрес сервиса могут быть видны; перед публикацией посмотри, что именно скопировалось.\n\nДля разбора проблемы полезно приложить точный текст ошибки и настройки проблемного блока. Экспорт полного промпта может содержать переписку: отправляй его только если этот текст можно показать.\n\n## Полезные ссылки\n\n- [Репозиторий ExtBlocks](https://gitgud.io/sleepydraqon/ext-blocks-custom)\n- [Описание возможностей расширения](https://gitgud.io/sleepydraqon/ext-blocks-custom/-/blob/master/README.md)\n- [Установка расширений SillyTavern](https://docs.sillytavern.app/extensions/)\n- [Профили соединения](https://docs.sillytavern.app/usage/core-concepts/connection-profiles/)\n\n";
+async function copyText(value){
+  try{await navigator.clipboard.writeText(value);return true}
+  catch(e){const t=document.createElement('textarea');t.value=value;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();return ok}
+}
+function feedback(button,ok,label){const original=button.textContent;button.textContent=ok?label:'Не удалось скопировать';setTimeout(()=>button.textContent=original,1800)}
+document.querySelector('#copy').addEventListener('click',async function(){feedback(this,await copyText(guide),'Текст скопирован')});
+document.querySelectorAll('pre').forEach(pre=>{
+  const wrap=document.createElement('div');wrap.className='codewrap';pre.replaceWith(wrap);wrap.append(pre);
+  const b=document.createElement('button');b.className='copycode';b.textContent='Скопировать';b.setAttribute('aria-label','Скопировать пример');wrap.append(b);
+  b.addEventListener('click',async()=>feedback(b,await copyText(pre.textContent),'Скопировано'));
+});
+document.querySelectorAll('table').forEach(table=>{const wrap=document.createElement('div');wrap.className='tablewrap';table.replaceWith(wrap);wrap.append(table)});
+const chapters=[...document.querySelectorAll('.chapter')],links=[...document.querySelectorAll('.toc a')],search=document.querySelector('#search'),status=document.querySelector('#searchstatus');
+const corpus=chapters.map(c=>c.textContent.toLocaleLowerCase('ru'));
+function filter(){
+  const words=search.value.trim().toLocaleLowerCase('ru').split(/\s+/).filter(Boolean);let count=0;
+  chapters.forEach((c,i)=>{const match=words.every(word=>corpus[i].includes(word));c.hidden=!match;links[i].hidden=!match;if(match)count++});
+  status.hidden=!words.length;status.textContent=count?'Найдено разделов: '+count:'Разделов с такими словами нет. Попробуй другое название.';
+  document.querySelector('#screens').hidden=Boolean(words.length);
+}
+search.addEventListener('input',filter);
+document.querySelector('#clear').addEventListener('click',()=>{search.value='';filter();search.focus()});
+const tocPanel=document.querySelector('#tocpanel');if(innerWidth<1001)tocPanel.open=false;
+links.forEach(a=>a.addEventListener('click',()=>{if(innerWidth<1001)tocPanel.open=false}));
+const d=document.querySelector('#viewer');
+document.querySelectorAll('.zoom').forEach(b=>b.addEventListener('click',()=>{const source=b.querySelector('img');document.querySelector('#large').src=source.src;document.querySelector('#large').alt=source.alt;d.showModal()}));
+document.querySelector('#close').addEventListener('click',()=>d.close());
+d.addEventListener('click',e=>{if(e.target===d)d.close()});
+</script></body></html>

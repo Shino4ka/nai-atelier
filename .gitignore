@@ -1,1 +1,4 @@
-verification/
+dist/
+.sites-runtime/
+node_modules/
+tests/artifacts/

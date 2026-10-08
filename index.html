@@ -1,363 +1,629 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#1a1836" />
-    <meta
-      name="description"
-      content="Стилевые теги, пользовательские меши и негативы NovelAI v5. Русские пояснения, источники, поиск и копирование."
-    />
-    <title>NAI Atelier — каталог стилей</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='2' fill='%231a1836'/%3E%3Cpath d='M8 28L20 7l12 21h-7l-5-9-5 9z' fill='%237e9fa8'/%3E%3C/svg%3E"
-    />
-    <link
-      rel="preload"
-      href="assets/fonts/manrope-cyrillic.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="assets/fonts/manrope-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="assets/fonts/literata-cyrillic.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link rel="stylesheet" href="fonts.css" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <a class="skip" href="#catalog">К каталогу</a>
-    <div class="layout">
-      <aside class="sidebar" aria-label="Навигация">
-        <div class="sidebar-heading">
-          <a href="#" class="brand" aria-label="NAI Atelier, главная">
-            <svg class="mark" aria-hidden="true" viewBox="0 0 32 32">
-              <path d="M4 28 16 4 28 28M9 19h14" />
-            </svg>
-            <span class="brand-name">
-              NAI
-              <strong>Atelier</strong>
-            </span>
-          </a>
-          <button id="themeBtn" aria-label="Включить светлую тему">◐</button>
-        </div>
-        <nav id="nav" class="catalog-nav" aria-label="Разделы каталога"></nav>
-        <div class="sidebar-actions">
-          <button id="workshopBtn">Добавить стиль</button>
-          <button id="sourceBtn">Источники</button>
-        </div>
-        <div class="sidebar-footer">
-          <button class="text-link" id="methodBtn">О каталоге</button>
-          <a
-            href="https://t.me/ah_ah_shino4ka"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Шино и Астера ↗
-          </a>
-        </div>
-      </aside>
-      <main class="content">
-        <section class="intro" aria-labelledby="introTitle">
-          <div class="intro-copy">
-            <span class="eyebrow">NovelAI v5</span>
-            <h1 id="introTitle">
-              Каталог
-              <br />
-              стилей
-            </h1>
-            <p>
-              Художественные теги, меши и негативы с описаниями, готовыми
-              строками и ссылками на примеры.
-            </p>
-          </div>
-          <div class="mascot-gallery" id="mascots" aria-hidden="true"></div>
-        </section>
-        <section class="workspace" id="catalog" aria-labelledby="sectionTitle">
-          <div class="catalog-tools">
-            <div class="search-wrap">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="10" cy="10" r="6.5" />
-                <path d="m15 15 5 5" />
-              </svg>
-              <input
-                id="search"
-                type="search"
-                placeholder="Найти стиль, тег, художника…"
-                aria-label="Поиск по каталогу"
-              />
-              <span class="key" aria-hidden="true">/</span>
-            </div>
-            <div class="custom-select" data-select="status">
-              <span id="statusLabel" class="sr-only">Происхождение</span>
-              <input type="hidden" id="status" value="all" />
-              <button
-                type="button"
-                id="statusTrigger"
-                class="select-trigger"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-controls="statusList"
-                aria-labelledby="statusLabel statusValue"
-              >
-                <span id="statusValue">Любое происхождение</span>
-                <svg viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="m4 6 4 4 4-4" />
-                </svg>
-              </button>
-              <div
-                id="statusList"
-                class="select-list"
-                role="listbox"
-                aria-labelledby="statusLabel"
-                hidden
-              >
-                <div
-                  id="statusOption0"
-                  role="option"
-                  aria-selected="true"
-                  data-value="all"
-                >
-                  Любое происхождение
-                </div>
-                <div
-                  id="statusOption1"
-                  role="option"
-                  aria-selected="false"
-                  data-value="official"
-                >
-                  Официальное
-                </div>
-                <div
-                  id="statusOption2"
-                  role="option"
-                  aria-selected="false"
-                  data-value="community"
-                >
-                  Из публикаций v5
-                </div>
-                <div
-                  id="statusOption3"
-                  role="option"
-                  aria-selected="false"
-                  data-value="adapted"
-                >
-                  Адаптации
-                </div>
-                <div
-                  id="statusOption4"
-                  role="option"
-                  aria-selected="false"
-                  data-value="experimental"
-                >
-                  Авторские подборки
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="categories" class="chips" aria-label="Категории"></div>
-          <div class="section-head">
-            <h2 id="sectionTitle">
-              Все записи
-              <span id="resultCount"></span>
-            </h2>
-          </div>
-          <div class="cards" id="cards"></div>
-          <div id="empty" class="empty" hidden>
-            <h3>Ничего не найдено</h3>
-            <p>Попробуй другое слово или сними фильтр.</p>
-            <button id="reset">Сбросить фильтры</button>
-          </div>
-          <button id="loadMore" class="load-more" hidden>Показать ещё</button>
-        </section>
-      </main>
-    </div>
-    <div class="tray" id="tray" hidden>
-      <div>
-        <span class="eyebrow">Твоя строка</span>
-        <strong id="trayCount"></strong>
-      </div>
-      <button id="trayView">Посмотреть</button>
-      <button class="primary" id="trayCopy">Копировать</button>
-      <button id="trayClear" aria-label="Очистить строку">×</button>
-    </div>
-    <dialog id="detail" aria-labelledby="detailTitle">
-      <div class="dialog-head">
-        <span class="eyebrow" id="modalKicker"></span>
-        <button class="close" aria-label="Закрыть">×</button>
-      </div>
-      <div id="detailContent"></div>
-    </dialog>
-    <dialog id="info" aria-label="Справка">
-      <div class="dialog-head">
-        <button class="close" aria-label="Закрыть">×</button>
-      </div>
-      <div id="infoContent"></div>
-    </dialog>
-    <dialog
-      id="workshop"
-      class="workshop-dialog"
-      aria-labelledby="workshopTitle"
-    >
-      <div class="dialog-head">
-        <button class="close" aria-label="Закрыть мастерскую">×</button>
-      </div>
-      <h2 id="workshopTitle">Новый стиль</h2>
-      <p class="workshop-lead">
-        Авторские стили публикуются через GitHub из аккаунта
-        <strong>Shino4ka</strong>
-        . Черновик можно сохранить в этом браузере.
-      </p>
-      <div class="owner-bar">
-        <span id="syncMessage" role="status">Загрузка стилей…</span>
-        <button id="refreshOwned">Обновить</button>
-      </div>
-      <form id="workshopForm">
-        <div id="styleFields">
-          <div class="form-grid">
-            <label>
-              Название
-              <input
-                id="ownName"
-                maxlength="160"
-                required
-                placeholder="Название стиля"
-              />
-            </label>
-            <div class="custom-select" data-select="ownVariant">
-              <span id="ownVariantLabel" class="field-label">Тип</span>
-              <input type="hidden" id="ownVariant" value="style" />
-              <button
-                type="button"
-                id="ownVariantTrigger"
-                class="select-trigger"
-                role="combobox"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-controls="ownVariantList"
-                aria-labelledby="ownVariantLabel ownVariantValue"
-              >
-                <span id="ownVariantValue">Стиль</span>
-                <svg viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="m4 6 4 4 4-4" />
-                </svg>
-              </button>
-              <div
-                id="ownVariantList"
-                class="select-list"
-                role="listbox"
-                aria-labelledby="ownVariantLabel"
-                hidden
-              >
-                <div
-                  id="ownVariantOption0"
-                  role="option"
-                  aria-selected="true"
-                  data-value="style"
-                >
-                  Стиль
-                </div>
-                <div
-                  id="ownVariantOption1"
-                  role="option"
-                  aria-selected="false"
-                  data-value="mix"
-                >
-                  Меш
-                </div>
-              </div>
-            </div>
-          </div>
-          <label>
-            Промпт
-            <textarea
-              id="ownPrompt"
-              rows="4"
-              maxlength="10000"
-              required
-              placeholder="Стилевые теги и художники с весами"
-            ></textarea>
-          </label>
-          <label>
-            Описание
-            <textarea
-              id="ownDescription"
-              rows="3"
-              maxlength="5000"
-              required
-              placeholder="Как выглядит стиль и для чего подходит"
-            ></textarea>
-          </label>
-          <label>
-            Примечание
-            <textarea
-              id="ownNote"
-              rows="2"
-              maxlength="3000"
-              placeholder="Особенности, ограничения или совет по весам"
-            ></textarea>
-          </label>
-        </div>
-        <div class="example-editor">
-          <h3>Пример изображения</h3>
-          <div class="example-input-row">
-            <label>
-              Ссылка на изображение
-              <input
-                id="ownImageURL"
-                type="url"
-                maxlength="3000"
-                placeholder="https://…"
-              />
-            </label>
-            <button type="button" id="previewExample">Посмотреть</button>
-          </div>
-          <p class="field-help">
-            Вставь ссылку или прикрепи файл на GitHub после нажатия «Продолжить
-            на GitHub».
-          </p>
-          <div id="editorPreview" class="editor-preview" hidden></div>
-          <label>
-            Подпись
-            <input
-              id="ownCaption"
-              maxlength="1000"
-              placeholder="Что показывает этот пример"
-            />
-          </label>
-          <label>
-            Параметры генерации
-            <input
-              id="ownParams"
-              maxlength="1000"
-              placeholder="Модель, настройки и seed (необязательно)"
-            />
-          </label>
-        </div>
-        <div class="workshop-actions">
-          <button class="primary" type="submit">Продолжить на GitHub</button>
-          <button type="button" id="saveDraft">Сохранить черновик</button>
-        </div>
-        <p id="workshopError" class="form-error" role="alert" hidden></p>
-      </form>
-      <div id="publicationStep" hidden></div>
-      <div id="workshopRecords"></div>
-    </dialog>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="catalog.js"></script>
-    <script src="app.js"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0c101b">
+<meta name="description" content="Материалы Шино для NovelAI и SillyTavern: теги, негативы, гайды, расширения, пресеты и внешние блоки.">
+<title>Atelier — Шино</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230c101b'/%3E%3Cpath d='M8 29L20 9l12 20M13 23h14' fill='none' stroke='%2393e2d9' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts.css">
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<style>:root{--bg:#0c101b;--panel:#121927;--card:#1a2638;--text:#edf1f8;--muted:#a8b5c9;--line:#29354a;--accent:#93e2d9;--serif:Literata,Georgia,serif;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Manrope,system-ui,sans-serif}
+button,input,textarea{font:inherit}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;color:inherit;padding:10px 15px;border:1px solid var(--line);border-radius:7px;background:var(--panel)}
+button:hover{border-color:var(--accent)}
+button:disabled{cursor:default;opacity:.4}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+p{margin:0 0 18px}
+h1,h2,h3{margin:0;line-height:1.2}
+h1{font:400 clamp(42px,5vw,68px)/1.2 var(--serif);letter-spacing:-1.8px}
+h2{font:400 clamp(28px,3vw,40px)/1.25 var(--serif);letter-spacing:-.7px}
+h3{font-size:19px;font-weight:650}
+small{font-size:14px}
+img{display:block;max-width:100%}
+svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+[hidden]{display:none!important}
+.muted{color:var(--muted)}
+.eyebrow{font-size:14px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.primary{display:inline-flex;padding:11px 18px;border:1px solid var(--accent);border-radius:7px;background:var(--accent);color:#101f27;font-weight:700}
+.skip{position:fixed;top:-100px;left:16px;z-index:100;background:var(--accent);color:#111;padding:12px}
+.skip:focus{top:15px}
+
+.header{height:82px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:0 4.5vw;border-bottom:1px solid var(--line);background:var(--bg);position:relative;z-index:8}
+.brand{font:500 28px var(--serif);letter-spacing:-1px;display:flex;gap:12px;align-items:center}
+.brand svg{width:27px;height:27px;color:var(--accent)}
+.header-nav{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:650}
+.header-nav a{position:relative;color:var(--muted);padding:12px 0}
+.header-nav a[aria-current=page]{color:var(--text)}
+.header-nav a[aria-current=page]::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent)}
+.header-actions{display:flex;align-items:center;gap:22px;font-size:14px;color:var(--muted)}
+.theme-toggle{border:0;background:transparent;width:40px;height:40px;padding:8px;display:flex;align-items:center;justify-content:center}
+.home-mode .header{background:#0c101b;color:#edf1f8;border-color:#28344a}
+.home-mode .header a{color:#c7d4e5}
+.home-mode .brand{color:#edf1f8}
+.gateway{display:grid;grid-template-columns:1fr 1fr;height:calc(100svh - 82px);min-height:610px;max-height:1300px;background:#080c17;overflow:hidden}
+.portal{display:flex;align-items:flex-end;position:relative;isolation:isolate;overflow:hidden;min-width:0;padding:clamp(28px,5vw,75px);color:#fff}
+.portal+.portal{border-left:1px solid #53687977}
+.portal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%;z-index:-3;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.portal::after{content:'';position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,#0b102010 25%,#0b102000 38%,#080d1ab8 74%,#080d1af5 100%)}
+.portal:hover img,.portal:focus-visible img{transform:scale(1.04)}
+.portal-number{font-size:14px;letter-spacing:.13em;color:#c7d7e3;display:flex;align-items:center;gap:13px;margin-bottom:18px}
+.portal-number::after{content:'';width:45px;height:1px;background:#c7d7e388}
+.portal h1,.portal h2{font:400 clamp(55px,6.5vw,104px)/1.1 var(--serif);letter-spacing:-3px;margin-bottom:20px}
+.portal p{color:#d7e1ed;font-size:16px;max-width:420px;margin-bottom:27px}
+.enter{display:inline-flex;border:1px solid #aabec980;padding:10px 21px;border-radius:6px;font-size:14px;font-weight:650;transition:.3s}
+.portal:hover .enter{background:#93e2d9;color:#11212a;border-color:#93e2d9}
+.portal-tools{position:absolute;top:24px;right:28px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#e2edf4b0}
+
+.section-page{max-width:1500px;margin:auto;padding:45px 4.5vw 80px;animation:appear .45s ease}
+.page-title{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:36px}
+.page-title h1{margin:8px 0 17px}
+.page-title p{color:var(--muted);max-width:650px;margin:0}
+.page-stamp{display:flex;align-items:center;gap:18px}
+.page-stamp img{width:124px;height:142px;object-fit:cover;object-position:50% 23%;border:1px solid var(--line);border-radius:60px 60px 8px 8px}
+.page-stamp span{font-size:14px;color:var(--muted);line-height:1.6;max-width:110px}
+.tabs{scrollbar-width:none;display:flex;gap:28px;border-bottom:1px solid var(--line);margin-bottom:32px;overflow-x:auto}
+.tabs a{padding:14px 0;white-space:nowrap;color:var(--muted)}
+.tabs a[aria-current=page]{color:var(--accent);border-bottom:2px solid var(--accent)}
+.catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px}
+.category-menu{scrollbar-width:none;position:sticky;top:25px;align-self:start;display:grid;gap:4px}
+.category-menu button{display:flex;justify-content:space-between;gap:12px;background:none;border:0;text-align:left;font-size:14px;color:var(--muted);padding:12px}
+.category-menu button.selected,.category-menu button:hover{background:var(--panel);color:var(--accent)}
+.category-caption{padding:10px 12px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.13em}
+.catalog-toolbar{display:flex;align-items:center;gap:15px;margin-bottom:22px}
+.search-wrap{position:relative;flex:1}
+.search-wrap svg{position:absolute;left:15px;top:15px;color:var(--muted)}
+input[type=search]{width:100%;height:51px;padding:10px 16px 10px 45px;color:var(--text);border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.catalog-count{font-size:14px;color:var(--muted);white-space:nowrap}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.tag-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:23px;min-width:0;transition:.25s}
+.tag-card:hover{border-color:#4d657b;transform:translateY(-2px)}
+.card-category{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:13px}
+.tag-card h3{font-size:18px;margin-bottom:13px;overflow-wrap:anywhere}
+.tag-card p{font-size:14px;color:var(--muted);margin-bottom:20px;min-height:69px}
+.card-actions{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.copy{display:flex;gap:8px;align-items:center;font-size:14px;padding:8px 12px;background:var(--card)}
+.more{border:0;background:none;padding:7px 0;color:var(--accent);font-size:14px}
+.example{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:6px;margin-bottom:17px}
+.empty{grid-column:1/-1;border:1px dashed var(--line);padding:55px 20px;color:var(--muted);text-align:center}
+.list-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:24px}
+.list-heading small{color:var(--muted)}
+
+.guide-feature{display:grid;grid-template-columns:1.1fr .9fr;min-height:365px;border:1px solid var(--line);background:var(--panel);border-radius:14px;overflow:hidden}
+.feature-copy{padding:44px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.guide-feature h2{margin:13px 0 19px}
+.guide-feature p{color:var(--muted);max-width:520px}
+.guide-feature small{margin-top:20px;color:var(--muted)}
+.feature-art{background:url('assets/hero-tavern.webp') 50% 35%/cover;position:relative;min-height:300px}
+.feature-art::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--panel),transparent 45%)}
+.quick-guides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}
+.quick-card,.extension-card,.block-file{padding:27px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.quick-card h3{margin-bottom:17px}
+.quick-card ol{font-size:14px;color:var(--muted);padding-left:21px;margin:0}
+.quick-card li+li{margin-top:10px}
+.extension-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.extension-card{display:flex;flex-direction:column;min-width:0}
+.extension-mark{display:flex;align-items:center;justify-content:center;width:43px;height:43px;border:1px solid #93e2d944;border-radius:10px;color:var(--accent);margin-bottom:23px}
+.extension-card h3{margin-bottom:13px;overflow-wrap:anywhere}
+.extension-card p{font-size:14px;color:var(--muted);flex:1;margin-bottom:20px}
+.repo{font-size:12px;color:var(--muted);overflow-wrap:anywhere;margin-bottom:20px}
+.buttons{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.buttons button,.buttons a{font-size:14px}
+.buttons a:not(.primary){color:var(--accent)}
+.install-note{padding:22px 26px;background:var(--panel);border-left:2px solid var(--accent);margin-top:25px;font-size:14px;color:var(--muted)}
+.install-note strong{color:var(--text)}
+.preset-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:25px}
+.preset-main,.preset-side{padding:35px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.preset-main h2{margin:13px 0 20px}
+.preset-main p,.preset-side p{color:var(--muted)}
+.preset-main>.buttons{margin:25px 0}
+.file-row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:23px 0;border-top:1px solid var(--line)}
+.file-row h3{font-size:16px;margin-bottom:8px}
+.file-row p{font-size:14px;margin:0}
+.file-row a{color:var(--accent);font-size:14px;white-space:nowrap}
+.preset-side h3{margin-bottom:20px}
+.preset-side ol{padding-left:20px;color:var(--muted);font-size:14px}
+.preset-side li+li{margin-top:13px}
+
+.theater{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:530px;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#080e19}
+.theater-aside{padding:35px 28px;display:flex;flex-direction:column;color:#edf1f8;border-right:1px solid #29344a;background:#12192799;backdrop-filter:blur(30px) saturate(150%)}
+.theater-aside .eyebrow{color:#93e2d9}
+.theater-aside h2{font-size:32px;margin:18px 0}
+.theater-aside p{font-size:14px;color:#afbdd0;line-height:1.8}
+.narrative{transition:opacity .3s;min-height:280px}
+.theater-nav{display:flex;align-items:center;gap:8px;margin-top:auto}
+.theater-nav button{display:flex;align-items:center;padding:9px 13px;background:#202b3c;border-color:#33425c;color:#edf1f8}
+.theater-nav span{margin:auto;font-size:14px;color:#afbdd0}
+.theater-stage{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;perspective:1200px;touch-action:pan-y;background:radial-gradient(ellipse at 55% 40%,#142d3c,#080e19 65%)}
+.block-card{width:290px;min-height:400px;position:absolute;display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:30px;border-radius:18px;border:1px solid #6d839c55;background:#34435530;backdrop-filter:blur(30px) saturate(150%);color:#eaf0f8;transition:transform .6s cubic-bezier(.25,.8,.25,1),opacity .6s,filter .6s}
+.block-card.active{border-color:#93e2d999;box-shadow:0 28px 60px #0006}
+.block-num{position:absolute;top:25px;right:20px;font:400 90px/1 var(--serif);color:#93e2d933}
+.block-card .extension-mark{margin:25px 0 55px;color:#93e2d9}
+.block-card h3{font:400 29px/1.25 var(--serif);margin-bottom:16px;max-width:220px}
+.block-card p{font-size:14px;color:#aebcd0}
+.highlight{margin-top:auto;font-size:14px;color:#c9f7ef;background:linear-gradient(#36766b88,#36766b88) no-repeat left 95%;background-size:0 35%}
+.block-card.active .highlight{animation:highlight .65s .2s forwards}
+.block-downloads{margin-top:40px}
+.block-files{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.block-file h3{margin-bottom:15px}
+.block-file p{font-size:14px;color:var(--muted);margin-bottom:22px}
+.block-file a{font-size:14px;display:flex;gap:7px;align-items:center;color:var(--accent);margin:11px 0;overflow-wrap:anywhere}
+.how{border-top:1px solid var(--line);padding-top:17px;margin-top:20px;font-size:14px;color:var(--muted)}
+.resource-bar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:30px;padding-top:25px;border-top:1px solid var(--line)}
+.resource-bar p{color:var(--muted);font-size:14px;margin:0}
+.resource-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.resource-links a{color:var(--accent);font-size:14px}
+.footer{border-top:1px solid var(--line);max-width:1500px;margin:auto;padding:26px 4.5vw;display:flex;justify-content:space-between;gap:24px;font-size:14px;color:var(--muted)}
+.footer a{color:var(--accent)}
+
+dialog{max-width:min(700px,calc(100vw - 32px));max-height:85svh;overflow-y:auto;padding:30px;border:1px solid var(--line);border-radius:13px;background:var(--panel);color:var(--text)}
+dialog::backdrop{background:#060a16c9;backdrop-filter:blur(8px)}
+.dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:22px;margin-bottom:25px}
+.dialog-head h2{font-size:29px;overflow-wrap:anywhere}
+.dialog-head button{flex-shrink:0;padding:7px 11px;background:var(--card)}
+.dialog-body p{color:var(--muted)}
+.dialog-body a{color:var(--accent)}
+.dialog-body label{display:block;font-size:14px;margin:18px 0 8px}
+.dialog-body input,.dialog-body textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--text)}
+.dialog-body textarea{min-height:125px}
+.prompt-box{padding:20px;border:1px solid var(--line);border-radius:8px;background:var(--bg);margin:20px 0;font:14px/1.9 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:280px;overflow:auto}
+.dialog-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.dialog-actions a{font-size:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:40;max-width:calc(100vw - 30px);padding:12px 20px;border-radius:8px;background:var(--accent);color:#101f27;font-size:14px;text-align:center;box-shadow:0 8px 30px #0005}
+.light{--bg:#eef1f5;--panel:#fff;--card:#e9eef4;--text:#17263b;--muted:#526278;--line:#d1dae6;--accent:#1e7776;color-scheme:light}
+
+@keyframes highlight{to{background-size:100% 35%}
+}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@media(min-width:1000px){.gateway{transition:grid-template-columns .65s cubic-bezier(.25,.8,.25,1)}
+.gateway:has(.portal:first-child:hover){grid-template-columns:1.13fr 1fr}
+.gateway:has(.portal:last-child:hover){grid-template-columns:1fr 1.13fr}
+}
+
+@media(max-width:1150px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.extension-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.theater{grid-template-columns:270px minmax(0,1fr)}
+.quick-guides{grid-template-columns:1fr}
+.page-stamp span{display:none}
+}
+
+@media(max-width:760px){.header{height:70px;padding:0 20px;gap:15px}
+.brand{font-size:23px;gap:7px}
+.brand svg{width:22px}
+.header-nav{gap:18px;font-size:14px}
+.header-actions{gap:7px}
+.header-actions>a{display:none}
+.gateway{grid-template-columns:1fr;grid-template-rows:1fr 1fr;height:auto;min-height:calc(100svh - 70px);max-height:none}
+.portal{min-height:max(300px,calc((100svh - 70px)/2));padding:25px 28px}
+.portal+.portal{border-left:0;border-top:1px solid #53687977}
+.portal img{object-position:50% 27%}
+.portal::after{background:linear-gradient(90deg,#080d1ae6,#080d1a80 45%,#080d1a00)}
+.portal h1,.portal h2{font-size:45px;letter-spacing:-1.6px;margin-bottom:10px}
+.portal-copy{width:75%;max-width:450px}
+.portal-number{font-size:12px;margin-bottom:10px}
+.portal p{font-size:14px;max-width:225px;margin-bottom:14px}
+.enter{padding:7px 15px}
+.portal-tools{display:none}
+.section-page{padding:30px 20px 50px}
+.page-title{align-items:center;margin-bottom:25px}
+.page-title h1{font-size:43px;letter-spacing:-1.2px}
+.page-title p{font-size:14px}
+.page-stamp img{width:80px;height:105px}
+.tabs{gap:24px;margin-bottom:24px}
+.tabs a{font-size:14px}
+.catalog-layout{display:block}
+.category-menu{position:static;display:flex;overflow-x:auto;margin-bottom:20px;padding-bottom:8px;gap:5px}
+.category-menu button{white-space:nowrap;gap:10px;padding:10px 13px;border:1px solid var(--line)}
+.category-caption{display:none}
+.catalog-toolbar{flex-wrap:wrap}
+.catalog-count{width:100%;font-size:14px}
+.guide-feature{display:flex;flex-direction:column-reverse}
+.feature-copy{padding:28px}
+.feature-art{min-height:200px;background-position:50% 27%}
+.feature-art::before{background:linear-gradient(0deg,var(--panel),transparent 65%)}
+.guide-feature h2{font-size:30px}
+.guide-feature p{font-size:14px}
+.preset-layout{grid-template-columns:1fr}
+.preset-main,.preset-side{padding:28px}
+.preset-main h2{font-size:31px}
+.preset-main p{font-size:14px}
+.theater{grid-template-columns:1fr;min-height:750px}
+.theater-stage{min-height:450px;order:0}
+.theater-aside{order:1;padding:25px;border-right:0;border-top:1px solid #29344a}
+.narrative{min-height:185px}
+.theater-aside h2{font-size:29px;margin:10px 0 14px}
+.theater-nav{margin-top:20px}
+.block-card{width:270px;min-height:365px;padding:25px}
+.block-card .extension-mark{margin:10px 0 50px}
+.block-files{grid-template-columns:1fr}
+.resource-bar{align-items:flex-start;flex-direction:column}
+.footer{padding:24px 20px;flex-direction:column;gap:10px}
+.list-heading{align-items:flex-start;flex-direction:column;gap:10px}
+dialog{padding:24px}
+}
+
+@media(max-width:480px){.header{padding:0 15px;gap:10px}
+.header-nav{gap:12px}
+.brand{font-size:21px}
+.brand svg{display:none}
+.theme-toggle{width:30px}
+.catalog-grid,.extension-grid{grid-template-columns:1fr}
+.tag-card p{min-height:0}
+.tag-card{padding:22px}
+.page-stamp{display:none}
+.portal-copy{width:85%}
+.file-row{align-items:flex-start;gap:12px}
+.preset-main{padding:23px}
+.block-card{width:255px}
+.extension-card{padding:25px}
+}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.block-card.active .highlight{background-size:100% 35%}
+}
+
+</style>
+</head>
+<body class="home-mode">
+<a class="skip" href="#main">К содержимому</a>
+<header class="header">
+<a class="brand" href="#home" aria-label="Atelier, главная">
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M5 27 16 5l11 22M10 18h12"/>
+</svg>Atelier</a>
+<nav class="header-nav" aria-label="Основные разделы">
+<a href="#novelai" data-nav="novelai">NovelAI</a>
+<a href="#tavern/guides" data-nav="tavern">SillyTavern</a>
+</nav>
+<div class="header-actions">
+<a href="https://t.me/ah_ah_shino4ka" target="_blank" rel="noopener noreferrer">Шино и Астера</a>
+<button id="themeToggle" class="theme-toggle" aria-label="Включить светлую тему">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M19 14a8 8 0 0 1-9-10 8 8 0 1 0 9 10Z"/>
+</svg>
+</button>
+</div>
+</header>
+<main id="main">
+<section id="home" class="gateway" aria-label="Выбор раздела">
+<a class="portal" href="#novelai">
+<img src="assets/hero-novelai.webp" alt="Шино рисует светящуюся лису в ночном ателье" fetchpriority="high">
+<span class="portal-tools">Illustration</span>
+<div class="portal-copy">
+<span class="portal-number">01 / ATELIER</span>
+<h1>NovelAI</h1>
+<p>Теги, материалы, цвет и негативные промпты.</p>
+<span class="enter">Открыть каталог</span>
+</div>
+</a>
+<a class="portal" href="#tavern/guides">
+<img src="assets/hero-tavern.webp" alt="Шино читает книгу в той же ночной библиотеке" fetchpriority="high">
+<span class="portal-tools">Roleplay</span>
+<div class="portal-copy">
+<span class="portal-number">02 / LIBRARY</span>
+<h2>SillyTavern</h2>
+<p>Гайды, расширения, пресеты и внешние блоки.</p>
+<span class="enter">Открыть библиотеку</span>
+</div>
+</a>
+</section>
+<section id="novelai" class="section-page" hidden aria-labelledby="nai-title">
+<div class="page-title">
+<div>
+<span class="eyebrow">NovelAI v5</span>
+<h1 id="nai-title">Каталог тегов</h1>
+<p>Рисовка, материалы, цвет и эффекты. Готовые строки можно скопировать в промпт или UC.</p>
+</div>
+<div class="page-stamp">
+<span>Материалы<br>Шино и Астеры</span>
+<img src="assets/hero-novelai.webp" alt="" loading="lazy">
+</div>
+</div>
+<div class="catalog-layout">
+<aside id="categories" class="category-menu" aria-label="Категории тегов">
+</aside>
+<div>
+<div class="catalog-toolbar">
+<div class="search-wrap">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="10" cy="10" r="6.5"/>
+<path d="m15 15 5 5"/>
+</svg>
+<input id="catalogSearch" type="search" placeholder="Найти тег или описание…" aria-label="Поиск по тегам">
+</div>
+<span id="catalogCount" class="catalog-count" aria-live="polite">
+</span>
+</div>
+<div id="catalogGrid" class="catalog-grid">
+</div>
+</div>
+</div>
+<div class="resource-bar">
+<p>Описания помогают выбрать теги. Результат зависит от модели и всего промпта.</p>
+<div class="resource-links">
+<button id="sourcesButton">Источники</button>
+<a href="https://novelai.net/image" target="_blank" rel="noopener noreferrer">Открыть NovelAI</a>
+</div>
+</div>
+</section>
+<section id="tavern" class="section-page" hidden aria-labelledby="tavern-title">
+<div class="page-title">
+<div>
+<span class="eyebrow">SillyTavern</span>
+<h1 id="tavern-title">Библиотека для ролки</h1>
+<p>Всё для настройки Таверны: от первого импорта до собственных блоков.</p>
+</div>
+<div class="page-stamp">
+<span>Собрано<br>Шино</span>
+<img src="assets/hero-tavern.webp" alt="" loading="lazy">
+</div>
+</div>
+<nav class="tabs" aria-label="Материалы SillyTavern">
+<a href="#tavern/guides" data-tab="guides">Гайды</a>
+<a href="#tavern/extensions" data-tab="extensions">Расширения</a>
+<a href="#tavern/presets" data-tab="presets">Пресеты</a>
+<a href="#tavern/blocks" data-tab="blocks">Внешние блоки</a>
+</nav>
+<div data-pane="guides">
+<article class="guide-feature">
+<div class="feature-copy">
+<span class="eyebrow">ExtBlocks / полный гайд</span>
+<h2>Внешние блоки<br>от начала до настройки</h2>
+<p>Установка, подключение модели, импорт и создание блоков. Дальше — контекст, Rewrite, инъекция, команды и решение проблем.</p>
+<a class="primary" href="guides/extblocks.html">Читать гайд</a>
+<small>26 разделов · скриншоты · поиск по тексту</small>
+</div>
+<div class="feature-art" role="img" aria-label="Шино с книгой в библиотеке">
+</div>
+</article>
+<div class="quick-guides">
+<article class="quick-card">
+<h3>Скачала готовый блок?</h3>
+<ol>
+<li>Установи ExtBlocks и включи расширение.</li>
+<li>Подключи сохранённый профиль в API Settings.</li>
+<li>Импортируй JSON в Preset blocks → Import.</li>
+<li>Включи блок и назначь ему батарейку.</li>
+</ol>
+</article>
+<article class="quick-card">
+<h3>Блок и regex — два файла</h3>
+<ol>
+<li>Конфигурацию блока импортируй в ExtBlocks.</li>
+<li>Файл оформления импортируй в Regex.</li>
+<li>Проверь, что оба элемента включены.</li>
+<li>Сохрани авторский шаблон и настройки запуска.</li>
+</ol>
+</article>
+<article class="quick-card">
+<h3>Отдельная модель для блоков</h3>
+<ol>
+<li>Создай и сохрани Connection Profile.</li>
+<li>Проверь ответ модели в отдельном чате.</li>
+<li>Выбери профиль для Big, Medium или Small.</li>
+<li>Назначь блоку ту же батарейку.</li>
+</ol>
+</article>
+</div>
+</div>
+<div data-pane="extensions" hidden>
+<div class="list-heading">
+<h2>Расширения</h2>
+<small>Ссылки на репозитории и кратко о возможностях</small>
+</div>
+<div id="extensionGrid" class="extension-grid">
+</div>
+<div class="install-note">
+<strong>Как установить:</strong> Расширения → Установить расширение → вставить ссылку на репозиторий. После установки обнови Таверну и открой настройки расширения.</div>
+</div>
+<div data-pane="presets" hidden>
+<div class="preset-layout">
+<article class="preset-main">
+<span class="eyebrow">Пресет Шино</span>
+<h2>Gemini 3.8 Flash<br>v.01</h2>
+<p>Пресет основного чата и два регекса для пробелов. Можно скачать комплект или каждый файл отдельно.</p>
+<div class="buttons">
+<a class="primary" href="downloads/shino-preset-pack.zip" download>Скачать комплект</a>
+<a href="downloads/shino-gemini-3.8-flash-v01.json" download>Только пресет</a>
+</div>
+<div class="file-row">
+<div>
+<h3>Use Figure Spaces</h3>
+<p>Заменяет обычные пробелы на figure spaces. В файле выключен по умолчанию.</p>
+</div>
+<a href="downloads/regex-use-figure-spaces.json" download>Скачать JSON</a>
+</div>
+<div class="file-row">
+<div>
+<h3>Return Normal Spaces</h3>
+<p>Возвращает figure spaces к обычным пробелам. Импортируется отдельно в Regex.</p>
+</div>
+<a href="downloads/regex-return-normal-spaces.json" download>Скачать JSON</a>
+</div>
+</article>
+<aside class="preset-side">
+<h3>Как подключить</h3>
+<ol>
+<li>Выбери в SillyTavern режим Chat Completion.</li>
+<li>В настройках пресетов основного чата нажми импорт и выбери файл пресета.</li>
+<li>Проверь, что в списке выбран новый пресет.</li>
+<li>Оба файла регексов импортируй в Расширения → Regex.</li>
+<li>Тоггл Figure Space и Use Figure Spaces включай вместе. Их можно связать через Silly Linkify.</li>
+</ol>
+<p>
+<small>Пресет содержит инструкции и параметры чата. Модель и своё API-подключение выбираешь отдельно.</small>
+</p>
+</aside>
+</div>
+</div>
+<div data-pane="blocks" hidden>
+<div class="list-heading">
+<h2>Готовые блоки</h2>
+<small>Выбери карточку, чтобы узнать, как работает блок</small>
+</div>
+<section class="theater" aria-label="Каталог внешних блоков">
+<aside class="theater-aside">
+<span class="eyebrow">ExtBlocks / коллекция</span>
+<div id="blockNarrative" class="narrative" aria-live="polite">
+</div>
+<div class="theater-nav">
+<button id="blockPrev" aria-label="Предыдущий блок">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="m14 6-6 6 6 6"/>
+</svg>
+</button>
+<span id="blockCounter">01 / 03</span>
+<button id="blockNext" aria-label="Следующий блок">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="m10 6 6 6-6 6"/>
+</svg>
+</button>
+</div>
+</aside>
+<div id="blockStage" class="theater-stage" role="group" tabindex="0" aria-label="Карточки блоков; листай стрелками клавиатуры или свайпом">
+</div>
+</section>
+<div class="block-downloads">
+<div class="list-heading">
+<h2>Файлы для импорта</h2>
+<a class="muted" href="downloads/external-blocks-pack.zip" download>Скачать все блоки ZIP</a>
+</div>
+<div id="blockFiles" class="block-files">
+</div>
+</div>
+<div class="resource-bar">
+<p>Остальные внешние блоки и новые публикации — в Telegram.</p>
+<div class="resource-links">
+<a href="https://t.me/ah_ah_shino4ka/1772" target="_blank" rel="noopener noreferrer">Все блоки в канале</a>
+<a href="guides/extblocks.html">Гайд по ExtBlocks</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer id="footer" class="footer" hidden>
+<span>Atelier · Шино и Астера</span>
+<a href="https://t.me/ah_ah_shino4ka" target="_blank" rel="noopener noreferrer">Telegram</a>
+<span>NovelAI и SillyTavern</span>
+</footer>
+<dialog id="detailDialog" aria-labelledby="dialogTitle">
+<div class="dialog-head">
+<h2 id="dialogTitle">
+</h2>
+<button id="dialogClose" aria-label="Закрыть окно">Закрыть</button>
+</div>
+<div id="dialogBody" class="dialog-body">
+</div>
+</dialog>
+<div id="toast" class="toast" role="status" hidden>
+</div>
+<script src="catalog.js">
+</script>
+<script src="examples.js">
+</script>
+<script>'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function icon(type='file'){
+ const paths={file:'<path d="M14 3H5v18h14V8Z"/><path d="M14 3v5h5M8 12h8M8 16h6"/>',copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/>',memory:'<path d="M8 4h8v16H8zM4 8h4M4 16h4M16 8h4M16 16h4M11 8h2v8h-2"/>',image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8" cy="9" r="1.5"/><path d="m4 18 6-6 4 4 3-3 4 4"/>',link:'<path d="m10 8 3-3a4 4 0 0 1 6 6l-3 3M14 16l-3 3a4 4 0 0 1-6-6l3-3M8 16l8-8"/>',split:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/>',book:'<path d="M12 6q-5-3-9 0v14q4-3 9 0 5-3 9 0V6q-4-3-9 0Zm0 0v14"/>',universe:'<circle cx="12" cy="12" r="8"/><path d="m5 6 14 12M4 14l16-4M12 4v16"/>'};
+ return '<svg viewBox="0 0 24 24" aria-hidden="true">'+(paths[type]||paths.file)+'</svg>';
+}
+let toastTimer;
+function notify(text){clearTimeout(toastTimer);$('#toast').textContent=text;$('#toast').hidden=false;toastTimer=setTimeout(()=>$('#toast').hidden=true,2400);}
+async function copyText(text){try{await navigator.clipboard.writeText(text);notify('Скопировано');return true;}catch{const t=document.createElement('textarea');t.value=text;t.style.cssText='position:fixed;opacity:0';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();notify(ok?'Скопировано':'Не удалось скопировать');return ok;}}
+function setTheme(light){document.body.classList.toggle('light',light);$('#themeToggle').setAttribute('aria-label',light?'Включить тёмную тему':'Включить светлую тему');try{localStorage.setItem('atelier-theme',light?'light':'dark');}catch{}}
+try{setTheme(localStorage.getItem('atelier-theme')==='light');}catch{}
+$('#themeToggle').addEventListener('click',()=>setTheme(!document.body.classList.contains('light')));
+const dialog=$('#detailDialog');
+$('#dialogClose').onclick=()=>dialog.close();
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+function openDialog(title,content){$('#dialogTitle').textContent=title;$('#dialogBody').innerHTML=content;dialog.showModal();}
+const baseItems=window.ATLAS.items;
+let items=baseItems.map(x=>({...x})),currentCategory='Все',activeBlock=0,narrativeTimer;
+const categoryOrder=['Все','Особые v5','Рисовка','Материал','Цвет','Эффекты','Качество','Находки пользователей','Негативы'];
+function buildCategories(){
+ $('#categories').innerHTML='<span class="category-caption">Категории</span>'+categoryOrder.map(c=>'<button data-category="'+c+'" class="'+(c===currentCategory?'selected':'')+'" aria-pressed="'+(c===currentCategory)+'">'+c+'<span>'+items.filter(x=>c==='Все'||x.category===c).length+'</span></button>').join('');
+}
+function renderCatalog(){
+ const words=$('#catalogSearch').value.trim().toLocaleLowerCase('ru').split(/\s+/).filter(Boolean);
+ const shown=items.filter(x=>(currentCategory==='Все'||x.category===currentCategory)&&words.every(w=>[x.name,x.prompt,x.description,x.category].join(' ').toLocaleLowerCase('ru').includes(w)));
+ $('#catalogCount').textContent=shown.length+' / '+items.length;
+ $('#catalogGrid').innerHTML=shown.length?shown.map(x=>'<article class="tag-card"><div class="card-category">'+esc(x.category)+'</div>'+(x.imageURL?'<img class="example" loading="lazy" src="'+esc(x.imageURL)+'" alt="Пример: '+esc(x.name)+'">':'')+'<h3>'+esc(x.name)+'</h3><p>'+esc(x.description)+'</p><div class="card-actions"><button class="copy" data-copy="'+x.id+'" aria-label="Скопировать '+esc(x.name)+'">'+icon('copy')+'Копировать</button><button class="more" data-detail="'+x.id+'">Подробнее</button></div></article>').join(''):'<div class="empty">Ничего не найдено. Попробуй другое слово или категорию.</div>';
+}
+$('#categories').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;currentCategory=b.dataset.category;buildCategories();renderCatalog();});
+$('#catalogSearch').addEventListener('input',renderCatalog);
+$('#catalogGrid').addEventListener('click',e=>{
+ const b=e.target.closest('[data-copy],[data-detail]');if(!b)return;
+ const x=items.find(x=>x.id===(b.dataset.copy||b.dataset.detail));
+ if(b.dataset.copy){copyText(x.prompt);return;}
+ openDialog(x.name,'<span class="eyebrow">'+esc(x.category)+'</span><p style="margin-top:18px">'+esc(x.description)+'</p><div class="prompt-box">'+esc(x.prompt)+'</div>'+(x.note?'<p>'+esc(x.note)+'</p>':'')+(x.params?'<p>'+esc(x.params)+'</p>':'')+'<div class="dialog-actions"><button id="detailCopy" class="primary">Копировать '+(x.kind==='negative'?'негатив':'теги')+'</button><a target="_blank" rel="noopener noreferrer" href="'+esc(x.source)+'">Источник</a><button id="addExample">Добавить пример</button></div>');
+ $('#detailCopy').onclick=()=>copyText(x.prompt);$('#addExample').onclick=()=>showExampleForm(x);
+});
+function showExampleForm(x){
+ $('#dialogTitle').textContent='Пример: '+x.name;
+ $('#dialogBody').innerHTML='<p>Пример публикуется через GitHub от владельца каталога. Можно указать прямую ссылку или прикрепить изображение на следующем шаге.</p><form id="exampleForm"><label for="exampleURL">Ссылка на изображение (необязательно)</label><input id="exampleURL" type="url" placeholder="https://…"><label for="exampleCaption">Подпись</label><textarea id="exampleCaption" maxlength="1000"></textarea><label for="exampleParams">Параметры генерации</label><input id="exampleParams" maxlength="1000" placeholder="Модель, шаги, CFG, seed"><div class="dialog-actions"><button class="primary" type="submit">Подготовить публикацию</button></div></form>';
+ $('#exampleForm').onsubmit=async e=>{e.preventDefault();const u=$('#exampleURL').value.trim();if(u&&!window.AtelierCMS.imageURL(u)){notify('Укажи прямую ссылку с https');return;}const p=window.AtelierCMS.buildIssue({type:'example',target:x.id,targetName:x.name,imageURL:u,caption:$('#exampleCaption').value,params:$('#exampleParams').value});if(p.needsPaste)await copyText(p.body);window.open(p.url,'_blank','noopener');};
+}
+$('#sourcesButton').onclick=()=>openDialog('Источники',window.ATLAS.sources.map(s=>'<p><a target="_blank" rel="noopener noreferrer" href="'+esc(s.url)+'">'+esc(s.title)+'</a><br><small>'+esc(s.note)+'</small></p>').join(''));
+const extensions=[
+ {name:'Silly Memories Plus',repo:'stellvt/silly-memories-plus',icon:'memory',desc:'Сжимает старую переписку в блоки памяти. Сохраняет события, отношения и важные факты; позволяет редактировать и пересобирать саммари.'},
+ {name:'Silly Images',repo:'0xl0cal/sillyimages',icon:'image',desc:'Генерирует картинки по тегам в сообщениях модели. Поддерживает NovelAI, Gemini и другие API, профили подключения и библиотеку референсов.'},
+ {name:'Silly Linkify',repo:'stellvt/silly-linkify',icon:'link',desc:'Связывает настройки Таверны правилами When → Then. Например, тоггл пресета включает нужный регекс, а выбор модели переключает пресет.'},
+ {name:'Alternate Descriptions Plus',repo:'stellvt/SillyTavern-AlternateDescriptionsPlus',icon:'file',desc:'Хранит несколько вариантов описания, характера, сценария и других полей карточки. Поддерживает альтернативные описания персоны.'},
+ {name:'Другая Вселенная',repo:'Shino4ka/another-shinoverse',icon:'universe',desc:'Переносит персонажа в выбранную AU: создаёт анкету и приветствие на русском. Результат можно редактировать и экспортировать в PNG или JSON.'},
+ {name:'Silly Split',repo:'stellvt/silly-split',icon:'split',desc:'Открывает второй полноценный чат рядом с основным. Подходит для сравнения свайпов, сюжетных веток и работы с двумя персонажами.'}
+];
+$('#extensionGrid').innerHTML=extensions.map((x,i)=>'<article class="extension-card"><div class="extension-mark">'+icon(x.icon)+'</div><h3>'+x.name+'</h3><p>'+x.desc+'</p><span class="repo">'+x.repo+'</span><div class="buttons"><button data-extension="'+i+'">Копировать ссылку</button><a target="_blank" rel="noopener noreferrer" href="https://github.com/'+x.repo+'">GitHub</a></div></article>').join('');
+$('#extensionGrid').addEventListener('click',e=>{const b=e.target.closest('[data-extension]');if(b)copyText('https://github.com/'+extensions[+b.dataset.extension].repo);});
+const blocks=[
+ {title:'Ларп с Шино',short:'Справочник по фандому',icon:'book',text:'Объясняет мир, канонических персонажей и историю произведения. Помогает ориентироваться в незнакомом фандоме; ответы и справка выводятся на русском.',note:'Вопрос блоку задаётся командой !вопрос. Для оформления нужен отдельный regex.',files:[['Конфигурация блока','fandom-guide-state.json'],['Regex оформления','regex-fandom-guide.json'],['Комплект ZIP','larp-shino-pack.zip']],how:'Блок → ExtBlocks. Regex → Регулярные выражения.'},
+ {title:'Мориарти',short:'Досье расследования',icon:'file',text:'Собирает улики, показания и хронологию из текущей ролки. Отделяет подтверждённые факты от предположений и помогает разбирать загадку.',note:'Опирается на доступный контекст. Запускается на сообщениях пользователя.',files:[['Скачать блок JSON','investigation-dossier.json']],how:'Импортируй в ExtBlocks → Preset blocks → Import.'},
+ {title:'Комментарии читателей',short:'Обсуждение главы',icon:'split',text:'Превращает текущий эпизод ролки в новую главу романа и пишет вымышленную ветку читательского обсуждения: реакции, теории и комментарии.',note:'Прикрепляется к сообщению персонажа. Оформление находится внутри блока.',files:[['Скачать блок JSON','novel-comm.json']],how:'Импортируй в ExtBlocks → Preset blocks → Import.'}
+];
+$('#blockStage').innerHTML=blocks.map((x,i)=>'<button class="block-card" data-block="'+i+'" aria-label="'+x.title+'"><span class="block-num">0'+(i+1)+'</span><span class="extension-mark">'+icon(x.icon)+'</span><h3>'+x.title+'</h3><p>'+x.short+'</p><span class="highlight">'+(i===0?'Блок + regex':'Готовый JSON')+'</span></button>').join('');
+$('#blockFiles').innerHTML=blocks.map(x=>'<article class="block-file"><h3>'+x.title+'</h3><p>'+x.short+'</p>'+x.files.map(([label,file])=>'<a href="downloads/'+file+'" download>'+icon('file')+label+'</a>').join('')+'<div class="how">'+x.how+'</div></article>').join('');
+function focusBlock(index,animate=true){
+ activeBlock=Math.max(0,Math.min(blocks.length-1,index));const stage=$('#blockStage'),spacing=stage.clientWidth<500?215:260;
+ $$('.block-card').forEach((c,i)=>{const delta=i-activeBlock;c.classList.toggle('active',delta===0);c.setAttribute('aria-pressed',delta===0);c.style.transform='translateX('+(delta*spacing)+'px) translateZ('+(delta===0?30:-100)+'px) rotateY('+(delta===0?0:delta<0?18:-18)+'deg) scale('+(delta===0?1:.81)+')';c.style.opacity=delta===0?1:Math.abs(delta)>1?.15:.35;c.style.filter=delta===0?'none':'blur(1px)';c.style.zIndex=delta===0?3:1;});
+ $('#blockCounter').textContent='0'+(activeBlock+1)+' / 03';$('#blockPrev').disabled=activeBlock===0;$('#blockNext').disabled=activeBlock===blocks.length-1;
+ clearTimeout(narrativeTimer);const n=$('#blockNarrative');n.style.opacity=animate?0:1;const update=()=>{const x=blocks[activeBlock];n.innerHTML='<h2>'+x.title+'</h2><p>'+x.text+'</p><p>'+x.note+'</p>';n.style.opacity=1;};if(animate)narrativeTimer=setTimeout(update,300);else update();
+}
+$('#blockPrev').onclick=()=>focusBlock(activeBlock-1);$('#blockNext').onclick=()=>focusBlock(activeBlock+1);
+$('#blockStage').addEventListener('click',e=>{const c=e.target.closest('[data-block]');if(c)focusBlock(+c.dataset.block);});
+$('#blockStage').addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();focusBlock(activeBlock+(e.key==='ArrowRight'?1:-1));}});
+let wheelSum=0,wheelTime=0;
+$('#blockStage').addEventListener('wheel',e=>{if(Math.abs(e.deltaX)<=Math.abs(e.deltaY)&&document.activeElement!==$('#blockStage')&&!$('#blockStage').contains(document.activeElement))return;const now=Date.now();if(now-wheelTime>350)wheelSum=0;wheelSum+=e.deltaX||e.deltaY;if(Math.abs(wheelSum)>=50&&now-wheelTime>450){focusBlock(activeBlock+(wheelSum>0?1:-1));wheelTime=now;wheelSum=0;}e.preventDefault();},{passive:false});
+let touchStart;
+$('#blockStage').addEventListener('touchstart',e=>touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY},{passive:true});
+$('#blockStage').addEventListener('touchend',e=>{if(!touchStart)return;const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))focusBlock(activeBlock+(dx<0?1:-1));touchStart=null;},{passive:true});
+let currentRoute='';
+function route(){
+ const raw=location.hash.slice(1)||'home';let section=raw.split('/')[0],pane=raw.split('/')[1]||'guides';if(!['home','novelai','tavern'].includes(section))section='home';if(!['guides','extensions','presets','blocks'].includes(pane))pane='guides';
+ for(const id of ['home','novelai','tavern'])$('#'+id).hidden=id!==section;
+ document.body.classList.toggle('home-mode',section==='home');$('#footer').hidden=section==='home';
+ $$('[data-nav]').forEach(a=>{if(a.dataset.nav===section)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ $$('[data-tab]').forEach(a=>{if(a.dataset.tab===pane)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ $$('[data-pane]').forEach(x=>x.hidden=x.dataset.pane!==pane);
+ document.title=section==='home'?'Atelier — Шино':section==='novelai'?'NovelAI — Atelier':'SillyTavern — Atelier';
+ if(currentRoute!==raw){window.scrollTo(0,0);currentRoute=raw;}if(section==='tavern'&&pane==='blocks')requestAnimationFrame(()=>focusBlock(activeBlock,false));
+}
+window.addEventListener('hashchange',route);
+window.addEventListener('resize',()=>{if(!$('#tavern').hidden&&!$('[data-pane="blocks"]').hidden)focusBlock(activeBlock,false);});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!$('#novelai').hidden&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)&&!dialog.open){e.preventDefault();$('#catalogSearch').focus();}});
+buildCategories();renderCatalog();route();
+async function loadExamples(){
+ try{const issues=[];for(let page=1;page<=5;page++){const r=await fetch('https://api.github.com/repos/Shino4ka/nai-atelier/issues?state=all&per_page=100&page='+page);if(!r.ok)return;const d=await r.json();issues.push(...d);if(d.length<100)break;}const allowed=new Set(baseItems.map(x=>x.id));items=window.AtelierCMS.materialize(baseItems,issues).filter(x=>allowed.has(x.id));buildCategories();renderCatalog();}catch{}
+}
+loadExamples();
+</script>
+</body>
 </html>

@@ -1,0 +1,1 @@
+{"name":"shino-atelier","version":"2.0.0","private":true,"type":"module","scripts":{"dev":"node dev-server.mjs","build":"node build.mjs"}}
