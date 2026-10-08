@@ -1,0 +1,63 @@
+{
+    "id": "21ff7fb6-aec7-418d-8bad-41a6e7ba1766",
+    "name": "image_lite",
+    "block_type": "generated",
+    "disabled": false,
+    "user_message": false,
+    "char_message": true,
+    "template": "<image_lite> \n...\n</image_lite>\n",
+    "prompt": "Rules:\n- Output ONLY the exact \"<image_lite>\" template and nothing else.\n- Keep src=\"[IMG:GEN]\" unchanged.\n- Keep data-iig-instruction as valid JSON inside a single-quoted HTML attribute.\n- \"prompt\" must be one continuous line.\n- Mix Danbooru tags with natural language.\n- Use \"#\" only for Action Tags: source#, target#, mutual#.\n\nScene:\n\n- Treat the latest RP state as the authoritative source with the highest priority.\n- Generate a single visual snapshot of the current moment.\n- Do not summarize previous actions.\n- Do not invent new actions, poses, facial expressions, objects, or scenery.\n- Preserve only what is visually important.\n\nStyle isolation:\n\n- You may describe only:\n  subject count, identity, appearance, clothing, poses, interactions, facial expressions, gaze direction, essential objects, essential location, factual time of day/weather when relevant, and neutral framing.\n- Never add artists, quality tags, aesthetic tags, artistic technique or medium descriptors, rendering terms, lineart terms, lighting styles, atmosphere, palette, textures, or any other style-driving terms.\n\nMulti-character structure:\n\n- Use: \"[base prompt] | [character 1] | [character 2] ...\"\n- Put subject counts only in the base prompt.\n- The base prompt must contain only shared scene information, background information, and neutral framing.\n- Each visible character gets one self-contained prompt block beginning with \"boy\", \"girl\", or \"other\".\n- Keep each character's appearance, clothing, action, facial expression, and gaze direction inside that character's own block.\n- Do not duplicate character details in the base prompt.\n- Never use descriptions that could make the characters appear to be children, such as \"petite\", \"small\", etc.\n\nIdentity:\n\n- For characters from existing franchises, put the identity immediately after the gender, for example: Naruto Uzumaki (naruto), Phainon (honkai star rail), etc.\n\nInteraction:\n\n- Describe each interaction once and as clearly as possible.\n- For complex physical contact, prioritize:\n  1. relative position,\n  2. contact point,\n  3. the corresponding Action Tag pair.\n- If necessary, add one short natural-language sentence to further reinforce the interaction.\n- Action Tags must use the same action on both sides:\n  source#action + target#action\n  or mutual#action + mutual#action\n- Never restate the same action using several synonymous formulations.\n- Avoid possessive body-part constructions involving character names. Prefer \"hands on shoulders\", \"hands on another's shoulders\", or \"both hands resting on the other boy's shoulders\".\n\nNSFW:\n\n- Use explicit, clinical Danbooru terminology; absolutely no metaphors, romantic abstractions, or emotional embellishment.\n- State the exact sexual act using appropriate tags: missionary, doggystyle, cowgirl position, oral, fellatio, cunnilingus, anal, vaginal, fingering, handjob, penetration, etc.\n- Always specify state and fluids when present: erect penis, flaccid, cum, precum, covered in cum, sweating, heavy breathing, flushed face, saliva trail, etc.\n- Explicitly map body contact points: \"penis in vagina\", \"penis in mouth\", \"penis rubbing against ass\", \"hand on penis\", etc.\n- Add ratings/tags to the base prompt: \"nsfw, explicit, uncensored, sex\".\n- During sex, describe the state of clothing with mechanical precision: naked, partially undressed, clothes pulled down, shirt lifted, bottomless.\n\nComposition:\n\n- Use the tightest neutral framing that preserves the important poses and physical contact.\n- Do not use full body.\n- Prefer close-up, upper body, cowboy shot, and other medium/close framings when the interaction is centered on faces, hands, or upper-body contact.\n\nGaze:\n\n- Never use \"looking at viewer\", \"facing viewer\", \"looking at camera\", or similar phrases.\n- For every visible character, assign an in-scene gaze direction: looking at another, looking up at another, looking down at another, looking aside, looking away, looking at object, eyes closed, etc.\n\nText rendering:\n\n- Add text only if readable dialogue or visible text is genuinely important.\n- If dialogue is used, add \"text, speech bubble\" to the base prompt.\n- Use \"Text:\" exactly once and strictly at the absolute end of the prompt.\n- After \"Text:\", include only the exact words that should be visible.\n- If text is unnecessary, do not add text tags.\n\nAspect ratio:\n\n- Use only \"1:1\", \"2:3\", or \"9:16\".\n\nFinal output:\n\n<image_lite>\n<img\ndata-iig-instruction='{\"prompt\":\"[detailed prompt]\", \"aspect_ratio\":\"[1:1, 2:3, or 9:16]\", \"image_size\":\"1K\"}'\nsrc=\"[IMG:GEN]\"\n/>\n</image_lite>",
+    "generation_pause": false,
+    "period": 1,
+    "keyword": "",
+    "keyword_is_regex": false,
+    "hide_display": false,
+    "inject_block": false,
+    "injection_role": 0,
+    "injection_position": 1,
+    "injection_depth": 1,
+    "generation_order": "before",
+    "background": false,
+    "context": [
+        {
+            "id": "0d4cedf7-ab92-4fe1-9b6b-6aeb1fd3ec52",
+            "name": "chat",
+            "role": "user",
+            "type": "last_messages",
+            "disabled": false,
+            "messages_count": 2,
+            "messages_offset": 0,
+            "messages_separator": "double_newline",
+            "user_prefix": "",
+            "user_suffix": "",
+            "char_prefix": "",
+            "char_suffix": ""
+        },
+        {
+            "id": "52478b01-2f24-458f-94ff-c4b0b71edb79",
+            "name": "block",
+            "role": "system",
+            "type": "previous_block",
+            "disabled": false,
+            "block_name": "",
+            "block_count": 1
+        },
+        {
+            "id": "c6b49830-fd88-466a-bc0d-dc13c93fbb71",
+            "name": "{{user}}",
+            "role": "user",
+            "type": "text",
+            "disabled": false,
+            "text": "внешность {{user}}: \n{{persona}}"
+        },
+        {
+            "id": "d25e5642-2f8c-478c-b554-16e65dcd434d",
+            "name": "{{char}}",
+            "role": "user",
+            "type": "text",
+            "disabled": false,
+            "text": "{{char}} внешность: {{description}}"
+        }
+    ],
+    "api_preset": "big"
+}

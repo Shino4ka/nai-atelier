@@ -359,7 +359,7 @@ dialog{padding:24px}
 <div class="page-title">
 <div>
 <span class="eyebrow">SillyTavern</span>
-<h1 id="tavern-title">Библиотека для ролки</h1>
+<h1 id="tavern-title">Библиотека для SillyTavern</h1>
 <p>Всё для настройки Таверны: от первого импорта до собственных блоков.</p>
 </div>
 <div class="page-stamp">
@@ -380,14 +380,14 @@ dialog{padding:24px}
 <h2>Внешние блоки<br>от начала до настройки</h2>
 <p>Установка, подключение модели, импорт и создание блоков. Дальше — контекст, Rewrite, инъекция, команды и решение проблем.</p>
 <a class="primary" href="guides/extblocks.html">Читать гайд</a>
-<small>26 разделов · скриншоты · поиск по тексту</small>
+<small>25 разделов · скриншоты · поиск по тексту</small>
 </div>
 <div class="feature-art" role="img" aria-label="Шино с книгой в библиотеке">
 </div>
 </article>
 <div class="quick-guides">
 <article class="quick-card">
-<h3>Скачала готовый блок?</h3>
+<h3>Как подключить готовый блок</h3>
 <ol>
 <li>Установи ExtBlocks и включи расширение.</li>
 <li>Подключи сохранённый профиль в API Settings.</li>
@@ -481,7 +481,7 @@ dialog{padding:24px}
 <path d="m14 6-6 6 6 6"/>
 </svg>
 </button>
-<span id="blockCounter">01 / 03</span>
+<span id="blockCounter">01 / 07</span>
 <button id="blockNext" aria-label="Следующий блок">
 <svg viewBox="0 0 24 24" aria-hidden="true">
 <path d="m10 6 6 6-6 6"/>
@@ -587,14 +587,18 @@ $('#extensionGrid').addEventListener('click',e=>{const b=e.target.closest('[data
 const blocks=[
  {title:'Ларп с Шино',short:'Справочник по фандому',icon:'book',text:'Объясняет мир, канонических персонажей и историю произведения. Помогает ориентироваться в незнакомом фандоме; ответы и справка выводятся на русском.',note:'Вопрос блоку задаётся командой !вопрос. Для оформления нужен отдельный regex.',files:[['Конфигурация блока','fandom-guide-state.json'],['Regex оформления','regex-fandom-guide.json'],['Комплект ZIP','larp-shino-pack.zip']],how:'Блок → ExtBlocks. Regex → Регулярные выражения.'},
  {title:'Мориарти',short:'Досье расследования',icon:'file',text:'Собирает улики, показания и хронологию из текущей ролки. Отделяет подтверждённые факты от предположений и помогает разбирать загадку.',note:'Опирается на доступный контекст. Запускается на сообщениях пользователя.',files:[['Скачать блок JSON','investigation-dossier.json']],how:'Импортируй в ExtBlocks → Preset blocks → Import.'},
- {title:'Комментарии читателей',short:'Обсуждение главы',icon:'split',text:'Превращает текущий эпизод ролки в новую главу романа и пишет вымышленную ветку читательского обсуждения: реакции, теории и комментарии.',note:'Прикрепляется к сообщению персонажа. Оформление находится внутри блока.',files:[['Скачать блок JSON','novel-comm.json']],how:'Импортируй в ExtBlocks → Preset blocks → Import.'}
+ {title:'Комментарии читателей',short:'Обсуждение главы',icon:'split',text:'Превращает текущий эпизод ролки в новую главу романа и пишет вымышленную ветку читательского обсуждения: реакции, теории и комментарии.',note:'Прикрепляется к сообщению персонажа. Оформление находится внутри блока.',files:[['Скачать блок JSON','novel-comm.json']],how:'Импортируй в ExtBlocks → Preset blocks → Import.'},
+{"title": "Image Lite · подробная сцена", "short": "Одна иллюстрация по текущей сцене", "icon": "image", "text": "Создаёт промпт для одной иллюстрации по текущему эпизоду: внешность персонажей, действия, эмоции, одежда, окружение, свет и цвет.", "note": "В этой версии описывается и визуальная подача. В исходном файле блок выключен. У двух версий Image Lite одинаковые имя и ID — выбирай одну для импорта.", "files": [["Скачать блок JSON", "image-lite-detailed.json"]], "how": "Импортируй в ExtBlocks. Включи блок и настрой Silly Images для тега <image_lite>."},
+{"title": "Image Lite · без стиля", "short": "Сцена отдельно от стиля", "icon": "image", "text": "Описывает один текущий момент и разделяет сцену и персонажей через |. Не добавляет художников, качество, палитру и другие стилевые теги: стиль задаётся отдельно.", "note": "Форматы: 1:1, 2:3 и 9:16. У двух версий Image Lite одинаковые имя и ID — выбирай одну для импорта.", "files": [["Скачать блок JSON", "image-lite-style-free.json"]], "how": "Импортируй в ExtBlocks. Настрой Silly Images для тега <image_lite>."},
+{"title": "Image · раскадровка", "short": "От одного до пяти кадров", "icon": "split", "text": "Собирает текущий эпизод в изображение из 1–5 кадров. Задаёт ракурсы, переходы, действия и русские реплики; держит фокус на лицах, руках и взаимодействии.", "note": "Стиль задаётся отдельно. Блок использует тег <image> и параметр image_size: 2K.", "files": [["Скачать блок JSON", "image-storyboard.json"]], "how": "Импортируй в ExtBlocks. Настрой Silly Images для тега <image>."},
+{"title": "NAI Com · комикс", "short": "Комикс по текущему эпизоду", "icon": "book", "text": "Готовит промпт одной страницы комикса: основная сцена, крупные планы, отдельные секции персонажей и русские реплики. Сохраняет действия и одежду из текущей ролки.", "note": "В этом файле имя блока и тег — naicom. Для генерации настрой тот же тег в Silly Images.", "files": [["Скачать блок JSON", "naicom.json"]], "how": "Импортируй в ExtBlocks. Настрой Silly Images для тега <naicom>."}
 ];
 $('#blockStage').innerHTML=blocks.map((x,i)=>'<button class="block-card" data-block="'+i+'" aria-label="'+x.title+'"><span class="block-num">0'+(i+1)+'</span><span class="extension-mark">'+icon(x.icon)+'</span><h3>'+x.title+'</h3><p>'+x.short+'</p><span class="highlight">'+(i===0?'Блок + regex':'Готовый JSON')+'</span></button>').join('');
 $('#blockFiles').innerHTML=blocks.map(x=>'<article class="block-file"><h3>'+x.title+'</h3><p>'+x.short+'</p>'+x.files.map(([label,file])=>'<a href="downloads/'+file+'" download>'+icon('file')+label+'</a>').join('')+'<div class="how">'+x.how+'</div></article>').join('');
 function focusBlock(index,animate=true){
  activeBlock=Math.max(0,Math.min(blocks.length-1,index));const stage=$('#blockStage'),spacing=stage.clientWidth<500?215:260;
  $$('.block-card').forEach((c,i)=>{const delta=i-activeBlock;c.classList.toggle('active',delta===0);c.setAttribute('aria-pressed',delta===0);c.style.transform='translateX('+(delta*spacing)+'px) translateZ('+(delta===0?30:-100)+'px) rotateY('+(delta===0?0:delta<0?18:-18)+'deg) scale('+(delta===0?1:.81)+')';c.style.opacity=delta===0?1:Math.abs(delta)>1?.15:.35;c.style.filter=delta===0?'none':'blur(1px)';c.style.zIndex=delta===0?3:1;});
- $('#blockCounter').textContent='0'+(activeBlock+1)+' / 03';$('#blockPrev').disabled=activeBlock===0;$('#blockNext').disabled=activeBlock===blocks.length-1;
+ $('#blockCounter').textContent=String(activeBlock+1).padStart(2,'0')+' / '+String(blocks.length).padStart(2,'0');$('#blockPrev').disabled=activeBlock===0;$('#blockNext').disabled=activeBlock===blocks.length-1;
  clearTimeout(narrativeTimer);const n=$('#blockNarrative');n.style.opacity=animate?0:1;const update=()=>{const x=blocks[activeBlock];n.innerHTML='<h2>'+x.title+'</h2><p>'+x.text+'</p><p>'+x.note+'</p>';n.style.opacity=1;};if(animate)narrativeTimer=setTimeout(update,300);else update();
 }
 $('#blockPrev').onclick=()=>focusBlock(activeBlock-1);$('#blockNext').onclick=()=>focusBlock(activeBlock+1);

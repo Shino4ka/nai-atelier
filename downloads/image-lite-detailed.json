@@ -1,0 +1,63 @@
+{
+    "id": "21ff7fb6-aec7-418d-8bad-41a6e7ba1766",
+    "name": "image_lite",
+    "block_type": "generated",
+    "disabled": true,
+    "user_message": false,
+    "char_message": true,
+    "template": "<image_lite> \n...\n</image_lite>\n",
+    "prompt": "Rules:\n- Output ONLY the exact <image_lite> template structure and nothing else. Never add explanations, markdown, comments, extra tags, extra text, or text before or after the template.\n- Always keep src=\"[IMG:GEN]\" exactly unchanged.\n- The data-iig-instruction value must remain valid JSON inside a single quoted HTML attribute.\n- The \"prompt\" value must be ONE SINGLE CONTINUOUS LINE. No line breaks, no newline characters, no paragraph breaks.\n- Do not use the apostrophe character inside the prompt value.\n- Do not use double quote characters inside the prompt value.\n\nScene analysis:\n- Analyze the current scene from the ongoing conversation.\n- Follow the current story context exactly: visible characters, current actions, emotions, clothing, location, time, weather, props, and atmosphere.\n- Describe the characters' appearance in detail so that they are generated in a believable way and match their appearance.\n- If the scene involves sexual content, explicitly identify:\n  - Sex act tags (e.g., vaginal, anal, oral, handjob, masturbation, double penetration, gangbang, etc.)\n  - Precise poses (e.g., doggystyle, missionary, cowgirl, 69, standing sex, bent over, against wall, suspended congress, amazon, etc.)\n  - Visible intimate body parts on each character (breasts, penis, testicles, pussy, anus, etc.)\n  - Fluids and effects (cum, wet, sweat, tears, blushing, ahegao, etc.) if relevant.\n- Do not invent a new scene if the current scene is clear. If context is incomplete, infer only the minimum necessary visual details that fit the scene, but always ensure all required intimate tags are included for NSFW scenes.\n\nSubject count:\n- The prompt must begin with the exact visible character count tags as the first tokens of the base prompt section.\n- Use standard count tags such as 1girl, 2girls, 1boy, 2boys, 1boy, 1girl, 2boys, 1girl, 3girls.\n- Count only visible characters. Do not count unseen speakers, memories, statues, reflections, posters, paintings, dolls, shadows, or background silhouettes unless they are actual visible characters in the scene.\n\nCharacter separation:\n- strictly use the vertical bar character (|) to separate the global scene from character blocks.\n- The structure MUST be: [Global tags, Style, Environment] | [Character 1 Block] | [Character 2 Block]\n- Do not include general clothing or individual physical traits in the global section. The global section contains ONLY subject count, quality tags, artist styles, background, lighting, and camera composition.\n- Each character block after the vertical bar (|) must be completely self-contained. Start each block with a strict gender tag (girl or boy, without numbers) and a spatial anchor (e.g., left side, right side, foreground, background).\n- Inside each character block, describe the appearance in maximum detail using descriptive tags. You MUST explicitly include: exact hair color, hair length (e.g., long hair, short hair), hairstyle details (e.g., ponytail, braids, messy hair, straight hair, curly hair, bangs, blunt bangs), eye color, facial expression, body type (e.g., slender, muscular, curvy), skin tone, highly detailed outfit colors and clothing pieces, and visible intimate body parts. USE FULL APPEARANCE DESCRIPTION, don't cut it, it affects the poor quality.\n- For physical interactions and sexual acts, use the action syntax inside the respective character blocks using \"source#\", \"target#\", or \"mutual#\" prefixes (e.g., \"source#penetrating another\", \"target#receiving penetration\", \"mutual#kissing\").\n\nNamed characters:\n- If the character belongs to an existing franchise or fandom (anime, manga, manhwa, games, TV shows, movies, etc.), you must specify their name and fandom in the standard Danbooru/NovelAI format: Character Name (fandom name) as the very first tag of their character block (e.g., Aventurine (honkai star rail), Makima (chainsaw man)).\n- Do not rely only on a character name or franchise tag. Always describe their full visible appearance, specific hairstyle, clothing (or nudity), pose, expression, and action inside their dedicated block to guide the model precisely.\n\nArt direction:\n- Use high quality tags in the global section: masterpiece, best quality, very aesthetic, absurdres, highly detailed, sharp focus.\n- For NSFW/erotic scenes, always add the tags: NSFW, explicit, uncensored. This is critical for uncensored generation.\n- Use composition tags fitting the scene: rule of thirds, dynamic framing, cinematic composition, clear silhouettes. For intimate scenes, prefer framing that showcases the action clearly (e.g., cowboy shot, full body, POV).\n- Use lighting tags fitting the scene: soft window light, moonlight, neon lighting, candlelight, overcast daylight, rim light, backlight, dramatic shadows, or other accurate lighting.\n- Use color mood tags fitting the scene: natural colors, muted colors, warm colors, cool colors, high contrast, low contrast, desaturated, rich colors.\n- Use background tags with concrete visual details: room, street, forest, shrine, bedroom, rain, snow, fog, furniture, props, architecture. For sex scenes, common backdrops include: bed, couch, table, shower, against wall.\n- Keep the prompt direct, visual, and parseable. Prefer compact tags and short visual phrases over flowery prose.\n- Do not use metaphorical writing or vague phrases such as beautiful atmosphere, perfect vibe, unforgettable scene.\n- Do not add censorship language.\n\nFinal output template:\n<image_lite>\n  <img\n    data-iig-instruction='{\"prompt\":\"[detailed prompt]\",\"aspect_ratio\":\"[choose one: 1:1, 2:3, 3:2, 16:9, 9:16]\",\"image_size\":\"1K\"}'\n    src=\"[IMG:GEN]\"\n  />\n</image_lite>\n",
+    "generation_pause": false,
+    "period": 1,
+    "keyword": "",
+    "keyword_is_regex": false,
+    "hide_display": false,
+    "inject_block": true,
+    "injection_role": 0,
+    "injection_position": 1,
+    "injection_depth": 1,
+    "generation_order": "before",
+    "background": false,
+    "context": [
+        {
+            "id": "0d4cedf7-ab92-4fe1-9b6b-6aeb1fd3ec52",
+            "name": "chat",
+            "role": "user",
+            "type": "last_messages",
+            "disabled": false,
+            "messages_count": 5,
+            "messages_offset": 0,
+            "messages_separator": "double_newline",
+            "user_prefix": "",
+            "user_suffix": "",
+            "char_prefix": "",
+            "char_suffix": ""
+        },
+        {
+            "id": "52478b01-2f24-458f-94ff-c4b0b71edb79",
+            "name": "block",
+            "role": "system",
+            "type": "previous_block",
+            "disabled": false,
+            "block_name": "",
+            "block_count": 1
+        },
+        {
+            "id": "c6b49830-fd88-466a-bc0d-dc13c93fbb71",
+            "name": "{{user}}",
+            "role": "user",
+            "type": "text",
+            "disabled": false,
+            "text": "Внешность {{user}}: \n{{persona}}"
+        },
+        {
+            "id": "d25e5642-2f8c-478c-b554-16e65dcd434d",
+            "name": "{{char}}",
+            "role": "user",
+            "type": "text",
+            "disabled": false,
+            "text": "{{char}} внешность: {{description}}"
+        }
+    ],
+    "api_preset": "big"
+}
