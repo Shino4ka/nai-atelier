@@ -303,6 +303,40 @@ dialog{padding:24px}
 
 .blocks-intro{max-width:850px;margin:0 0 30px;color:var(--muted);font-size:15px}.blocks-intro a{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
 </style>
+<style id="atelierMusicStyle">
+.music-widget{--mp-tint:195,166,244;--mp-bg:#141a29;--mp-text:#f2f3fa;--mp-muted:#a8b1c6;--mp-line:#ffffff18;position:fixed;right:24px;bottom:max(20px,env(safe-area-inset-bottom));z-index:35;color:var(--mp-text);font:14px/1.5 Manrope,system-ui,sans-serif;color-scheme:dark}
+.music-widget *{box-sizing:border-box}.music-widget p{margin:0}.music-widget svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.music-widget button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;border-radius:10px;padding:0}.music-widget button:hover{background:#ffffff0b}.music-widget button:focus-visible,.music-widget input:focus-visible{outline:2px solid rgb(var(--mp-tint));outline-offset:4px}
+.music-widget [hidden]{display:none!important}.music-widget .mp-icon{width:42px;height:42px;display:grid;place-items:center;flex:none}.music-widget .mp-icon:hover{color:rgb(var(--mp-tint))}
+.music-dock{position:relative;display:flex;align-items:center;gap:4px;width:302px;padding:9px;border:1px solid #ffffff20;border-radius:18px;background:#141a29eb;backdrop-filter:blur(24px) saturate(140%);box-shadow:0 12px 40px #0005;overflow:hidden}
+.music-widget .mp-launch{min-width:0;display:flex;align-items:center;gap:11px;flex:1;text-align:left;padding:2px 5px}
+.mp-mini-disc{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:repeating-radial-gradient(circle,#1b2133 0 2px,#353b4c 3px,#171c2a 4px);border:1px solid #ffffff25;flex:none}.mp-mini-disc svg{width:16px;height:16px;color:rgb(var(--mp-tint))}
+.mp-mini-copy{min-width:0;display:grid;gap:1px}.mp-mini-copy b{font-size:13px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mp-mini-copy span{font-size:11px;color:var(--mp-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.music-widget .mp-dock-play{width:42px;height:42px;border-radius:50%;background:rgb(var(--mp-tint));color:#151922}.music-widget .mp-dock-play:hover{background:rgb(var(--mp-tint));filter:brightness(1.12)}
+.mp-dock-progress{position:absolute;left:0;bottom:0;max-width:100%;height:2px;background:rgb(var(--mp-tint));width:0;pointer-events:none}
+.music-panel{position:absolute;right:0;bottom:81px;width:390px;max-height:calc(100svh - 118px);overflow:auto;overscroll-behavior:contain;border:1px solid #ffffff24;border-radius:24px;background:linear-gradient(135deg,rgba(var(--mp-tint),.12),transparent 45%),#141a29f7;backdrop-filter:blur(35px) saturate(150%);box-shadow:0 30px 90px #0009;padding:18px 22px 20px;transform-origin:bottom right;animation:mp-open .3s cubic-bezier(.25,.8,.25,1)}
+.mp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.mp-head h2{font:600 13px Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin:0;color:var(--mp-muted)}.music-widget .mp-close{width:32px;height:32px}
+.mp-cover{position:relative;display:grid;place-items:center;min-height:158px;isolation:isolate;perspective:800px}.mp-cover::before{content:'';position:absolute;inset:8px 22%;border-radius:50%;background:rgb(var(--mp-tint));filter:blur(40px);opacity:.16;z-index:-1}
+.mp-record{position:relative;display:grid;place-items:center;width:148px;height:148px;border-radius:50%;border:1px solid #ffffff28;background:repeating-radial-gradient(circle,#141725 0 3px,#2e3340 4px,#101422 5px);box-shadow:0 10px 25px #0007,inset 0 0 15px #000;animation:mp-spin 14s linear infinite;animation-play-state:paused;transition:box-shadow .3s}
+.mp-record::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 25deg,transparent 0deg,#fff2 30deg,transparent 60deg,transparent 190deg,#fff1 230deg,transparent 280deg)}
+.mp-record-label{position:relative;width:74px;height:74px;display:grid;place-items:center;overflow:hidden;border-radius:50%;background:radial-gradient(circle,#d6e5e2,#69acae);border:4px solid #141a29}.mp-record-label img{width:59px;height:69px;object-fit:contain;object-position:center top;display:block}.mp-record-label::after{content:'';position:absolute;width:7px;height:7px;background:#101422;border:1px solid #a6c7c5;border-radius:50%;top:calc(50% - 3px);left:calc(50% - 3px)}
+.mp-cover-number{position:absolute;right:1px;bottom:15px;color:#b2bdd2;font:11px/1 Manrope,system-ui,sans-serif;letter-spacing:.1em}.mp-now{text-align:center;margin:9px 0 16px}.mp-now h3{font:400 26px/1.25 Literata,Georgia,serif;letter-spacing:-.6px;margin:0 0 5px;overflow-wrap:anywhere}.mp-now p{font-size:12px;color:var(--mp-muted)}
+.mp-wave{height:29px;display:flex;gap:2px;align-items:center;overflow:hidden;margin-bottom:4px}.mp-wave i{display:block;flex:1;min-width:1px;border-radius:2px;background:#ffffff26;transition:background .15s}.mp-wave i.played{background:rgb(var(--mp-tint))}
+.mp-timeline input{display:block;width:100%;height:14px;margin:0;cursor:pointer;accent-color:rgb(var(--mp-tint));background:none}.mp-times{display:flex;justify-content:space-between;color:var(--mp-muted);font:11px/1.4 Manrope,system-ui,sans-serif;font-variant-numeric:tabular-nums;margin-top:2px}
+.mp-controls{display:flex;justify-content:center;align-items:center;gap:15px;margin:10px 0}.music-widget .mp-play{width:52px;height:52px;border-radius:50%;background:rgb(var(--mp-tint));color:#151922;box-shadow:0 0 24px rgba(var(--mp-tint),.15)}.music-widget .mp-play:hover{background:rgb(var(--mp-tint));filter:brightness(1.12)}.music-widget .mp-play svg{width:22px;height:22px}.music-widget .mp-mode{position:relative;width:32px;height:38px;color:var(--mp-muted)}.music-widget .mp-mode[aria-pressed="true"]{color:rgb(var(--mp-tint))}.mp-repeat-one{font:700 10px system-ui;position:absolute;right:0;top:0}
+.mp-volume{display:flex;align-items:center;gap:9px;padding:2px 0 10px}.music-widget .mp-mute{width:32px;height:32px}.mp-volume input{width:100%;min-width:0;height:16px;accent-color:rgb(var(--mp-tint));cursor:pointer}.mp-volume-value{font:11px Manrope,system-ui,sans-serif;color:var(--mp-muted);min-width:28px;text-align:right;font-variant-numeric:tabular-nums}
+.mp-queue-label{display:flex;justify-content:space-between;color:var(--mp-muted);font-size:11px;margin:3px 0 9px;letter-spacing:.06em}.mp-queue{display:grid;gap:4px;perspective:900px}.music-widget .mp-track{display:grid;grid-template-columns:22px minmax(0,1fr) 32px;align-items:center;gap:10px;text-align:left;width:100%;padding:9px 11px;border:1px solid transparent;border-radius:9px;color:var(--mp-muted);transform:scale(.98) translateZ(-4px);transition:transform .3s cubic-bezier(.25,.8,.25,1),color .2s,background .2s,border-color .2s}.music-widget .mp-track:hover{color:var(--mp-text);background:#ffffff07}.music-widget .mp-track[aria-current="true"]{transform:scale(1) translateZ(0);background:rgba(var(--mp-tint),.09);border-color:rgba(var(--mp-tint),.2);color:var(--mp-text)}
+.mp-track-number,.mp-track-time{font-size:11px;font-variant-numeric:tabular-nums;color:var(--mp-muted)}.mp-track-title{font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mp-track[aria-current="true"] .mp-track-title{background:linear-gradient(rgba(var(--mp-tint),.2),rgba(var(--mp-tint),.2)) no-repeat left 95%;background-size:0 30%;animation:mp-highlight .55s .1s forwards}.mp-track-time{text-align:right}
+.mp-status{font-size:12px;color:var(--mp-muted);text-align:center;margin-top:9px;min-height:0}.mp-status:empty{display:none}.mp-playing-mark{display:none;align-items:flex-end;height:12px;gap:2px}.mp-playing-mark i{width:2px;height:6px;background:rgb(var(--mp-tint));animation:mp-meter .8s infinite alternate}.mp-playing-mark i:nth-child(2){animation-delay:-.4s}.mp-playing-mark i:nth-child(3){animation-delay:-.2s}
+.is-playing .mp-record{animation-play-state:running}.is-playing .mp-track[aria-current="true"] .mp-playing-mark{display:flex}.is-playing .mp-track[aria-current="true"] .mp-track-index{display:none}
+.light .music-widget{--mp-bg:#f4f6fc;--mp-text:#1b2333;--mp-muted:#5c6478;--mp-line:#23314a18}.light .music-dock{background:#f3f6fff0;border-color:#29354a25}.light .music-panel{background:linear-gradient(135deg,rgba(var(--mp-tint),.12),transparent 45%),#f3f6fffa;border-color:#29354a25}.light .mp-wave i{background:#28374e30}.light .music-widget button:hover{background:#29354a0b}.light .mp-wave i.played{background:#8266b3}.light .mp-head h2,.light .mp-cover-number{color:#586477}
+@keyframes mp-open{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}@keyframes mp-spin{to{transform:rotate(360deg)}}@keyframes mp-highlight{to{background-size:100% 30%}}@keyframes mp-meter{to{height:12px}}
+@media(max-width:600px){.music-widget{right:12px;bottom:max(12px,env(safe-area-inset-bottom))}.music-dock{width:260px;border-radius:16px;padding:7px}.music-panel{width:min(365px,calc(100vw - 40px));bottom:74px;padding:16px 19px;max-height:calc(100svh - 105px)}.mp-now h3{font-size:24px}.mp-record{width:134px;height:134px}.mp-cover{min-height:144px}.mp-controls{gap:13px}}
+@media(max-height:720px){.mp-cover{min-height:104px}.mp-record{width:98px;height:98px}.mp-record-label{width:53px;height:53px}.mp-record-label img{width:43px;height:48px}.mp-now{margin:6px 0 12px}.mp-now h3{font-size:23px}.mp-controls{margin:6px 0}.mp-cover-number{bottom:6px}}
+@media(prefers-reduced-motion:reduce){.music-widget *{animation:none!important;transition:none!important}.mp-track[aria-current="true"] .mp-track-title{background-size:100% 30%}}
+@media print{.music-widget{display:none!important}}
+
+</style>
 </head>
 <body class="home-mode">
 <a class="skip" href="#main">К содержимому</a>
@@ -660,6 +694,162 @@ async function loadExamples(){
  try{const issues=[];for(let page=1;page<=5;page++){const r=await fetch('https://api.github.com/repos/Shino4ka/nai-atelier/issues?state=all&per_page=100&page='+page);if(!r.ok)return;const d=await r.json();issues.push(...d);if(d.length<100)break;}const allowed=new Set(baseItems.map(x=>x.id));items=window.AtelierCMS.materialize(baseItems,issues).filter(x=>allowed.has(x.id));buildCategories();renderCatalog();}catch{}
 }
 loadExamples();
+</script>
+<section class="music-widget" id="musicWidget" aria-label="Музыкальный плеер" data-root="./">
+<div class="music-panel" id="musicPanel" role="dialog" aria-labelledby="musicHeading" hidden>
+<div class="mp-head"><h2 id="musicHeading">Музыка в Atelier</h2><button class="mp-icon mp-close" id="musicClose" aria-label="Свернуть плеер" data-mp-icon="close"></button></div>
+<div class="mp-cover" id="musicCover" tabindex="0" role="group" aria-label="Пластинка. Стрелки влево и вправо переключают треки">
+<div class="mp-record" aria-hidden="true"><div class="mp-record-label"><img src="./assets/hero-tavern-cutout.webp" alt=""></div></div><span class="mp-cover-number" id="musicNumber">01 / 04</span></div>
+<div class="mp-now"><h3 id="musicTitle">Ханнамонтана</h3><p>Пошлая Молли</p></div>
+<div class="mp-timeline"><div class="mp-wave" id="musicWave" aria-hidden="true"></div><input id="musicSeek" type="range" min="0" max="190.85" value="0" step="0.1" aria-label="Позиция воспроизведения"><div class="mp-times"><span id="musicElapsed">0:00</span><span id="musicDuration">3:10</span></div></div>
+<div class="mp-controls">
+<button class="mp-icon mp-mode" id="musicShuffle" aria-label="Перемешать очередь" aria-pressed="false" data-mp-icon="shuffle"></button>
+<button class="mp-icon" id="musicPrev" aria-label="Предыдущий трек" data-mp-icon="prev"></button>
+<button class="mp-icon mp-play" id="musicPlay" aria-label="Воспроизвести" data-mp-icon="play"></button>
+<button class="mp-icon" id="musicNext" aria-label="Следующий трек" data-mp-icon="next"></button>
+<button class="mp-icon mp-mode" id="musicRepeat" aria-label="Повтор: выключен" aria-pressed="false" data-mp-icon="repeat"></button>
+</div>
+<div class="mp-volume"><button class="mp-icon mp-mute" id="musicMute" aria-label="Выключить звук" data-mp-icon="volume"></button><input id="musicVolume" type="range" min="0" max="100" value="65" step="1" aria-label="Громкость"><span class="mp-volume-value" id="musicVolumeValue">65%</span></div>
+<div class="mp-queue-label"><span>ОЧЕРЕДЬ</span><span>4 ТРЕКА</span></div><div class="mp-queue" id="musicQueue" aria-label="Очередь воспроизведения"></div>
+<p id="musicStatus" class="mp-status" role="status" aria-live="polite"></p>
+</div>
+<div class="music-dock"><button class="mp-launch" id="musicOpen" aria-label="Открыть музыкальный плеер" aria-controls="musicPanel" aria-expanded="false"><span class="mp-mini-disc" data-mp-icon="music" aria-hidden="true"></span><span class="mp-mini-copy"><b id="musicMiniTitle">Музыка</b><span id="musicMiniArtist">Пошлая Молли · 4 трека</span></span></button><button class="mp-icon mp-dock-play" id="musicMiniPlay" aria-label="Воспроизвести" data-mp-icon="play"></button><button class="mp-icon" id="musicMiniNext" aria-label="Следующий трек" data-mp-icon="next"></button><span class="mp-dock-progress" id="musicMiniProgress" aria-hidden="true"></span></div>
+<audio id="atelierAudio" preload="none"></audio>
+</section>
+
+<script id="atelierMusicScript">
+(()=>{
+'use strict';
+const tracks=[{"title": "Ханнамонтана", "file": "khannamontana.mp3", "duration": 190.8538, "tint": "195,166,244", "peaks": [39, 53, 52, 53, 63, 84, 90, 93, 94, 91, 55, 88, 89, 90, 76, 72, 75, 71, 73, 90, 89, 95, 94, 93, 88, 91, 97, 91, 80, 75, 73, 72, 72, 71, 71, 71, 69, 71, 72, 73, 75, 71, 91, 94, 94, 91, 92, 90, 90, 90, 85, 89, 89, 96, 93, 86, 74, 76, 86, 90, 96, 100, 82, 24]}, {"title": "Супермаркет", "file": "supermarket.mp3", "duration": 214.4685, "tint": "124,222,208", "peaks": [62, 73, 82, 96, 95, 72, 67, 87, 91, 94, 93, 87, 93, 100, 100, 99, 99, 96, 98, 99, 98, 97, 91, 69, 74, 91, 91, 94, 87, 90, 81, 94, 99, 99, 97, 98, 99, 97, 99, 97, 94, 93, 95, 94, 91, 81, 84, 100, 100, 94, 95, 96, 94, 93, 96, 95, 95, 94, 91, 94, 93, 92, 66, 14]}, {"title": "Паки пуси", "file": "paki-pusi.mp3", "duration": 143.54605, "tint": "243,159,192", "peaks": [65, 59, 61, 58, 58, 58, 62, 85, 92, 89, 91, 89, 87, 73, 90, 89, 89, 89, 90, 89, 52, 59, 58, 88, 94, 92, 94, 92, 93, 86, 100, 91, 91, 99, 94, 76, 90, 89, 89, 90, 90, 90, 69, 58, 54, 72, 87, 94, 92, 92, 94, 83, 98, 94, 93, 95, 97, 85, 88, 98, 98, 83, 17, 14]}, {"title": "Контракт", "file": "kontrakt.mp3", "duration": 204.8, "tint": "239,197,130", "peaks": [47, 45, 71, 80, 80, 79, 78, 80, 79, 75, 79, 81, 74, 98, 95, 97, 99, 96, 90, 97, 97, 99, 96, 98, 88, 79, 82, 79, 76, 78, 81, 72, 81, 78, 77, 99, 100, 97, 97, 98, 94, 96, 97, 96, 96, 94, 71, 91, 87, 88, 88, 87, 100, 99, 97, 97, 98, 97, 96, 98, 97, 96, 95, 33]}];
+const widget=document.getElementById('musicWidget');
+if(!widget)return;
+const q=id=>document.getElementById(id),audio=q('atelierAudio'),panel=q('musicPanel');
+const root=new URL(widget.dataset.root||'./',location.href);
+const glyphs={
+ play:'<path d="m9 5 11 7-11 7Z" fill="currentColor" stroke="none"/>',
+ pause:'<path d="M8 5v14M16 5v14" stroke-width="4"/>',
+ prev:'<path d="m17 5-9 7 9 7Z" fill="currentColor" stroke="none"/><path d="M5 5v14"/>',
+ next:'<path d="m7 5 9 7-9 7Z" fill="currentColor" stroke="none"/><path d="M19 5v14"/>',
+ close:'<path d="m6 6 12 12M18 6 6 18"/>',
+ music:'<path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/>',
+ volume:'<path d="M4 9h4l5-4v14l-5-4H4ZM17 8q5 4 0 8"/>',
+ muted:'<path d="M4 9h4l5-4v14l-5-4H4ZM17 9l5 6M22 9l-5 6"/>',
+ shuffle:'<path d="M3 7h3c5 0 7 10 12 10h3M3 17h3c2 0 4-2 6-5M15 8c1-1 2-1 3-1h3M18 4l3 3-3 3M18 14l3 3-3 3"/>',
+ repeat:'<path d="M4 10V8a3 3 0 0 1 3-3h13M17 2l3 3-3 3M20 14v2a3 3 0 0 1-3 3H4M7 16l-3 3 3 3"/>'
+};
+const svg=name=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+glyphs[name]+'</svg>';
+widget.querySelectorAll('[data-mp-icon]').forEach(b=>b.innerHTML=svg(b.dataset.mpIcon));
+const format=n=>{n=Math.max(0,Math.floor(Number(n)||0));return Math.floor(n/60)+':'+String(n%60).padStart(2,'0')};
+let settings={};try{settings=JSON.parse(localStorage.getItem('atelier-player-settings')||'{}')}catch{}
+let session=null;try{session=JSON.parse(sessionStorage.getItem('atelier-player-session')||'null')}catch{}
+let index=Number.isInteger(settings.track)&&settings.track>=0&&settings.track<tracks.length?settings.track:0;
+let volume=Number.isFinite(settings.volume)?Math.max(0,Math.min(1,settings.volume)):.65;
+let repeat=[0,1,2].includes(settings.repeat)?settings.repeat:0;
+let shuffle=settings.shuffle===true,loaded=false,pendingSeek=null,request=0,lastSaved=0,used=false;
+let history=[],bag=tracks.map((_,i)=>i).filter(i=>i!==index),lastVolume=volume||.65;
+if(session&&Number.isInteger(session.track)&&session.track>=0&&session.track<tracks.length){index=session.track;pendingSeek=Number(session.time)||0;used=true;bag=tracks.map((_,i)=>i).filter(i=>i!==index)}
+audio.volume=volume;
+function save(){
+ try{localStorage.setItem('atelier-player-settings',JSON.stringify({track:index,volume:audio.volume,repeat,shuffle}));sessionStorage.setItem('atelier-player-session',JSON.stringify({track:index,time:loaded?audio.currentTime:(pendingSeek||0),playing:!audio.paused,savedAt:Date.now()}))}catch{}
+}
+function duration(){return loaded&&Number.isFinite(audio.duration)&&audio.duration>0?audio.duration:tracks[index].duration}
+function progress(){
+ const time=loaded?audio.currentTime:(pendingSeek||0),total=duration(),fraction=Math.min(1,Math.max(0,time/total));
+ q('musicSeek').max=total;q('musicSeek').value=time;q('musicSeek').setAttribute('aria-valuetext',format(time)+' из '+format(total));
+ q('musicElapsed').textContent=format(time);q('musicDuration').textContent=format(total);q('musicMiniProgress').style.width=(fraction*100)+'%';
+ if(!panel.hidden)[...q('musicWave').children].forEach((b,i)=>b.classList.toggle('played',i<fraction*tracks[index].peaks.length));
+}
+function renderVolume(){
+ const silent=audio.volume===0||audio.muted;
+ q('musicVolume').value=silent?0:Math.round(audio.volume*100);q('musicVolumeValue').textContent=(silent?0:Math.round(audio.volume*100))+'%';
+ q('musicMute').innerHTML=svg(silent?'muted':'volume');q('musicMute').setAttribute('aria-label',silent?'Включить звук':'Выключить звук');
+}
+function renderModes(){
+ q('musicShuffle').setAttribute('aria-pressed',String(shuffle));q('musicRepeat').setAttribute('aria-pressed',String(repeat!==0));
+ q('musicRepeat').setAttribute('aria-label','Повтор: '+['выключен','вся очередь','один трек'][repeat]);q('musicRepeat').innerHTML=svg('repeat')+(repeat===2?'<span class="mp-repeat-one" aria-hidden="true">1</span>':'');
+}
+function renderTrack(){
+ const track=tracks[index];widget.style.setProperty('--mp-tint',track.tint);
+ q('musicTitle').textContent=track.title;q('musicNumber').textContent=String(index+1).padStart(2,'0')+' / 04';
+ q('musicMiniTitle').textContent=used?track.title:'Музыка';q('musicMiniArtist').textContent=used?'Пошлая Молли':'Пошлая Молли · 4 трека';
+ q('musicWave').innerHTML=track.peaks.map(h=>'<i style="height:'+h+'%"></i>').join('');
+ widget.querySelectorAll('[data-mp-track]').forEach(b=>{const active=Number(b.dataset.mpTrack)===index;b.setAttribute('aria-current',String(active))});
+ if('mediaSession' in navigator&&'MediaMetadata' in window){navigator.mediaSession.metadata=new MediaMetadata({title:track.title,artist:'Пошлая Молли',album:'Atelier',artwork:[{src:new URL('assets/hero-tavern-cutout.webp',root).href,type:'image/webp'}]})}
+ progress();
+}
+function renderPlayback(){
+ const playing=!audio.paused&&!audio.ended;widget.classList.toggle('is-playing',playing);
+ ['musicPlay','musicMiniPlay'].forEach(id=>{q(id).innerHTML=svg(playing?'pause':'play');q(id).setAttribute('aria-label',playing?'Пауза':'Воспроизвести')});
+ if('mediaSession' in navigator)navigator.mediaSession.playbackState=playing?'playing':'paused';
+}
+async function play(userInitiated=true){
+ used=true;renderTrack();q('musicStatus').textContent='';
+ if(!loaded)load(index,false,pendingSeek||0);
+ if(audio.ended)audio.currentTime=0;
+ const attempt=request;
+ try{await audio.play();if(attempt===request)q('musicStatus').textContent=''}
+ catch(error){if(attempt!==request||error.name==='AbortError')return;renderPlayback();if(userInitiated)q('musicStatus').textContent=error.name==='NotAllowedError'?'Нажми «Воспроизвести», чтобы включить музыку.':'Не удалось загрузить трек. Попробуй ещё раз.'}
+}
+function load(next,autoplay=false,time=0){
+ request++;audio.pause();index=(next+tracks.length)%tracks.length;loaded=true;pendingSeek=Math.max(0,Number(time)||0);
+ audio.preload='metadata';audio.src=new URL('assets/music/'+tracks[index].file,root).href;audio.load();renderTrack();q('musicStatus').textContent='';save();if(autoplay)play();
+}
+function togglePlay(){if(audio.paused||audio.ended)play();else audio.pause()}
+function next(ended=false){
+ const playing=!audio.paused||ended;
+ if(ended&&repeat===2){audio.currentTime=0;play();return}
+ if(ended&&repeat===0&&((!shuffle&&index===tracks.length-1)||(shuffle&&bag.length===0))){renderPlayback();save();return}
+ let target=(index+1)%tracks.length;
+ if(shuffle){if(!bag.length)bag=tracks.map((_,i)=>i).filter(i=>i!==index);target=bag.splice(Math.floor(Math.random()*bag.length),1)[0]}
+ history.push(index);used=true;load(target,playing);
+}
+function previous(){
+ if(loaded&&audio.currentTime>3){audio.currentTime=0;progress();save();return}
+ const playing=!audio.paused;const target=history.length?history.pop():(index-1+tracks.length)%tracks.length;used=true;bag=bag.filter(i=>i!==target);load(target,playing);
+}
+function seek(time){
+ const target=Math.min(duration(),Math.max(0,Number(time)||0));
+ if(!loaded){load(index,false,target);return}
+ if(audio.readyState>=1)audio.currentTime=target;else pendingSeek=target;progress();save();
+}
+function open(){panel.hidden=false;q('musicOpen').setAttribute('aria-expanded','true');progress();q('musicClose').focus()}
+function close(){panel.hidden=true;q('musicOpen').setAttribute('aria-expanded','false');q('musicOpen').focus()}
+q('musicQueue').innerHTML=tracks.map((t,i)=>'<button class="mp-track" data-mp-track="'+i+'" aria-label="Включить: '+t.title+'"><span class="mp-track-number"><span class="mp-track-index">'+String(i+1).padStart(2,'0')+'</span><span class="mp-playing-mark" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="mp-track-title">'+t.title+'</span><span class="mp-track-time">'+format(t.duration)+'</span></button>').join('');
+widget.querySelectorAll('[data-mp-track]').forEach(b=>b.addEventListener('click',()=>{history.push(index);used=true;const target=Number(b.dataset.mpTrack);bag=bag.filter(i=>i!==target);load(target,true)}));
+q('musicOpen').addEventListener('click',()=>panel.hidden?open():close());q('musicClose').addEventListener('click',close);
+q('musicPlay').addEventListener('click',togglePlay);q('musicMiniPlay').addEventListener('click',togglePlay);
+q('musicNext').addEventListener('click',()=>next());q('musicMiniNext').addEventListener('click',()=>next());q('musicPrev').addEventListener('click',previous);
+q('musicSeek').addEventListener('input',e=>seek(e.target.value));
+q('musicVolume').addEventListener('input',e=>{audio.muted=false;audio.volume=Number(e.target.value)/100;if(audio.volume>0)lastVolume=audio.volume;renderVolume();save()});
+q('musicMute').addEventListener('click',()=>{if(audio.volume===0||audio.muted){audio.muted=false;audio.volume=lastVolume||.65}else{lastVolume=audio.volume;audio.volume=0}renderVolume();save()});
+q('musicShuffle').addEventListener('click',()=>{shuffle=!shuffle;bag=tracks.map((_,i)=>i).filter(i=>i!==index);renderModes();save()});
+q('musicRepeat').addEventListener('click',()=>{repeat=(repeat+1)%3;renderModes();save()});
+audio.addEventListener('loadedmetadata',()=>{if(pendingSeek!==null){audio.currentTime=Math.min(pendingSeek,duration());pendingSeek=null}progress()});
+audio.addEventListener('timeupdate',()=>{progress();if(Date.now()-lastSaved>5000){save();lastSaved=Date.now()}});
+audio.addEventListener('play',()=>{renderPlayback();save()});audio.addEventListener('pause',()=>{renderPlayback();save()});audio.addEventListener('ended',()=>next(true));
+audio.addEventListener('waiting',()=>{q('musicStatus').textContent='Загрузка…'});audio.addEventListener('playing',()=>{q('musicStatus').textContent=''});
+audio.addEventListener('error',()=>{renderPlayback();q('musicStatus').textContent='Не удалось загрузить трек. Попробуй ещё раз.'});
+widget.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&!panel.hidden){e.preventDefault();close();return}
+ if(/INPUT|TEXTAREA/.test(e.target.tagName))return;
+ if(e.key==='ArrowRight'){e.preventDefault();next()}else if(e.key==='ArrowLeft'){e.preventDefault();previous()}
+ else if(e.code==='Space'&&e.target===q('musicCover')){e.preventDefault();togglePlay()}
+});
+document.addEventListener('pointerdown',e=>{if(!panel.hidden&&!widget.contains(e.target)){panel.hidden=true;q('musicOpen').setAttribute('aria-expanded','false')}});
+let wheelTime=0,pointerX=null;
+q('musicCover').addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<50)return;e.preventDefault();if(Date.now()-wheelTime<400)return;wheelTime=Date.now();e.deltaY>0?next():previous()},{passive:false});
+q('musicCover').addEventListener('pointerdown',e=>{pointerX=e.clientX});q('musicCover').addEventListener('pointerup',e=>{if(pointerX!==null&&Math.abs(e.clientX-pointerX)>45)e.clientX<pointerX?next():previous();pointerX=null});q('musicCover').addEventListener('pointercancel',()=>pointerX=null);
+window.addEventListener('pagehide',save);
+if('mediaSession' in navigator){
+ const handlers={play:()=>play(),pause:()=>audio.pause(),previoustrack:previous,nexttrack:()=>next(),seekbackward:e=>seek(audio.currentTime-(e.seekOffset||10)),seekforward:e=>seek(audio.currentTime+(e.seekOffset||10)),seekto:e=>seek(e.seekTime)};
+ for(const [action,handler] of Object.entries(handlers)){try{navigator.mediaSession.setActionHandler(action,handler)}catch{}}
+}
+renderTrack();renderVolume();renderModes();renderPlayback();
+// Only continue a just-playing session after navigation within this website.
+let sameSite=false;try{sameSite=new URL(document.referrer).origin===location.origin}catch{}
+if(session&&session.playing&&sameSite&&Date.now()-session.savedAt<15000){load(index,false,pendingSeek||0);play(false)}
+})();
+
 </script>
 </body>
 </html>
