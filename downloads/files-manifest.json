@@ -53,5 +53,10 @@
     "file": "naicom.json",
     "sha256": "afb58194da943f2dea661bcc0ce7f0f7f56458d2f51ff3a79a2f70bbf482659b",
     "bytes": 14945
+  },
+  {
+    "file": "shino-2026-10-30.json",
+    "sha256": "5b72a9ca3bb09e482e1f94554cbd1052e2f8099050f3af3617ff89b2e16f8eb8",
+    "bytes": 38252
   }
 ]
