@@ -500,7 +500,7 @@ dialog{padding:24px}
 <article class="preset-main">
 <span class="eyebrow">Универсальный пресет</span>
 <h2>!Shino (30.10.2026)</h2>
-<p>Универсальный пресет для ролевых чатов в SillyTavern. Подходит для разных моделей Chat Completion. Регексы для пробелов и настройка те же, что у Gemini 3.8 Flash v.01.</p>
+<p>Регексы для пробелов и настройка те же, что у Gemini 3.8 Flash v.01.</p>
 <div class="buttons">
 <a class="primary" href="downloads/shino-universal-pack.zip" download>Скачать комплект</a>
 <a href="downloads/shino-2026-10-30.json" download="!Shino (30.10.2026).json">Только пресет</a>
@@ -517,17 +517,17 @@ dialog{padding:24px}
 </div>
 <div class="file-row">
 <div>
-<h3>Use Figure Spaces</h3>
-<p>Заменяет обычные пробелы на figure spaces. В файле выключен по умолчанию.</p>
-</div>
-<a href="downloads/regex-use-figure-spaces.json" download>Скачать JSON</a>
-</div>
-<div class="file-row">
-<div>
 <h3>Return Normal Spaces</h3>
 <p>Возвращает figure spaces к обычным пробелам. Импортируется отдельно в Regex.</p>
 </div>
 <a href="downloads/regex-return-normal-spaces.json" download>Скачать JSON</a>
+</div>
+<div class="file-row">
+<div>
+<h3>Use Figure Spaces</h3>
+<p>Заменяет обычные пробелы на figure spaces. В файле выключен по умолчанию.</p>
+</div>
+<a href="downloads/regex-use-figure-spaces.json" download>Скачать JSON</a>
 </div>
 </article>
 </div>
@@ -538,8 +538,16 @@ dialog{padding:24px}
 <li>В настройках пресетов основного чата нажми импорт и выбери файл пресета.</li>
 <li>Проверь, что в списке выбран новый пресет.</li>
 <li>Оба файла регексов импортируй в Расширения → Regex.</li>
-<li>Тоггл Figure Space и Use Figure Spaces включай вместе. Их можно связать через Silly Linkify.</li>
 </ol>
+<h4>Порядок регексов</h4>
+<ol>
+<li><strong>Return Normal Spaces</strong> поставь первым в списке и оставь включённым постоянно.</li>
+<li><strong>Use Figure Spaces</strong> поставь после Return Normal Spaces. По умолчанию держи его выключенным.</li>
+</ol>
+<p>Включай тоггл <strong>Figure Space</strong> в пресете и регекс <strong>Use Figure Spaces</strong> вместе, только если в NSFW-сцене мешает цензура. Этот регекс значительно увеличивает расход токенов, поэтому после сцены выключи его и тоггл.</p>
+<p>Чтобы переключать их одновременно, свяжи тоггл Figure Space с регексом Use Figure Spaces через Silly Linkify.</p>
+<h4>Парсинг тхинкинга</h4>
+<p>Для парсинга тхинкинга укажи <code>&lt;rp_plan&gt;</code> как открывающий тег и <code>&lt;/rp_plan&gt;</code> как закрывающий.</p>
 <p>
 <small>Пресет содержит инструкции и параметры чата. Модель и своё API-подключение выбираешь отдельно.</small>
 </p>
