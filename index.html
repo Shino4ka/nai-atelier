@@ -85,6 +85,14 @@ svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 .tabs{scrollbar-width:none;display:flex;gap:28px;border-bottom:1px solid var(--line);margin-bottom:32px;overflow-x:auto}
 .tabs a{padding:14px 0;white-space:nowrap;color:var(--muted)}
 .tabs a[aria-current=page]{color:var(--accent);border-bottom:2px solid var(--accent)}
+.janitor-export{max-width:730px}
+.janitor-export h2{margin:8px 0 12px}
+.janitor-export p{color:var(--muted)}
+.janitor-export form{margin-top:22px}
+.janitor-export label{display:block;margin-bottom:6px;font-size:14px;font-weight:700}
+.janitor-link{display:flex;flex-wrap:wrap;gap:8px}
+.janitor-link input{flex:1 1 240px;min-width:0;padding:10px 12px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:7px}
+#janitorStatus:empty{display:none}
 .catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px}
 .category-menu{scrollbar-width:none;position:sticky;top:25px;align-self:start;display:grid;gap:4px}
 .category-menu button{display:flex;justify-content:space-between;gap:12px;background:none;border:0;text-align:left;font-size:14px;color:var(--muted);padding:12px}
@@ -438,10 +446,26 @@ dialog{padding:24px}
 </div>
 <nav class="tabs" aria-label="Материалы SillyTavern">
 <a href="#tavern/guides" data-tab="guides">Гайды</a>
+<a href="#tavern/janitor" data-tab="janitor">JanitorAI</a>
 <a href="#tavern/extensions" data-tab="extensions">Расширения</a>
 <a href="#tavern/presets" data-tab="presets">Пресеты</a>
 <a href="#tavern/blocks" data-tab="blocks">Внешние блоки</a>
 </nav>
+<div data-pane="janitor" hidden>
+<article class="quick-card janitor-export" aria-labelledby="janitor-title">
+<span class="eyebrow">JanitorAI → SillyTavern</span>
+<h2 id="janitor-title">Скачать карточку с JanitorAI</h2>
+<p>Вставь ссылку на персонажа. Atelier скачает PNG с аватаркой, основным и альтернативными приветствиями из публичного архива. Если в архиве несколько аватарок, они будут в ZIP отдельными PNG-карточками.</p>
+<form id="janitorLinkForm" data-endpoint="">
+<label for="janitorLink">Ссылка на персонажа</label>
+<div class="janitor-link">
+<input type="url" id="janitorLink" placeholder="https://janitorai.com/characters/…" autocapitalize="none" spellcheck="false" required>
+<button type="submit" class="primary">Скачать карточку</button>
+</div>
+</form>
+<p id="janitorStatus" role="status"></p>
+</article>
+</div>
 <div data-pane="guides">
 <article class="guide-feature">
 <div class="feature-copy">
@@ -717,7 +741,7 @@ $('#blockStage').addEventListener('touchstart',e=>touchStart={x:e.touches[0].cli
 $('#blockStage').addEventListener('touchend',e=>{if(!touchStart)return;const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))focusBlock(activeBlock+(dx<0?1:-1));touchStart=null;},{passive:true});
 let currentRoute='';
 function route(){
- const raw=location.hash.slice(1)||'home';let section=raw.split('/')[0],pane=raw.split('/')[1]||'guides';if(!['home','novelai','tavern'].includes(section))section='home';if(!['guides','extensions','presets','blocks'].includes(pane))pane='guides';
+ const raw=location.hash.slice(1)||'home';let section=raw.split('/')[0],pane=raw.split('/')[1]||'guides';if(!['home','novelai','tavern'].includes(section))section='home';if(!['guides','extensions','presets','blocks','janitor'].includes(pane))pane='guides';
  for(const id of ['home','novelai','tavern'])$('#'+id).hidden=id!==section;
  document.body.classList.toggle('home-mode',section==='home');$('#footer').hidden=section==='home';
  $$('[data-nav]').forEach(a=>{if(a.dataset.nav===section)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -759,5 +783,6 @@ loadExamples();
 
 <script>window.atelierLocalize(document.getElementById("musicWidget"));</script>
 <script src="music.js"></script>
+<script src="janitor-link.js" defer></script>
 </body>
 </html>
