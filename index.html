@@ -85,15 +85,6 @@ svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 .tabs{scrollbar-width:none;display:flex;gap:28px;border-bottom:1px solid var(--line);margin-bottom:32px;overflow-x:auto}
 .tabs a{padding:14px 0;white-space:nowrap;color:var(--muted)}
 .tabs a[aria-current=page]{color:var(--accent);border-bottom:2px solid var(--accent)}
-.janitor-export{max-width:730px}
-.janitor-export h2{margin:8px 0 12px}
-.janitor-export p{color:var(--muted)}
-.janitor-export ol{margin:18px 0 22px}
-.janitor-export a:not(.primary){color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-.janitor-export form{margin-top:26px}
-.janitor-export label{display:block;margin-bottom:6px;font-size:14px;font-weight:700}
-.janitor-link{display:flex;flex-wrap:wrap;gap:8px}
-.janitor-link input{flex:1 1 240px;min-width:0;padding:10px 12px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:7px}
 .catalog-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:28px}
 .category-menu{scrollbar-width:none;position:sticky;top:25px;align-self:start;display:grid;gap:4px}
 .category-menu button{display:flex;justify-content:space-between;gap:12px;background:none;border:0;text-align:left;font-size:14px;color:var(--muted);padding:12px}
@@ -447,32 +438,10 @@ dialog{padding:24px}
 </div>
 <nav class="tabs" aria-label="Материалы SillyTavern">
 <a href="#tavern/guides" data-tab="guides">Гайды</a>
-<a href="#tavern/janitor" data-tab="janitor">JanitorAI</a>
 <a href="#tavern/extensions" data-tab="extensions">Расширения</a>
 <a href="#tavern/presets" data-tab="presets">Пресеты</a>
 <a href="#tavern/blocks" data-tab="blocks">Внешние блоки</a>
 </nav>
-<div data-pane="janitor" hidden>
-<article class="quick-card janitor-export" aria-labelledby="janitor-title">
-<span class="eyebrow">JanitorAI → SillyTavern</span>
-<h2 id="janitor-title">Скачать карточку с JanitorAI</h2>
-<p>В PNG сохраняются аватар, основное приветствие и все альтернативные приветствия, доступные на странице персонажа. Если аватарок несколько, скачивается ZIP с отдельной PNG-карточкой для каждой.</p>
-<ol>
-<li><a href="https://www.tampermonkey.net/" target="_blank" rel="noopener noreferrer">Установи Tampermonkey, если менеджера скриптов ещё нет.</a></li>
-<li>Один раз установи скрипт Atelier и подтверди установку в браузере.</li>
-<li>Открой персонажа на JanitorAI и нажми «Скачать карточку». Загрузи полученный PNG в SillyTavern.</li>
-</ol>
-<a class="primary" href="downloads/atelier-janitor.user.js">Установить скрипт Atelier</a>
-<form id="janitorLinkForm">
-<label for="janitorLink">Ссылка на персонажа</label>
-<div class="janitor-link">
-<input type="url" id="janitorLink" placeholder="https://janitorai.com/characters/…" required>
-<button type="submit">Открыть в JanitorAI</button>
-</div>
-</form>
-<p>Скрипт использует данные, доступные в твоей сессии JanitorAI. Карточка собирается в браузере.</p>
-</article>
-</div>
 <div data-pane="guides">
 <article class="guide-feature">
 <div class="feature-copy">
@@ -664,20 +633,6 @@ languageToggle.onclick=()=>{
  location.assign(url.href);
 };
 localize(document.body);
-const janitorLink=$('#janitorLink');
-janitorLink.addEventListener('input',()=>janitorLink.setCustomValidity(''));
-$('#janitorLinkForm').addEventListener('submit',event=>{
- event.preventDefault();
- let url;
- try{url=new URL(janitorLink.value);}catch{}
- if(url?.origin!=='https://janitorai.com'||url.username||url.password||!/^\/characters\/[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}(?:[_-][^/]+)?\/?$/i.test(url.pathname)){
-  janitorLink.setCustomValidity(t('Вставь ссылку на страницу персонажа с janitorai.com.'));
-  janitorLink.reportValidity();
-  return;
- }
- url.searchParams.set('atelier_lang',document.documentElement.lang);
- window.open(url.href,'_blank','noopener,noreferrer');
-});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function icon(type='file'){
  const paths={file:'<path d="M14 3H5v18h14V8Z"/><path d="M14 3v5h5M8 12h8M8 16h6"/>',copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/>',memory:'<path d="M8 4h8v16H8zM4 8h4M4 16h4M16 8h4M16 16h4M11 8h2v8h-2"/>',image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8" cy="9" r="1.5"/><path d="m4 18 6-6 4 4 3-3 4 4"/>',link:'<path d="m10 8 3-3a4 4 0 0 1 6 6l-3 3M14 16l-3 3a4 4 0 0 1-6-6l3-3M8 16l8-8"/>',split:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/>',book:'<path d="M12 6q-5-3-9 0v14q4-3 9 0 5-3 9 0V6q-4-3-9 0Zm0 0v14"/>',universe:'<circle cx="12" cy="12" r="8"/><path d="m5 6 14 12M4 14l16-4M12 4v16"/>'};
@@ -762,7 +717,7 @@ $('#blockStage').addEventListener('touchstart',e=>touchStart={x:e.touches[0].cli
 $('#blockStage').addEventListener('touchend',e=>{if(!touchStart)return;const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))focusBlock(activeBlock+(dx<0?1:-1));touchStart=null;},{passive:true});
 let currentRoute='';
 function route(){
- const raw=location.hash.slice(1)||'home';let section=raw.split('/')[0],pane=raw.split('/')[1]||'guides';if(!['home','novelai','tavern'].includes(section))section='home';if(!['guides','extensions','presets','blocks','janitor'].includes(pane))pane='guides';
+ const raw=location.hash.slice(1)||'home';let section=raw.split('/')[0],pane=raw.split('/')[1]||'guides';if(!['home','novelai','tavern'].includes(section))section='home';if(!['guides','extensions','presets','blocks'].includes(pane))pane='guides';
  for(const id of ['home','novelai','tavern'])$('#'+id).hidden=id!==section;
  document.body.classList.toggle('home-mode',section==='home');$('#footer').hidden=section==='home';
  $$('[data-nav]').forEach(a=>{if(a.dataset.nav===section)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
